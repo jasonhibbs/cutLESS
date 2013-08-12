@@ -5,11 +5,10 @@
 
 hr { 
   display: block; 
-  margin: (@baselineheight) 0 (@baselineheight - 2px); 
-  padding: 0;
-  height: 0px;
   border: 0; 
   border-top: 1px solid @bordercolor;
+  margin: (@baselineheight) 0 (@baselineheight - 2px); 
+  padding: 0;
 }
 
 
@@ -17,14 +16,9 @@ hr {
 // Images ----------------------------------------------------------
 
 img {
-  height: auto;
-  border-width: 0; 
+  height: auto; 
   vertical-align: middle; 
   -ms-interpolation-mode: bicubic;
-}
-
-svg:not(:root) {
-  overflow: hidden;
 }
 
 
@@ -47,4 +41,17 @@ figure {
   a {
     cursor: pointer;
   }
+}
+
+
+
+// Media -----------------------------------------------------------
+
+// Remove the gap between images, videos, audio and canvas and the bottom of
+// their containers: h5bp.com/i/440
+
+audio,
+canvas,
+video {
+    vertical-align: middle;
 }

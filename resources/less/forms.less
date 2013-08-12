@@ -6,33 +6,15 @@
 
 form { 
   
-  //margin: 0 0 @baselineheight 0;
-  
   fieldset { 
     margin: 0 0 (@baselineheight - 1px) 0;
     padding: (@baselineheight) @gutterwidth 0; 
     border-width: 1px;
   }
-  
-/* 
-  legend { 
-    display: block;
-    width: 100%;
-    margin-bottom: (@baselineheight * 2);
-    *margin-left: -7px; 
-    padding: 0;
-    color: @textcolor;
-    border: 0;
-    border-bottom: @inputborderwidth @inputborderstyle @inputborder;
-    white-space: normal; 
-    
-    small {
-      .font-size(14);
-      color: @lightgrey;
-    }
+
+  p {
+    margin-bottom: (@baselineheight);
   }
-  
-  p { margin-bottom: (@baselineheight / 2); }
   
   ul {
     list-style-type: none; 
@@ -40,54 +22,25 @@ form {
     padding: 0;
   }
   
-  br { display: none; }
-*/
+  br {
+    display: none;
+  }
 }
 
-label,
-input,
-button,
-select,
-textarea {
-  /*
-margin: 0;
-  .font-size(16);
-  vertical-align: baseline; 
-  *vertical-align: middle;
-  height: @baselineheight;
-*/
-}
 
-input,
-button,
-select,
-textarea {
-  /*
-font-family: @basefont; 
-  .box-sizing(border-box);
-  .border-radius(4px);
-*/
-}
 
 button {
   cursor: pointer;
 }
 
 label {
-  /*
-display : block;
-  //margin-bottom : (@baseline / 8);
-  color: @textcolor;
-  font-weight: 600;
   cursor: pointer;
-  line-height: (@baselineheight * 0.8);
-  
+
   input,
   textarea,
   select {
-    display: block;
+    margin-left: (@gutterwidth * 0.25);
   }
-*/
 }
 
 input,
@@ -107,18 +60,37 @@ display: inline-block;
 input,
 textarea {
   .border-radius(4px);
-  .transition(border-color 0.2s);
+  .transition(~'border-color 0.2s, background-color 0.2s');
   border: @inputborderwidth @inputborderstyle @inputborder;
   color: @textcolor;
 
   &:hover {
     border-color: @inputhover;
   }
+  
+  &:focus {
+    outline: 0;
+    border-color: @inputfocus;
+  }
 }
 
-.input-mini { /* width: 60px; */ }
+input {
+  padding: 0 4px;
+  line-height: (@baselineheight - 2px);
+  
+  &:invalid {
+    border: @inputborderwidth @inputborderstyle lighten(@errorcolor, 25%);
+    background-color: lighten(@errorcolor, 35%);
+    
+    &:focus,
+    &:active {
+      background-color: @white;
+    }
+  }
+}
 
-.input-small { /* width: 90px; */ }
+
+
 
 // Mini reset for unique input types
 input[type="image"],
@@ -137,42 +109,43 @@ width: auto;
 */
 }
 
-input[type="checkbox"], 
-input[type="radio"] {  
-  /*
-.box-sizing(border-box);
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0;
+  
+  .box-sizing(border-box);
+  .margin-x(@gutterwidth * 0.25);
+
+/*
   padding: 0; 
   *width: 13px; 
   *height: 13px;
 */
 }
 
-// Remove shadow from image inputs
+
+
 input[type="image"] {
-  /*
-border: 0; 
-  .box-shadow(none);
-*/
+  padding: 0;
+  height: (@baselineheight - 2px);
+  margin-bottom: -7px;
 }
+
+
 
 input[type="file"] {
   border: initial;
-  /*
-width: auto;
   padding: initial;
   line-height: initial;
-  
-  background-color: transparent;
-  background-color: initial;
-  .box-shadow(none);
-*/
 }
+
+
 
 // Help out input buttons
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  padding: 2px 6px;
+  padding: 0px 7px;
   /*
 width : auto;
   height : auto;
@@ -180,7 +153,6 @@ width : auto;
   *overflow : visible;
 */
 }
-
 select,
 input[type="file"] {
   /*
@@ -190,8 +162,23 @@ height : @baselineheight; // In IE7, the height of the select element cannot be 
 */
 }
 
-input[type="date"] {
-  /* padding-top: 3px; */
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="datetime-local"] {
+  height: 22px;
+}
+
+
+input[type="datetime"] {}
+
+input[type="datetime-local"] {
+  
+}
+
+input[type="color"] {
+  height: 20px;
+  padding: 0 3px;
 }
 
 // Chrome on Linux and Mobile Safari need background-color
@@ -209,21 +196,23 @@ select[size] {
   /* height : auto; */
 }
 
+
 // Make textarea height behave
+
 textarea {
-  /*
-.resize(vertical);
+  .resize(vertical);
   height : auto;
   overflow : auto; 
   vertical-align : top;
-*/
 }
+
 
 input[type="hidden"] {
   /* display : none; */
 }
 
-// disabled
+
+// Disabled --------------------------------------------------------
 
 input[disabled],
 select[disabled],
@@ -248,11 +237,13 @@ border-color : @inputfocus;
 */
 }
 
+input[type="range"]:focus,
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus,
 select:focus {
-  /* .box-shadow(none); */
+  outline: 1px dotted @inputfocus;
+  outline-offset: 1px;
 }
 
 ::-webkit-input-placeholder {

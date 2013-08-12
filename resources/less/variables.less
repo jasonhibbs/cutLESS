@@ -9,11 +9,11 @@
 
 // Typography ------------------------------------------------------
 
-@basefont                   : Helvetica, Arial, Verdana sans-serif;
+@basefont                   : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
 @basefontsize               : 16px;
 @baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
 @baseheadingfont            : inherit;
-@baseheadingfontweight      : 500;
+@baseheadingfontweight      : 400;
 @baseheadingfontcolor       : inherit;
 
 @altfont                    : Cambria, Georgia, Times, 'Times New Roman', serif;
@@ -82,8 +82,8 @@
 @inputborder                : @lightgrey;
 @inputborderwidth           : 1px;
 @inputborderstyle           : solid;
-@inputhover                 : lighten(@basecolor, 20%);
-@inputfocus                 : lighten(@basecolor, 40%;
+@inputhover                 : @basecolor;
+@inputfocus                 : @basecolor;
 @placeholdercolor           : @lightgrey;
 
 
