@@ -1,0 +1,50 @@
+// Elements  ///////////////////////////////////////////////////////
+
+
+//  Horizontal Rule ------------------------------------------------
+
+hr { 
+  display: block; 
+  margin: (@baselineheight) 0 (@baselineheight - 2px); 
+  padding: 0;
+  height: 0px;
+  border: 0; 
+  border-top: 1px solid @bordercolor;
+}
+
+
+
+// Images ----------------------------------------------------------
+
+img {
+  height: auto;
+  border-width: 0; 
+  vertical-align: middle; 
+  -ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+
+// Figures ---------------------------------------------------------
+
+figure { 
+  
+  img {
+    width: 100%;
+  }
+  
+  figcaption {
+    display: block;
+    font-weight: normal;
+    .font-size(14); 
+    color: @grey;
+  }
+  
+  a {
+    cursor: pointer;
+  }
+}

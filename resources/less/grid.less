@@ -1,0 +1,66 @@
+// Grid ////////////////////////////////////////////////////////////
+    
+//  A Pixel-Based Grid System for LESS
+//  by Jason Hibbs
+
+//  jason@jasonhibbs.co.uk
+
+  
+
+// These resets ensure new columns at new breakpoints work
+// and can also be occasionally useful outside of the grid
+
+  .column-reset(@amount: 0) {
+    .padding-x(@amount); 
+    .margin-x(@amount);
+    width: 100%;
+    float: none;
+  }
+
+
+// These values may be changed
+
+  @gutterwidth: 20px;
+  @columnwidth: (3 * @gutterwidth);
+
+
+// This class should be applied to a containing div to hold a number of columns in place
+
+  .gridcontainer(@columns) {
+  
+    @container: ( @columns * ( @columnwidth + @gutterwidth )); // Width is determined by the number of columns we want, plus outer-gutters
+    width: @container;
+    .margin-reset(auto);
+  
+  }
+
+
+// This should be applied to containers within grids, in case you need to...
+
+  .gridlet(@columns) {
+  
+    @container: ( @columns * ( @columnwidth + @gutterwidth ));
+    width: @container;
+    margin-left: -(@gutterwidth/2);
+    .clearfix();
+  
+  }
+
+
+// This should be applied to elements to be placed on a grid, specifying how many columns it will span
+
+  .columns(@span){
+
+    .margin-reset(@gutterwidth/2);
+    width: ((( @columnwidth + @gutterwidth ) * @span ) - @gutterwidth );
+    float: left;
+  
+  }
+  
+// Maybe you just need a width?
+
+  .column-span(@span) {
+    
+    width: ((( @columnwidth + @gutterwidth ) * @span ) - @gutterwidth );
+    
+  }

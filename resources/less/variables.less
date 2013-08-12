@@ -1,0 +1,90 @@
+// Variables //////////////////////////////////////////////////////.
+
+
+// Root ------------------------------------------------------------
+
+@bodycolor                  : @white;
+@textcolor                  : @darkgrey;
+
+
+// Typography ------------------------------------------------------
+
+@basefont                   : Helvetica, Arial, Verdana sans-serif;
+@basefontsize               : 16px;
+@baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
+@baseheadingfont            : inherit;
+@baseheadingfontweight      : 500;
+@baseheadingfontcolor       : inherit;
+
+@altfont                    : Cambria, Georgia, Times, 'Times New Roman', serif;
+
+@codefont                   : Monaco, Courier New, monospace;
+
+
+// Colours ---------------------------------------------------------
+
+@basecolor                  : #48D;
+@compcolor                  : #D44;
+@bordercolor                : @lightergrey;
+
+
+// Links
+
+@linkcolor                  : @basecolor;
+@linkcolorhover             : darken(@linkcolor, 20);
+@linkcolorvisited           : desaturate(@linkcolor, 15);
+@linkcolorfocus             : darken(@linkcolor , 20);
+
+
+// Greyscale (with a hint of the base colour)
+
+@black                      : rgb( 34, 34, 34);
+@darkgrey                   : hsl( hue(@basecolor), 03%, 25% );
+@grey                       : hsl( hue(@basecolor), 03%, 55% );
+@lightgrey                  : hsl( hue(@basecolor), 03%, 80% );
+@lightergrey                : hsl( hue(@basecolor), 03%, 94% );
+@white                      : rgb( 255, 255, 255);
+
+
+// Colour Palettes
+
+@alertcolor                 : rgb(252,248,227);
+@errorcolor                 : rgb(218,79,73);
+@infocolor                  : rgb(217,237,247);
+@inversecolor               : rgb(65,65,65);
+@successcolor               : rgb(91,183,91);
+@warningcolor               : rgb(250,167,50);
+
+
+// Social
+
+@facebook                   : rgb(059, 089, 152);
+@twitter                    : rgb(000, 170, 239);
+@linkedin                   : rgb(000, 123, 182);
+@googleplus                 : rgb(222, 075, 052);
+@pinterest                  : rgb(203, 032, 039);
+
+
+// Elements --------------------------------------------------------
+
+//  Tables
+
+@tablebackground            : transparent;
+@tablestripe                : lighten(@basecolor, 60%);
+@tablehover                 : lighten(@basecolor, 50%);
+@tableborder                : @lightergrey;
+@tableborderwidth           : 1px;
+@tableborderstyle           : solid;
+
+//  Forms
+
+@inputbackground            : @white;
+@inputborder                : @lightgrey;
+@inputborderwidth           : 1px;
+@inputborderstyle           : solid;
+@inputhover                 : lighten(@basecolor, 20%);
+@inputfocus                 : lighten(@basecolor, 40%;
+@placeholdercolor           : @lightgrey;
+
+
+

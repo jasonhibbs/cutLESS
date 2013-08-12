@@ -1,0 +1,41 @@
+// Colour //////////////////////////////////////////////////////////
+
+
+// Links -----------------------------------------------------------
+
+a { 
+  text-decoration: none;
+  color: @linkcolor;
+  .transition(color .2s);
+  
+  &:visited { 
+    color: @linkcolorvisited;
+  }
+  &:hover { 
+    color: @linkcolorhover;
+  }
+  &:focus { 
+    outline: @basecolor thin dotted; 
+    color: @linkcolorfocus;
+  }
+  &:hover, 
+  &:active { 
+    outline: 0;
+  }
+}
+
+
+
+// Selection -------------------------------------------------------
+
+::-moz-selection { 
+background-color: fadeout(@basecolor, 10%); 
+color: @white; 
+text-shadow: none;
+}  
+
+::selection { 
+background-color: fadeout(@basecolor, 10%); 
+color: @white; 
+text-shadow: none;
+}
