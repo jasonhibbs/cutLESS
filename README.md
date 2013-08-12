@@ -1,6 +1,4 @@
 # cutLESS
-## Just another LESS Framework
-## v0.0.1
 
 ### Core
 Normalize
