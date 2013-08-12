@@ -1,0 +1,26 @@
+# ----------------------------------------------------------------------------------------------
+
+# Welcome to your Cutless configuration
+# Each entry should be on a newline
+# Comments are marked with a #
+
+# ----------------------------------------------------------------------------------------------
+
+# cutless checks the update_file, if it exists cutless will recompress everything
+# if update_delete is true it will delete the update file, set to false if you are
+# making frequent changes
+update_file = ../css/update.txt
+update_delete = true
+
+# base is where all the content gets put into, disable global_file to create individual files
+global_file = true
+
+# add files for cutless to find and convert, seperate with comma
+less_folder = ../css/
+less = global
+css_folder = ../css/
+css = font-awesome.min,normal,style,global 
+js_folder = ../js/
+js = solo,_cookie_shack,index
+
+# ----------------------------------------------------------------------------------------------
