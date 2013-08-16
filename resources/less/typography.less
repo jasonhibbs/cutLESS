@@ -75,7 +75,11 @@ address {
 
 small { 
   .font-size(14);
-  color: lighten(@textcolor, 20%);
+  font-weight: 300;
+  
+  // This is for baseline fixing only, remove/override if causing problems
+  display: inline-block;
+  margin-bottom: -1px;
 }
 
 ul,
@@ -154,7 +158,7 @@ code,
 kbd,
 samp {
   font-family: @codefont;
-  .font-size(14);
+  .font-size(16);
 }
 
 pre {

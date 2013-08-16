@@ -30,7 +30,7 @@
   
     @container: ( @columns * ( @columnwidth + @gutterwidth )); // Width is determined by the number of columns we want, plus outer-gutters
     width: @container;
-    .margin-reset(auto);
+    .margin-x(auto);
   
   }
 
@@ -51,7 +51,7 @@
 
   .columns(@span){
 
-    .margin-reset(@gutterwidth/2);
+    .margin-x(@gutterwidth/2);
     width: ((( @columnwidth + @gutterwidth ) * @span ) - @gutterwidth );
     float: left;
   

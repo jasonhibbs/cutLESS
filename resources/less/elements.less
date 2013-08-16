@@ -7,7 +7,7 @@ hr {
   display: block; 
   border: 0; 
   border-top: 1px solid @bordercolor;
-  margin: (@baselineheight) 0 (@baselineheight - 2px); 
+  margin: (@baselineheight) 0 (@baselineheight - 1px); 
   padding: 0;
 }
 
@@ -25,7 +25,8 @@ img {
 
 // Figures ---------------------------------------------------------
 
-figure { 
+figure {
+  margin-bottom: (@baselineheight);
   
   img {
     width: 100%;
