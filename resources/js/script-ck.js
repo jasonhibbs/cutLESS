@@ -1,3 +1,0 @@
-// Menu Bar ////////////////////////////////////////////////////////
-// If we’re loading a narrow page, close the nav
-$(function(){var e=$(window).width();e<=600&&$(".head nav ul").css("display","none")});$(".menu_bar").click(function(){$(".head nav ul").slideToggle("slow")});$(window).resize(function(){var e=$(window).width();e>600&&$(".head nav ul[style]")&&$(".head nav ul").removeAttr("style")});

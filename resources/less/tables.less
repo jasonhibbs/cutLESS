@@ -8,6 +8,7 @@ table {
   border-collapse : collapse;
   border-spacing : 0;
   background-color : @tablebackground;
+  .box-sizing(border-box);
 
   th,
   td {
@@ -19,9 +20,14 @@ table {
     text-align: left;
   }
 
-  th { font-weight : bold; }
+  th {
+    font-weight : bold;
+  }
 
-  thead th { vertical-align : bottom; }
+  thead th {
+    vertical-align : bottom;
+    border-top: none;
+  }
 
   colgroup + thead tr:first-child th,
   colgroup + thead tr:first-child td,
@@ -43,4 +49,27 @@ table {
   tbody tr:hover th {
     background-color : @tablehover;
   }
+  
+  // I was really proud of this, until Wikipedia did it too…
+  @media only screen and (max-width: 599px) {
+    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+
+
+// Table Mixins ----------------------------------------------------
+
+
+// Apply to table element
+
+.stripe-table(@color: @tablestripe) {
+  
+  tbody tr:nth-child(even) {
+    background-color: @color;
+  }
+  
 }

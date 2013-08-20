@@ -91,7 +91,7 @@ ol {
 li ul,
 li ol {
   .font-size(16);
-  margin: 0 0 0 @gutterwidth;
+  margin: 0 0 0 (@gutterwidth * 2);
 }
 
 
@@ -120,21 +120,7 @@ dt {
 }
 
 dd {
-  margin: 0 0 (@baselineheight / 2) @gutterwidth;
-}
-
-.dl-horizontal {
-
-  dt {
-    float: left;
-    clear: left;
-    width: 20.25%;
-    text-align: right;
-  }
-
-  dd {
-    margin-left: 22.78%;
-  }
+  margin: 0 0 (@baselineheight / 2) (@gutterwidth * 2);
 }
 
 

@@ -2,19 +2,14 @@
 
 // Variables -------------------------------------------------------
 
-@percentmargin: 8%;
+
 
 // Root ------------------------------------------------------------
 
 .head,
 .foot,
-.page,
-.container {
+.page {
   .clearfix();
-}
-
-.container {
-  .margin-x(@percentmargin);
 }
 
 nav {
@@ -22,6 +17,14 @@ nav {
   ul {
     margin-bottom: 0;
     list-style: none;
+    
+    max-height: (@baselineheight * 6);
+    overflow: hidden;
+    .transition(max-height 1s);
+    
+    &.closed {
+      max-height: 0;
+    }
   }
   
   .menu_bar {
@@ -35,17 +38,83 @@ nav {
 // Header //////////////////////////////////////////////////////////
 
 .head {
-  
+  .site_title,
+  nav {
+    .column();
+  }
 }
 
 // Footer //////////////////////////////////////////////////////////
 
 .foot {
+  padding-bottom: (@baselineheight * 3);
   
+  .bottom_line {
+    .column();
+  }
 }
 
 // Content /////////////////////////////////////////////////////////
 
 .content {
+  
+}
 
+
+// Demo ////////////////////////////////////////////////////////////
+
+.default_demo {
+  
+  
+  .demo_wrap {
+    .column();
+  }
+
+  
+  svg {
+    display: block;
+  }
+  
+  audio,
+  video {
+    margin-bottom: (@baselineheight / 4);
+  }
+  
+  .striped {
+    .stripe-table();
+  }
+}
+
+.gridding_demo {
+  h2 {
+    .column();
+  }
+  
+}
+
+.demo {
+  height: (@baselineheight * 5);
+  background-color: fadeout(@lightergrey, 50%);
+  margin-bottom: (@baselineheight / 2);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: (@baselineheight / 2) (@gutterwidth);
+  border: 1px solid @lightgrey;
+  .border-radius(4px);
+}
+
+.first {
+  .column(1/1);
+}
+
+.second {
+  .column(1/2);
+}
+
+.third {
+  .column(1/3);
+}
+
+.fourth {
+  .column(1/4);
 }

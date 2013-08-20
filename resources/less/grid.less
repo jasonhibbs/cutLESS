@@ -1,66 +1,180 @@
 // Grid ////////////////////////////////////////////////////////////
     
-//  A Pixel-Based Grid System for LESS
+//  A Grid System for cutLESS
 //  by Jason Hibbs
 
-//  jason@jasonhibbs.co.uk
 
-  
 
-// These resets ensure new columns at new breakpoints work
-// and can also be occasionally useful outside of the grid
+// Useful Mixins
+
+  // Column reset strips a column of its column-ness
+  // Use .margin-x(0) or .padding-x(0) if you only need to reset these
 
   .column-reset(@amount: 0) {
-    .padding-x(@amount); 
     .margin-x(@amount);
-    width: 100%;
+    .padding-x(@amount);
+    .box-sizing(content-box);
+    width: auto;
     float: none;
   }
 
 
-// These values may be changed
-
+// Grid Variables
+  
+  // The width you’d like your gutters to be
   @gutterwidth: 20px;
-  @columnwidth: (3 * @gutterwidth);
-
-
-// This class should be applied to a containing div to hold a number of columns in place
-
-  .gridcontainer(@columns) {
   
-    @container: ( @columns * ( @columnwidth + @gutterwidth )); // Width is determined by the number of columns we want, plus outer-gutters
-    width: @container;
+  // Helpful, don’t remember why
+  @gridwidth: 100%;
+
+
+
+// Layout (Grid Container)
+
+  .layout {
+    width: 94%;
     .margin-x(auto);
-  
-  }
-
-
-// This should be applied to containers within grids, in case you need to...
-
-  .gridlet(@columns) {
-  
-    @container: ( @columns * ( @columnwidth + @gutterwidth ));
-    width: @container;
-    margin-left: -(@gutterwidth/2);
     .clearfix();
-  
-  }
-
-
-// This should be applied to elements to be placed on a grid, specifying how many columns it will span
-
-  .columns(@span){
-
-    .margin-x(@gutterwidth/2);
-    width: ((( @columnwidth + @gutterwidth ) * @span ) - @gutterwidth );
-    float: left;
-  
-  }
-  
-// Maybe you just need a width?
-
-  .column-span(@span) {
     
-    width: ((( @columnwidth + @gutterwidth ) * @span ) - @gutterwidth );
+    // For Fixed Layouts
+    &.fixed {
+      @media only screen and (min-width: 480px) {
+        width: 400px;
+      }
+      
+      @media only screen and (min-width: 600px) {
+        width: 560px;
+      }
+      
+      @media only screen and (min-width: 768px) {
+        width: 640px;
+      }
+      
+      @media only screen and (min-width: 992px) {
+        width: 960px;
+      }
+      
+      @media only screen and (min-width: 1382px) {
+        width: 1280px;
+      }
+    }
+    
+    &.liquid {
+      @media only screen and (min-width: 480px) {
+        width: 83.3333333%;
+      }
+      
+      @media only screen and (min-width: 600px) {
+        width: 93.3333333%;
+      }
+      
+      @media only screen and (min-width: 768px) {
+        width: 83.3333333%;
+      }
+      
+      @media only screen and (min-width: 992px) {
+        width: 96.7741935%;
+      }
+      
+      @media only screen and (min-width: 1382px) {
+        width: 92.6193922%;
+      }
+    }
+  
+  }
+  
+  
+
+// Column Mixin
+
+  // This could really do with tidying up.
+  // Optimising.
+  // Seriously, it’s pretty powerful
+  // But it’s messy.
+
+  .column(@fraction: 1/1) {
+  
+    // Default
+    @media only screen { 
+      
+      @gridbits: (320 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      .box-sizing(border-box);
+    }
+    
+    // 480
+    @media only screen and (min-width: 480px) {
+      
+      @gridbits: (400 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      
+    }
+    
+    // 600
+    @media only screen and (min-width: 600px) {
+      
+      @gridbits: (560 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      
+      @portion: (@fraction / @fraction / @fraction);
+      
+      float: left;
+      width: @gutterbits * ((@gridbits - @portion) * @fraction);
+      
+    }
+    
+    // 768
+    @media only screen and (min-width: 768px) {
+      
+      @gridbits: (640 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      
+      @portion: (@fraction / @fraction / @fraction);
+      
+      float: left;
+      width: @gutterbits * ((@gridbits - @portion) * @fraction);
+      
+    }
+    
+    // 992
+    @media only screen and (min-width: 992px) {
+      
+      @gridbits: (960 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      
+      @portion: (@fraction / @fraction / @fraction);
+      
+      float: left;
+      width: @gutterbits * ((@gridbits - @portion) * @fraction);
+      
+    }
+    
+    // 1382
+    @media only screen and (min-width: 1382px) {
+      
+      @gridbits: (1280 / @gutterwidth);
+      @gutterbits: (@gridwidth / @gridbits);
+      
+      .margin-x(@gutterbits * 0.5);
+      
+      @portion: (@fraction / @fraction / @fraction);
+      
+      float: left;
+      width: @gutterbits * ((@gridbits - @portion) * @fraction);
+      
+    }
     
   }
+
+
+

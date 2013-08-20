@@ -9,7 +9,7 @@
 
 // Typography ------------------------------------------------------
 
-@basefont                   : 'Quattrocento Sans', 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
+@basefont                   : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
 @basefontsize               : 16px;
 @baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
 @baseheadingfont            : inherit;
@@ -23,8 +23,8 @@
 
 // Colours ---------------------------------------------------------
 
-@basecolor                  : #ffb61a;
-@compcolor                  : #00baff;
+@basecolor                  : #48D;
+@compcolor                  : #D44;
 @bordercolor                : @lightergrey;
 
 
@@ -58,11 +58,11 @@
 
 // Social
 
-@facebookcolour             : rgb(059, 089, 152);
-@twittercolour              : rgb(000, 170, 239);
-@linkedincolour             : rgb(000, 123, 182);
-@googlepluscolour           : rgb(222, 075, 052);
-@pinterestcolour            : rgb(203, 032, 039);
+@facebook                   : rgb(059, 089, 152);
+@twitter                    : rgb(000, 170, 239);
+@linkedin                   : rgb(000, 123, 182);
+@googleplus                 : rgb(222, 075, 052);
+@pinterest                  : rgb(203, 032, 039);
 
 
 // Elements --------------------------------------------------------
@@ -70,8 +70,8 @@
 //  Tables
 
 @tablebackground            : transparent;
-@tablestripe                : lighten(@basecolor, 60%);
-@tablehover                 : lighten(@basecolor, 50%);
+@tablestripe                : darken(@white, 3%);
+@tablehover                 : fadeout(@basecolor, 80%);
 @tableborder                : @lightergrey;
 @tableborderwidth           : 1px;
 @tableborderstyle           : solid;

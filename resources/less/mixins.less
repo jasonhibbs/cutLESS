@@ -9,6 +9,11 @@
   font-size: ~"@{rem}rem";
 }
 
+.line-height(@line-height: 1.5) {
+  line-height: (@line-height * @basefontsize);
+  line-height: ~"@{line-height}rem";
+}
+
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -201,10 +206,9 @@ background-repeat: repeat-x;
 
 // .box-sizing(VALUE); (border-box, padding-box, content-box)
 
-.box-sizing(@boxsize: border-box) {
+.box-sizing(@boxsize) {
 -webkit-box-sizing: @boxsize;
    -moz-box-sizing: @boxsize;
-    -ms-box-sizing: @boxsize;
         box-sizing: @boxsize;
 }
 
