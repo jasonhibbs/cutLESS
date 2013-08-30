@@ -2535,13 +2535,13 @@ table tbody tr:hover th {
 nav ul {
   margin-bottom: 0;
   list-style: none;
-  max-height: 144px;
+  max-height: 72px;
   overflow: hidden;
-  -webkit-transition: max-height 1s;
-  -moz-transition: max-height 1s;
-  -ms-transition: max-height 1s;
-  -o-transition: max-height 1s;
-  transition: max-height 1s;
+  -webkit-transition: max-height 0.4s;
+  -moz-transition: max-height 0.4s;
+  -ms-transition: max-height 0.4s;
+  -o-transition: max-height 0.4s;
+  transition: max-height 0.4s;
 }
 nav ul.closed {
   max-height: 0;
@@ -2710,7 +2710,7 @@ nav .menu_bar {
 .default_demo video {
   margin-bottom: 6px;
 }
-.default_demo .striped tbody tr:nth-child(even) {
+.default_demo .striped tbody tr:nth-child(odd) {
   background-color: #f7f7f7;
 }
 @media only screen {

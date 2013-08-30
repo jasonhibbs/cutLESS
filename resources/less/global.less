@@ -18,9 +18,9 @@ nav {
     margin-bottom: 0;
     list-style: none;
     
-    max-height: (@baselineheight * 6);
+    max-height: (@baselineheight * 3); // Change this to the height of your <nav> list
     overflow: hidden;
-    .transition(max-height 1s);
+    .transition(max-height 0.4s);
     
     &.closed {
       max-height: 0;
@@ -81,7 +81,7 @@ nav {
   }
   
   .striped {
-    .stripe-table();
+    .striped-table();
   }
 }
 

@@ -66,9 +66,9 @@ table {
 
 // Apply to table element
 
-.stripe-table(@color: @tablestripe) {
+.striped-table(@color: @tablestripe) {
   
-  tbody tr:nth-child(even) {
+  tbody tr:nth-child(odd) {
     background-color: @color;
   }
   
