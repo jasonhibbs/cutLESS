@@ -16,8 +16,11 @@ table {
     border-top : @tableborderwidth @tableborderstyle @tableborder;
     padding: 0 (@baselineheight / 2);
     .font-size(14);
-    line-height: (@baselineheight - @tableborderwidth);
+    line-height: ((@baselineheight * 1.5) - 2px);
     text-align: left;
+    
+    height: (@baselineheight * 1.5);
+    .box-sizing(border-box);
   }
 
   th {
@@ -42,12 +45,17 @@ table {
 
   tbody tr td,
   tbody tr th {
-    .transition(background-color .1s 0);
+    .transition(background-color 0.1s);
   }
 
   tbody tr:hover td,
   tbody tr:hover th {
     background-color : @tablehover;
+  }
+  
+  tbody tr:first-child td,
+  tfoot tr:first-child th {
+    border-top-width: (@tableborderwidth * 2);
   }
   
   // I was really proud of this, until Wikipedia did it too…
@@ -70,6 +78,11 @@ table {
   
   tbody tr:nth-child(odd) {
     background-color: @color;
+  }
+  
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: transparent;
   }
   
 }

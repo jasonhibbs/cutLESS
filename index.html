@@ -68,7 +68,7 @@
       <hr>
   
       <p>The <a href="#">a element</a> example</p>
-      <p>The <abbr>abbr element</abbr> and <abbr title="Title text">abbr element with title</abbr> examples</p>
+      <p>The <abbr title="Title text">abbr element</abbr>, <abbr class="acronym" title="Title text">acronym</abbr> and <abbr class="initialism" title="Title text">initialism</abbr> examples</p>
       <p>The <b>b element</b> example</p>
       <p>The <cite>cite element</cite> example</p>
       <p>The <code>code element</code> example</p>
@@ -141,23 +141,32 @@
   
       <pre>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et me.</pre>
   
-      <pre>
-        <code>
-  &lt;html>
-    &lt;head>
-    &lt;/head>
-    &lt;body>
-      &lt;div class="main">
-      &lt;div>
-    &lt;/body>
-  &lt;/html>
-        </code>
-      </pre>
+<pre>
+&lt;html>
+  &lt;head>
+  &lt;/head>
+  &lt;body>
+    &lt;div>
+    &lt;div>
+  &lt;/body>
+&lt;/html>
+</pre>
+
+<pre rel="CSS"><code>&lt;html>
+  &lt;head>
+  &lt;/head>
+  &lt;body>
+    &lt;div>
+      &lt;p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et m.&lt;/p>
+    &lt;div>
+  &lt;/body>
+&lt;/html></code></pre>
   
       <h3>blockquote</h3>
   
       <blockquote>
         <p>Some sort of famous witty quote marked up with a &lt;blockquote> and a child &lt;p> element.</p>
+        <small>The Man in Charge</small>
       </blockquote>
   
       <blockquote>Even better philosophical quote marked up with just a &lt;blockquote> element.</blockquote>

@@ -353,7 +353,7 @@ table {
 }
 .chromeframe {
   margin: .2em 0;
-  background: #caccce;
+  background: #d8d9da;
   color: #222222;
   padding: .2em 0;
 }
@@ -1980,25 +1980,25 @@ h5,
 h6 {
   margin: 0;
   font-family: inherit;
-  font-weight: 400;
+  font-weight: 500;
   color: inherit;
   text-rendering: optimizelegibility;
 }
 h1 small,
 h2 small {
   font-weight: normal;
-  color: #caccce;
+  color: #d8d9da;
 }
 h1 {
-  font-size: 48px;
-  font-size: 4.8rem;
-  line-height: 60px;
-  margin: 24px 0;
-}
-h2 {
   font-size: 36px;
   font-size: 3.6rem;
   line-height: 48px;
+  margin: 24px 0;
+}
+h2 {
+  font-size: 30px;
+  font-size: 3rem;
+  line-height: 36px;
   margin: 24px 0;
 }
 h3 {
@@ -2046,20 +2046,26 @@ small {
 ul,
 ol {
   margin: 0 0 24px 0;
-  padding: 0;
+  padding: 0 0 0 40px;
 }
 li ul,
 li ol {
   font-size: 16px;
   font-size: 1.6rem;
-  margin: 0 0 0 40px;
+  margin: 0 0 0;
 }
 blockquote {
   margin: 0 0 24px 0;
-  padding-left: 20px;
-  border-left: 3px solid #eff0f0;
-  font-style: normal;
-  color: #898c90;
+  padding: 12px 20px;
+  color: #6f7276;
+  background-color: #f7f7f7;
+  border-left: 5px solid #dedede;
+}
+blockquote p:last-of-type {
+  margin-bottom: 6px;
+}
+blockquote small:before {
+  content: '\2014\00a0';
 }
 dl {
   margin-bottom: 24px;
@@ -2071,8 +2077,14 @@ dd {
   margin: 0 0 12px 40px;
 }
 abbr[title] {
-  border-color: #caccce;
+  border-color: #d8d9da;
   cursor: help;
+}
+abbr[title].acronym,
+abbr[title].initialism {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-size: 105%;
 }
 ins,
 mark {
@@ -2085,12 +2097,52 @@ code,
 kbd,
 samp {
   font-family: Monaco, Courier New, monospace;
-  font-size: 16px;
-  font-size: 1.6rem;
+  font-size: 15px;
+  font-size: 1.5rem;
 }
-pre {
-  margin-top: 12px;
-  margin-bottom: 12px;
+code,
+kbd,
+samp {
+  display: inline-block;
+  margin-bottom: -1px;
+  padding: 0 4px;
+  color: #57595c;
+  background-color: #eff0f0;
+}
+pre[rel] {
+  display: block;
+  position: relative;
+  color: #eff0f0;
+  line-height: 18px;
+  background-color: #3e4042;
+  margin: 0 0 24px 0;
+}
+pre[rel][rel]:before {
+  content: attr(rel);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  line-height: 36px;
+  padding: 0 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
+  color: #ffffff;
+  background-color: #4488dd;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+pre[rel] code {
+  display: block;
+  height: auto;
+  padding: 48px 20px 12px;
+  color: #eff0f0;
+  background: none;
+  vertical-align: baseline;
+  white-space: pre;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 a {
   text-decoration: none;
@@ -2153,18 +2205,30 @@ figure figcaption {
 figure a {
   cursor: pointer;
 }
+summary {
+  cursor: pointer;
+}
+summary:focus {
+  outline: 1px dotted #4488dd;
+}
 audio,
 canvas,
 video {
   vertical-align: middle;
+  max-width: 100%;
 }
 video {
   background-color: rgba(34, 34, 34, 0.9);
 }
 form fieldset {
   margin: 0 0 23px 0;
-  padding: 24px 20px 0;
-  border-width: 1px;
+  padding: 24px 10px;
+  border: 1px solid #eff0f0;
+}
+form fieldset legend {
+  padding: 6px 10px;
+  border: 1px solid #eff0f0;
+  background-color: #ffffff;
 }
 form p {
   margin-bottom: 24px;
@@ -2182,24 +2246,17 @@ button {
 }
 label {
   cursor: pointer;
-}
-label input,
-label textarea,
-label select {
-  margin-left: 5px;
-}
-input,
-textarea,
-select {
   /*
-display: inline-block;
-  width: 100%;
-  padding: 4px;
-  //margin-bottom: (@baselineheight / 2);
-  background-color: @inputbackground;
-  border: @inputborderwidth @inputborderstyle @inputborder;
-  color: @textcolor;
+input,
+  textarea,
+  select,
+  + input,
+  + textarea,
+  + select {
+    margin-left: (@gutterwidth * 0.25);
+  }
 */
+
 }
 textarea,
 input[type="text"],
@@ -2217,14 +2274,14 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   background-color: #ffffff;
-  border: 1px solid #caccce;
+  border: 1px solid #d8d9da;
   color: #3e4042;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   -webkit-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
   -moz-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
   -ms-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
@@ -2280,9 +2337,24 @@ input[type="email"]:invalid,
 input[type="url"]:invalid,
 input[type="search"]:invalid,
 input[type="tel"]:invalid,
-input[type="color"]:invalid {
+input[type="color"]:invalid,
+textarea.invalid,
+input[type="text"].invalid,
+input[type="password"].invalid,
+input[type="datetime"].invalid,
+input[type="datetime-local"].invalid,
+input[type="date"].invalid,
+input[type="month"].invalid,
+input[type="time"].invalid,
+input[type="week"].invalid,
+input[type="number"].invalid,
+input[type="email"].invalid,
+input[type="url"].invalid,
+input[type="search"].invalid,
+input[type="tel"].invalid,
+input[type="color"].invalid {
   border: 1px solid #f0b5b3;
-  background-color: #f8dedd;
+  background-color: #f9e3e2;
 }
 textarea:invalid:focus,
 input[type="text"]:invalid:focus,
@@ -2299,6 +2371,21 @@ input[type="url"]:invalid:focus,
 input[type="search"]:invalid:focus,
 input[type="tel"]:invalid:focus,
 input[type="color"]:invalid:focus,
+textarea.invalid:focus,
+input[type="text"].invalid:focus,
+input[type="password"].invalid:focus,
+input[type="datetime"].invalid:focus,
+input[type="datetime-local"].invalid:focus,
+input[type="date"].invalid:focus,
+input[type="month"].invalid:focus,
+input[type="time"].invalid:focus,
+input[type="week"].invalid:focus,
+input[type="number"].invalid:focus,
+input[type="email"].invalid:focus,
+input[type="url"].invalid:focus,
+input[type="search"].invalid:focus,
+input[type="tel"].invalid:focus,
+input[type="color"].invalid:focus,
 textarea:invalid:active,
 input[type="text"]:invalid:active,
 input[type="password"]:invalid:active,
@@ -2313,31 +2400,45 @@ input[type="email"]:invalid:active,
 input[type="url"]:invalid:active,
 input[type="search"]:invalid:active,
 input[type="tel"]:invalid:active,
-input[type="color"]:invalid:active {
+input[type="color"]:invalid:active,
+textarea.invalid:active,
+input[type="text"].invalid:active,
+input[type="password"].invalid:active,
+input[type="datetime"].invalid:active,
+input[type="datetime-local"].invalid:active,
+input[type="date"].invalid:active,
+input[type="month"].invalid:active,
+input[type="time"].invalid:active,
+input[type="week"].invalid:active,
+input[type="number"].invalid:active,
+input[type="email"].invalid:active,
+input[type="url"].invalid:active,
+input[type="search"].invalid:active,
+input[type="tel"].invalid:active,
+input[type="color"].invalid:active {
   background-color: #ffffff;
-  -webkit-box-shadow: 0 0 10px rgba(218, 79, 73, 0.30000000000000004);
-  -moz-box-shadow: 0 0 10px rgba(218, 79, 73, 0.30000000000000004);
-  box-shadow: 0 0 10px rgba(218, 79, 73, 0.30000000000000004);
+  -webkit-box-shadow: 0 0 5px rgba(218, 79, 73, 0.4);
+  -moz-box-shadow: 0 0 5px rgba(218, 79, 73, 0.4);
+  box-shadow: 0 0 5px rgba(218, 79, 73, 0.4);
 }
-input {
+input,
+textarea {
   padding: 0 4px;
-  line-height: 22px;
+  vertical-align: bottom;
 }
-input[type="image"],
-input[type="checkbox"],
-input[type="radio"] {
-  /*
-width: auto;
-  height: auto;
-  padding: 0;
-  margin: 3px 0;
-  *margin-top: 0;
-  line-height: normal;
-  cursor: pointer;
-  .border-radius(0);
-  border: 0 \9;
-*/
-
+input,
+textarea,
+select {
+  font-size: 14px;
+  font-size: 1.4rem;
+  height: 24px;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+select {
+  vertical-align: text-top;
 }
 input[type="checkbox"],
 input[type="radio"] {
@@ -2347,12 +2448,6 @@ input[type="radio"] {
   box-sizing: border-box;
   margin-left: 5px;
   margin-right: 5px;
-  /*
-  padding: 0; 
-  *width: 13px; 
-  *height: 13px;
-*/
-
 }
 input[type="image"] {
   padding: 0;
@@ -2363,27 +2458,12 @@ input[type="file"] {
   border: initial;
   padding: initial;
   line-height: initial;
+  width: 100%;
 }
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   padding: 0px 7px;
-  /*
-width : auto;
-  height : auto;
-  cursor : pointer;
-  *overflow : visible;
-*/
-
-}
-select,
-input[type="file"] {
-  /*
-height : @baselineheight; // In IE7, the height of the select element cannot be changed by height, only font-size
-  *margin-top : 4px; // For IE7, add top margin to align select with labels
-  line-height : 28px;
-*/
-
 }
 input[type="date"],
 input[type="month"],
@@ -2395,49 +2475,15 @@ input[type="color"] {
   height: 20px;
   padding: 0 3px;
 }
-select {
-  /*
-width : auto; // 10px of padding doesn't get applied
-  background-color : @inputbackground;
-  .font-size(13);
-*/
-
-}
-select[multiple],
-select[size] {
-  /* height : auto; */
-
-}
 textarea {
-  resize: vertical;
   height: auto;
-  overflow: auto;
   vertical-align: top;
+  line-height: 24px;
+  resize: vertical;
+  overflow: auto;
 }
 input[type="hidden"] {
-  /* display : none; */
-
-}
-input[disabled],
-select[disabled],
-textarea[disabled],
-input[readonly],
-select[readonly],
-textarea[readonly] {
-  /*
-.opacity(.5);
-  cursor : not-allowed;
-*/
-
-}
-input:focus,
-textarea:focus {
-  /*
-border-color : @inputfocus;
-  outline : 0;
-  outline : thin dotted \9;
-*/
-
+  display: none;
 }
 input[type="range"]:focus,
 input[type="file"]:focus,
@@ -2469,12 +2515,16 @@ table {
 table th,
 table td {
   vertical-align: top;
-  border-top: 1px solid #eff0f0;
+  border-top: 1px solid #f2f2f3;
   padding: 0 12px;
   font-size: 14px;
   font-size: 1.4rem;
-  line-height: 23px;
+  line-height: 34px;
   text-align: left;
+  height: 36px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 table th {
   font-weight: bold;
@@ -2490,19 +2540,23 @@ table thead:first-child tr:first-child td {
   border-top: 0;
 }
 table tbody + tbody {
-  border-top: 2px solid #eff0f0;
+  border-top: 2px solid #f2f2f3;
 }
 table tbody tr td,
 table tbody tr th {
-  -webkit-transition: background-color 0.1s 0;
-  -moz-transition: background-color 0.1s 0;
-  -ms-transition: background-color 0.1s 0;
-  -o-transition: background-color 0.1s 0;
-  transition: background-color 0.1s 0;
+  -webkit-transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s;
+  -ms-transition: background-color 0.1s;
+  -o-transition: background-color 0.1s;
+  transition: background-color 0.1s;
 }
 table tbody tr:hover td,
 table tbody tr:hover th {
   background-color: rgba(68, 136, 221, 0.19999999999999996);
+}
+table tbody tr:first-child td,
+table tfoot tr:first-child th {
+  border-top-width: 2px;
 }
 @media only screen and (max-width: 599px) {
   table {
@@ -2511,6 +2565,134 @@ table tbody tr:hover th {
     overflow-x: auto;
     display: block;
   }
+}
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"],
+input[type="image"],
+.button {
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-size: 1.4rem;
+  height: 30px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  outline: none;
+  color: #3e4042;
+  background: #eff0f0;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
+  -moz-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
+  -ms-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
+  -o-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
+  transition: background 0.2s, border 0.1s, box-shadow 0.2s;
+}
+button:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="image"]:focus,
+.button:focus,
+button:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="image"]:hover,
+.button:hover {
+  background: #e2e3e4;
+  text-decoration: none;
+}
+button:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="image"]:active,
+.button:active,
+button.active,
+input[type="reset"].active,
+input[type="button"].active,
+input[type="submit"].active,
+input[type="image"].active,
+.button.active {
+  outline: 0;
+  background-image: none;
+}
+button.disabled,
+input[type="reset"].disabled,
+input[type="button"].disabled,
+input[type="submit"].disabled,
+input[type="image"].disabled,
+.button.disabled,
+button[disabled],
+input[type="reset"][disabled],
+input[type="button"][disabled],
+input[type="submit"][disabled],
+input[type="image"][disabled],
+.button[disabled],
+fieldset[disabled] button,
+fieldset[disabled] input[type="reset"],
+fieldset[disabled] input[type="button"],
+fieldset[disabled] input[type="submit"],
+fieldset[disabled] input[type="image"],
+fieldset[disabled] .button {
+  cursor: not-allowed;
+  pointer-events: none;
+  -webkit-opacity: 0.6;
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"],
+.button {
+  padding: 0 10px;
+  border: 1px solid #eaebeb;
+}
+button:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+.button:focus,
+button:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.button:hover {
+  border-color: #e2e3e4;
+}
+button:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+.button:active,
+button.active,
+input[type="reset"].active,
+input[type="button"].active,
+input[type="submit"].active,
+.button.active {
+  border-top: 2px solid #c8c9cb;
 }
 .head,
 .foot,
@@ -2698,6 +2880,10 @@ nav .menu_bar {
 .default_demo .striped tbody tr:nth-child(odd) {
   background-color: #f7f7f7;
 }
+.default_demo .striped tbody tr:hover td,
+.default_demo .striped tbody tr:hover th {
+  background-color: transparent;
+}
 .gridding_demo h2 {
   margin-left: 3.125%;
   margin-right: 3.125%;
@@ -2747,7 +2933,7 @@ nav .menu_bar {
   text-overflow: ellipsis;
   overflow: hidden;
   padding: 12px 20px;
-  border: 1px solid #caccce;
+  border: 1px solid #d8d9da;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;

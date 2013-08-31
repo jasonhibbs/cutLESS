@@ -45,6 +45,20 @@ figure {
 }
 
 
+// Details and Summary ---------------------------------------------
+
+summary {
+  cursor: pointer;
+  
+  &:focus {
+    outline: 1px dotted @inputfocus;
+  }
+}
+
+details {
+  
+}
+
 
 // Media -----------------------------------------------------------
 
@@ -55,6 +69,7 @@ audio,
 canvas,
 video {
   vertical-align: middle;
+  max-width: 100%;
 }
 
 // Why not, eh?

@@ -1,0 +1,76 @@
+// Buttons /////////////////////////////////////////////////////////
+
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"],
+input[type="image"],
+.button {
+  display: inline-block;
+  margin-bottom: 0; // For input.button
+  
+  .font-size(14);
+  height: (@baselineheight * 1.25);
+
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  outline: none;
+  
+  color: @buttoncolor;
+  background: @buttonbackground;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  
+  .box-sizing(border-box);
+  
+  .border-radius(3px);
+  .user-select(none);
+  .appearance(none);
+  .transition(~"background 0.2s, border 0.1s, box-shadow 0.2s");
+
+  &:focus,
+  &:hover {
+    background: @buttonhover;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    .opacity(0.6);
+    .box-shadow(none);
+  }
+
+}
+
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"],
+.button {
+  padding: 0 (@gutterwidth / 2);
+  border: 1px solid @buttonborder;
+  //.box-shadow(0 1px 2px rgba(0,0,0,0.2));
+  
+  &:focus,
+  &:hover {
+    border-color: @buttonhover;
+  }
+  
+  &:active,
+  &.active {
+    border-top: 2px solid darken(@buttonhover, 10%);
+    //.box-shadow(0 1px 1px rgba(0,0,0,0.2));
+  }
+}

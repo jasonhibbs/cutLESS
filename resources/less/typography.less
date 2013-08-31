@@ -23,14 +23,14 @@ h2 small {
 }
 
 h1 {
-  .font-size(48);
-  line-height: (@baselineheight * 2.5);
+  .font-size(36);
+  line-height: (@baselineheight * 2);
   margin: @baselineheight 0;
 }
 
 h2 {
-  .font-size(36);
-  line-height: (@baselineheight * 2);
+  .font-size(30);
+  line-height: (@baselineheight * 1.5);
   margin: @baselineheight 0;
 }
 
@@ -85,13 +85,13 @@ small {
 ul,
 ol {
   margin: 0 0 @baselineheight 0;
-  padding: 0;
+  padding: 0 0 0 (@gutterwidth * 2);
 }
 
 li ul,
 li ol {
   .font-size(16);
-  margin: 0 0 0 (@gutterwidth * 2);
+  margin: 0 0 0;
 }
 
 
@@ -100,11 +100,23 @@ li ol {
 
 blockquote  {
   margin: 0 0 @baselineheight 0;
-  padding-left: @gutterwidth;
-  border-left: 3px solid @lightergrey;
+  padding: (@baselineheight * 0.5) @gutterwidth;
+  
+  color: lighten(@textcolor, 20%);
+  background-color: darken(@bodycolor, 3%);
+  border-left: (@gutterwidth * 0.25) solid darken(@bodycolor, 13%);
+  
   //font-family: @altfont;
-  font-style: normal;
-  color: @grey;
+  
+  p:last-of-type {
+    margin-bottom: (@baselineheight * 0.25);
+  }
+  
+  small {
+    &:before {
+      content: '\2014\00a0'; //&ndash;&nbsp;
+    }
+  }
 }
 
 
@@ -130,6 +142,14 @@ dd {
 abbr[title] {
   border-color: @lightgrey;
   cursor: help;
+  
+  &.acronym,
+  &.initialism {
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    font-size: 105%;
+    //font-weight: 500;
+  }
 }
 
 ins,
@@ -144,11 +164,67 @@ code,
 kbd,
 samp {
   font-family: @codefont;
-  .font-size(16);
+  .font-size(15);
 }
 
-pre {
-  .margin-y(@baselineheight / 2);
+code,
+kbd,
+samp {
+  display: inline-block;
+  margin-bottom: -1px;
+  padding: 0 4px;
+  
+  color: lighten(@textcolor, 10%);
+  background-color: @lightergrey;
 }
 
+
+
+// Code ------------------------------------------------------------
+
+pre[rel] {
+  display: block;
+  position: relative;
+  color: @lightergrey;
+  
+  line-height: (@baselineheight * 0.75);
+  
+  background-color: @darkgrey;
+  
+  margin: 0 0 @baselineheight 0;
+  
+  
+  
+  
+  &[rel]:before {
+    content: attr(rel);
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    line-height: (@baselineheight * 1.5);
+    padding: 0 (@gutterwidth * 0.75);
+    
+    font-family: @basefont;
+    
+    color: @white;
+    background-color: @basecolor;
+    
+    .box-sizing(border-box);
+  }
+  
+  code {
+    display: block;
+    height: auto;
+    padding: (@baselineheight * 2) @gutterwidth (@baselineheight * 0.5);
+    
+    color: @lightergrey;
+    background: none;
+    
+    vertical-align: baseline;
+    white-space: pre;
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+}
 

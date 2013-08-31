@@ -8,8 +8,15 @@ form {
   
   fieldset { 
     margin: 0 0 (@baselineheight - 1px) 0;
-    padding: (@baselineheight) @gutterwidth 0; 
-    border-width: 1px;
+    padding: (@baselineheight) (@gutterwidth * 0.5);
+    border: 1px solid @lightergrey;
+    
+    legend {
+      padding: (@baselineheight * 0.25) (@gutterwidth * 0.5);
+      border: 1px solid @lightergrey;
+      background-color: @bodycolor;
+    
+    }
   }
 
   p {
@@ -36,26 +43,18 @@ button {
 label {
   cursor: pointer;
 
-  input,
+  /*
+input,
   textarea,
-  select {
+  select,
+  + input,
+  + textarea,
+  + select {
     margin-left: (@gutterwidth * 0.25);
   }
+*/
 }
 
-input,
-textarea,
-select {
-  /*
-display: inline-block;
-  width: 100%;
-  padding: 4px;
-  //margin-bottom: (@baselineheight / 2);
-  background-color: @inputbackground;
-  border: @inputborderwidth @inputborderstyle @inputborder;
-  color: @textcolor;
-*/ 
-}
 
 
 textarea,
@@ -77,8 +76,9 @@ input[type="color"] {
   border: @inputborderwidth @inputborderstyle @inputborder;
   color: @textcolor;
   
-  .inset-shadow(0 1px 2px rgba(0,0,0,0.1));
+  //.inset-shadow(0 1px 1px rgba(0,0,0,0.1));
   .border-radius(4px);
+  .appearance(none);
   .transition(~'border-color 0.2s, background-color 0.2s, box-shadow 1s');
   
   &:hover {
@@ -92,14 +92,15 @@ input[type="color"] {
     //.box-shadow(0 0 10px fadeout(@inputfocus, 70%));
   }
   
-  &:invalid {
+  &:invalid,
+  &.invalid {
     border: @inputborderwidth @inputborderstyle lighten(@errorcolor, 25%);
-    background-color: lighten(@errorcolor, 35%);
+    background-color: lighten(@errorcolor, 36%);
     
     &:focus,
     &:active {
       background-color: @white;
-      .box-shadow(0 0 10px fadeout(@errorcolor, 70%));
+      .box-shadow(0 0 5px fadeout(@errorcolor, 60%));
     }
   }
 }
@@ -107,43 +108,34 @@ input[type="color"] {
 
 
 
-input {
+input,
+textarea {
   padding: 0 4px;
-  line-height: (@baselineheight - 2px);
+  vertical-align: bottom;
 }
 
-
-
-
-// Mini reset for unique input types
-input[type="image"],
-input[type="checkbox"],
-input[type="radio"] {
-  /*
-width: auto;
-  height: auto;
-  padding: 0;
-  margin: 3px 0;
-  *margin-top: 0;
-  line-height: normal;
-  cursor: pointer;
-  .border-radius(0);
-  border: 0 \9;
-*/
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  padding: 0;
+input,
+textarea,
+select {
+  .font-size(14);
   
+  height: (@baselineheight);
+  max-width: 100%;
+  .box-sizing(border-box);
+}
+
+
+select {
+  vertical-align: text-top;
+}
+
+
+
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0;
   .box-sizing(border-box);
   .margin-x(@gutterwidth * 0.25);
-
-/*
-  padding: 0; 
-  *width: 13px; 
-  *height: 13px;
-*/
 }
 
 
@@ -160,6 +152,7 @@ input[type="file"] {
   border: initial;
   padding: initial;
   line-height: initial;
+  width: 100%; // Make the damn thing behave
 }
 
 
@@ -169,21 +162,9 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   padding: 0px 7px;
-  /*
-width : auto;
-  height : auto;
-  cursor : pointer;
-  *overflow : visible;
-*/
 }
-select,
-input[type="file"] {
-  /*
-height : @baselineheight; // In IE7, the height of the select element cannot be changed by height, only font-size
-  *margin-top : 4px; // For IE7, add top margin to align select with labels
-  line-height : 28px;
-*/
-}
+
+
 
 input[type="date"],
 input[type="month"],
@@ -193,45 +174,36 @@ input[type="datetime-local"] {
 }
 
 
-input[type="datetime"] {}
-
-input[type="datetime-local"] {
-  
-}
 
 input[type="color"] {
   height: 20px;
   padding: 0 3px;
 }
 
-// Chrome on Linux and Mobile Safari need background-color
-select {
-  /*
-width : auto; // 10px of padding doesn't get applied
-  background-color : @inputbackground;
-  .font-size(13);
-*/
-}
-
-// Make multiple select elements height not fixed
-select[multiple],
-select[size] {
-  /* height : auto; */
-}
 
 
 // Make textarea height behave
 
 textarea {
+  height: auto;
+  overflow: auto; 
+  vertical-align: top;
+  line-height: (@baselineheight);
   .resize(vertical);
-  height : auto;
-  overflow : auto; 
-  vertical-align : top;
 }
 
 
 input[type="hidden"] {
-  /* display : none; */
+  display: none;
+}
+
+input[type="range"]:focus,
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus,
+select:focus {
+  outline: 1px dotted @inputfocus;
+  outline-offset: 1px;
 }
 
 
@@ -243,31 +215,10 @@ textarea[disabled],
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  /*
-.opacity(.5);
-  cursor : not-allowed;
-*/
+
 }
 
-// focus and active
 
-input:focus,
-textarea:focus {
-  /*
-border-color : @inputfocus;
-  outline : 0;
-  outline : thin dotted \9;
-*/
-}
-
-input[type="range"]:focus,
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus,
-select:focus {
-  outline: 1px dotted @inputfocus;
-  outline-offset: 1px;
-}
 
 ::-webkit-input-placeholder {
   /* .font-size(14); */

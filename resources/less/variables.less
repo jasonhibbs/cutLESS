@@ -13,7 +13,7 @@
 @basefontsize               : 16px;
 @baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
 @baseheadingfont            : inherit;
-@baseheadingfontweight      : 400;
+@baseheadingfontweight      : 500;
 @baseheadingfontcolor       : inherit;
 
 @altfont                    : Cambria, Georgia, Times, 'Times New Roman', serif;
@@ -41,7 +41,7 @@
 @black                      : rgb( 34, 34, 34);
 @darkgrey                   : hsl( hue(@basecolor), 03%, 25% );
 @grey                       : hsl( hue(@basecolor), 03%, 55% );
-@lightgrey                  : hsl( hue(@basecolor), 03%, 80% );
+@lightgrey                  : hsl( hue(@basecolor), 03%, 85% );
 @lightergrey                : hsl( hue(@basecolor), 03%, 94% );
 @white                      : rgb( 255, 255, 255);
 
@@ -67,16 +67,16 @@
 
 // Elements --------------------------------------------------------
 
-//  Tables
+// Tables
 
 @tablebackground            : transparent;
 @tablestripe                : darken(@white, 3%);
 @tablehover                 : fadeout(@basecolor, 80%);
-@tableborder                : @lightergrey;
+@tableborder                : lighten(@lightgrey, 10%);
 @tableborderwidth           : 1px;
 @tableborderstyle           : solid;
 
-//  Forms
+// Forms
 
 @inputbackground            : @white;
 @inputborder                : @lightgrey;
@@ -86,5 +86,11 @@
 @inputfocus                 : @basecolor;
 @placeholdercolor           : @lightgrey;
 
+// Buttons
 
+@buttonbackground            : @lightergrey;
+@buttoncolor                 : @textcolor;
+@buttonborder                : darken(@buttonbackground, 2%);
+@buttonhover                 : darken(@buttonbackground, 5%);
+//@buttonfocus                 : @inputfocus;
 
