@@ -401,7 +401,8 @@ table {
   overflow: visible;
 }
 .layout {
-  width: 94%;
+  width: 93.75%;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   *zoom: 1;
@@ -415,61 +416,60 @@ table {
 .layout:after {
   clear: both;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .layout.fixed {
     width: 400px;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .layout.fixed {
     width: 560px;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .layout.fixed {
     width: 640px;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .layout.fixed {
     width: 960px;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .layout.fixed {
     width: 1280px;
   }
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .layout.liquid {
-    width: 83.3333333%;
+    width: 83.33333333333334%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .layout.liquid {
-    width: 93.3333333%;
+    width: 93.33333333333333%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .layout.liquid {
-    width: 83.3333333%;
+    width: 83.33333333333334%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .layout.liquid {
-    width: 96.7741935%;
+    width: 96.7741935483871%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .layout.liquid {
-    width: 92.6193922%;
+    width: 92.61939218523878%;
   }
 }
 html {
   background: #ffffff;
   color: #3e4042;
   font-size: 62.5%;
-  -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: rgba(68, 136, 221, 0.9);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -2553,154 +2553,139 @@ nav .menu_bar {
   margin: 0 0 24px;
   cursor: pointer;
 }
-@media only screen {
-  .head .site_title,
-  .head nav {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.head .site_title,
+.head nav {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .head .site_title,
   .head nav {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .head .site_title,
   .head nav {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 96.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .head .site_title,
   .head nav {
+    width: 96.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 96.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .head .site_title,
   .head nav {
+    width: 97.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 97.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .head .site_title,
   .head nav {
+    width: 98.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 98.4375%;
   }
 }
 .foot {
   padding-bottom: 72px;
 }
-@media only screen {
-  .foot .bottom_line {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.foot .bottom_line {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .foot .bottom_line {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .foot .bottom_line {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 96.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .foot .bottom_line {
+    width: 96.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 96.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .foot .bottom_line {
+    width: 97.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 97.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .foot .bottom_line {
+    width: 98.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 98.4375%;
   }
 }
-@media only screen {
-  .default_demo .demo_wrap {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.default_demo .demo_wrap {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .default_demo .demo_wrap {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .default_demo .demo_wrap {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 96.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .default_demo .demo_wrap {
+    width: 96.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 96.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .default_demo .demo_wrap {
+    width: 97.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 97.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .default_demo .demo_wrap {
+    width: 98.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 98.4375%;
   }
 }
 .default_demo svg {
@@ -2713,51 +2698,46 @@ nav .menu_bar {
 .default_demo .striped tbody tr:nth-child(odd) {
   background-color: #f7f7f7;
 }
-@media only screen {
-  .gridding_demo h2 {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.gridding_demo h2 {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .gridding_demo h2 {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .gridding_demo h2 {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 96.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .gridding_demo h2 {
+    width: 96.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 96.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .gridding_demo h2 {
+    width: 97.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 97.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .gridding_demo h2 {
+    width: 98.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 98.4375%;
   }
 }
 .demo {
@@ -2772,192 +2752,240 @@ nav .menu_bar {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-@media only screen {
-  .first {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.first {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .first {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .first {
+    float: left;
+    width: 121.42857142857143%;
     margin-left: 1.7857142857142858%;
     margin-right: 1.7857142857142858%;
-    float: left;
-    width: 96.42857142857143%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .first {
+    width: 121.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 96.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .first {
+    width: 122.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 97.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .first {
+    width: 123.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 98.4375%;
   }
 }
-@media only screen {
-  .second {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.second {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .second {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .second {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 46.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .second {
+    width: 46.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 46.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .second {
+    width: 47.91666666666667%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 47.91666666666667%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .second {
+    width: 48.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 48.4375%;
   }
 }
-@media only screen {
-  .third {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+.third {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
 }
-@media only screen and (min-width: 480px) {
+@media (min-width: 480px) {
   .third {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .third {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 29.76190476190476%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .third {
+    width: 30.208333333333332%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 30.208333333333332%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .third {
+    width: 31.250000000000004%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 31.250000000000004%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .third {
+    width: 31.770833333333332%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
-    float: left;
-    width: 31.770833333333332%;
   }
 }
-@media only screen {
-  .fourth {
-    margin-left: 3.125%;
-    margin-right: 3.125%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+@media (min-width: 600px) {
+  .third {
+    left: 8.333333333333332%;
   }
 }
-@media only screen and (min-width: 480px) {
+.fourth {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media (min-width: 480px) {
   .fourth {
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 }
-@media only screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .fourth {
-    margin-left: 1.7857142857142858%;
-    margin-right: 1.7857142857142858%;
     float: left;
     width: 21.42857142857143%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .fourth {
+    width: 21.875%;
     margin-left: 1.5625%;
     margin-right: 1.5625%;
-    float: left;
-    width: 21.875%;
   }
 }
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .fourth {
+    width: 22.916666666666668%;
     margin-left: 1.0416666666666667%;
     margin-right: 1.0416666666666667%;
-    float: left;
-    width: 22.916666666666668%;
   }
 }
-@media only screen and (min-width: 1382px) {
+@media (min-width: 1382px) {
   .fourth {
+    width: 23.4375%;
     margin-left: 0.78125%;
     margin-right: 0.78125%;
+  }
+}
+.grid_test {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.grid_test ul {
+  list-style: none;
+}
+.grid_test li {
+  margin-left: 3.125%;
+  margin-right: 3.125%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid rgba(221, 68, 68, 0.050000000000000044);
+  border-top: none;
+  border-bottom: none;
+  background: rgba(221, 68, 68, 0.030000000000000027);
+  height: 2000px;
+}
+@media (min-width: 480px) {
+  .grid_test li {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+}
+@media (min-width: 600px) {
+  .grid_test li {
     float: left;
-    width: 23.4375%;
+    width: 4.761904761904762%;
+    margin-left: 1.7857142857142858%;
+    margin-right: 1.7857142857142858%;
+  }
+}
+@media (min-width: 768px) {
+  .grid_test li {
+    width: 5.208333333333333%;
+    margin-left: 1.5625%;
+    margin-right: 1.5625%;
+  }
+}
+@media (min-width: 992px) {
+  .grid_test li {
+    width: 6.25%;
+    margin-left: 1.0416666666666667%;
+    margin-right: 1.0416666666666667%;
+  }
+}
+@media (min-width: 1382px) {
+  .grid_test li {
+    width: 6.770833333333333%;
+    margin-left: 0.78125%;
+    margin-right: 0.78125%;
   }
 }
 @media print {
@@ -3030,6 +3058,6 @@ nav .menu_bar {
 @media only screen and (min-width: 1382px) {
   
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
   
 }

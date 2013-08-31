@@ -2,179 +2,209 @@
     
 //  A Grid System for cutLESS
 //  by Jason Hibbs
+//  hello@jasonhibbs.co.uk
 
 
 
-// Useful Mixins
+// Useful Mixins ---------------------------------------------------
 
-  // Column reset strips a column of its column-ness
-  // Use .margin-x(0) or .padding-x(0) if you only need to reset these
+  // .column-reset() brutally strips a column of its column-ness
+  // Use .margin-x(0) and/or .padding-x(0) if you only need to reset these
 
   .column-reset(@amount: 0) {
-    .margin-x(@amount);
-    .padding-x(@amount);
-    .box-sizing(content-box);
-    width: auto;
-    float: none;
+    .margin-x(@amount);       // Remove margin only on the x-axis
+    .padding-x(@amount);      // Remove padding only on the x-axis
+    .box-sizing(content-box); // Default box-sizing
+    width: auto;              // Default width
+    float: none;              // Remove float
+  }
+  
+  // Nudge column by fraction of the grid
+  // .nudge-column(-1/4) will move a column by { left: -25%; }
+  
+  .nudge-column(@distance: 1/12) {
+    position: relative; // Keeps the column in the flow
+    
+    // Protect non-columned layouts
+    @media (min-width: 600px) {
+      left: percentage(@distance);
+    }
   }
 
 
-// Grid Variables
+// Grid Variables --------------------------------------------------
   
   // The width you’d like your gutters to be
   @gutterwidth: 20px;
   
-  // Helpful, don’t remember why
+  // Helpful for calculating 
   @gridwidth: 100%;
 
+  // The width you’d like your layout to be at these breakpoints
+  // Remember this width includes 1/2 a gutter at both sides
+  @480width:  400px;
+  @600width:  560px;
+  @768width:  640px;
+  @992width:  960px;
+  @1382width: 1280px;
 
 
-// Layout (Grid Container)
+// Layout (Grid Container) -----------------------------------------
 
+
+  // class="layout" -----------------------------
+  // Use only "layout" if you’re more confident than me
+  
   .layout {
-    width: 94%;
-    .margin-x(auto);
-    .clearfix();
+  
+    // All layouts are liquid before the first breakpoint
+    // To give silly little devices a fighting chance
     
-    // For Fixed Layouts
+    width: 93.75%;      // 300 / 320 = 93.75%
+    position: relative; // For nudging
+    .margin-x(auto);    // Centre layout
+    .clearfix();        // Columns are floated
+    
+    
+    // class="fixed layout" --------------------
+    // For when you’ve designed for each breakpoint
+    
     &.fixed {
-      @media only screen and (min-width: 480px) {
-        width: 400px;
+      @media (min-width: 480px) {
+        width: @480width;
       }
       
-      @media only screen and (min-width: 600px) {
-        width: 560px;
+      @media (min-width: 600px) {
+        width: @600width;
       }
       
-      @media only screen and (min-width: 768px) {
-        width: 640px;
+      @media (min-width: 768px) {
+        width: @768width;
       }
       
-      @media only screen and (min-width: 992px) {
-        width: 960px;
+      @media (min-width: 992px) {
+        width: @992width;
       }
       
-      @media only screen and (min-width: 1382px) {
-        width: 1280px;
+      @media (min-width: 1382px) {
+        width: @1382width;
       }
     }
+    
+    
+    // class="liquid layout" -------------------
+    // For when you’re not ready to go full-liquid
     
     &.liquid {
-      @media only screen and (min-width: 480px) {
-        width: 83.3333333%;
+      @media (min-width: 480px) {
+        width: percentage(@480width / 480);
       }
       
-      @media only screen and (min-width: 600px) {
-        width: 93.3333333%;
+      @media (min-width: 600px) {
+        width: percentage(@600width / 600);
       }
       
-      @media only screen and (min-width: 768px) {
-        width: 83.3333333%;
+      @media (min-width: 768px) {
+        width: percentage(@768width / 768);
       }
       
-      @media only screen and (min-width: 992px) {
-        width: 96.7741935%;
+      @media (min-width: 992px) {
+        width: percentage(@992width / 992);
       }
       
-      @media only screen and (min-width: 1382px) {
-        width: 92.6193922%;
+      @media (min-width: 1382px) {
+        width: percentage(@1382width / 1382);
       }
     }
-  
   }
   
   
 
-// Column Mixin
-
-  // This could really do with tidying up.
-  // Optimising.
-  // Seriously, it’s pretty powerful
-  // But it’s messy.
+// Column Mixin ----------------------------------------------------
 
   .column(@fraction: 1/1) {
-  
-    // Default
-    @media only screen { 
+    
+    // Some calculations -----------------------
+    
+    @gridbits: (320 / @gutterwidth);
+    // How many gutters could fit in the current layout?
+    
+    @gutterbits: (@gridwidth / @gridbits);
+    // @gridbits as a percentage
+    
+    @portion: (1 / @fraction);
+    // How many columns could I fit in a row given @fraction
+    // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
+    
+    // This is the complicated bit
+    @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction);
+    // e.g.       (100% / 48) * ((48        - 2)        * 1/2)        = 47.916666667%
+    
+    
+    // Finishing -------------------------------
+    
+    .margin-x(@gutterbits * 0.5);
+    // Give half a gutter to each side
+    
+    .box-sizing(border-box);
+    // Make your content pretty without worrying about breaking the layout
+
+    
+    // Breakpoints -----------------------------
+    
+    @media (min-width: 480px) {
       
-      @gridbits: (320 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
+      // Because gutters remain pretty constant over breakpoints
+      // @gridbits needs to be set in context to recalculate everything else
+      @gridbits: (@480width / @gutterwidth);
       
-      .margin-x(@gutterbits * 0.5);
-      .box-sizing(border-box);
+      .margin-x(@gutterbits * 0.5); // Recalculated for current context
+      
     }
     
-    // 480
-    @media only screen and (min-width: 480px) {
-      
-      @gridbits: (400 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
-      
-      .margin-x(@gutterbits * 0.5);
-      
-    }
     
-    // 600
-    @media only screen and (min-width: 600px) {
+    @media (min-width: 600px) {
       
-      @gridbits: (560 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
+      @gridbits: (@600width / @gutterwidth);
       
-      .margin-x(@gutterbits * 0.5);
-      
-      @portion: (@fraction / @fraction / @fraction);
-      
+      // Now we’re talking columns…
       float: left;
-      width: @gutterbits * ((@gridbits - @portion) * @fraction);
-      
-    }
-    
-    // 768
-    @media only screen and (min-width: 768px) {
-      
-      @gridbits: (640 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
-      
+      width: @columnwidth;
       .margin-x(@gutterbits * 0.5);
       
-      @portion: (@fraction / @fraction / @fraction);
-      
-      float: left;
-      width: @gutterbits * ((@gridbits - @portion) * @fraction);
-      
     }
     
-    // 992
-    @media only screen and (min-width: 992px) {
+
+    @media (min-width: 768px) {
       
-      @gridbits: (960 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
+      @gridbits: (@768width / @gutterwidth);
       
+      width: @columnwidth;
       .margin-x(@gutterbits * 0.5);
       
-      @portion: (@fraction / @fraction / @fraction);
-      
-      float: left;
-      width: @gutterbits * ((@gridbits - @portion) * @fraction);
-      
     }
     
-    // 1382
-    @media only screen and (min-width: 1382px) {
+
+    @media (min-width: 992px) {
       
-      @gridbits: (1280 / @gutterwidth);
-      @gutterbits: (@gridwidth / @gridbits);
+      @gridbits: (@992width / @gutterwidth);
       
+      width: @columnwidth;
       .margin-x(@gutterbits * 0.5);
       
-      @portion: (@fraction / @fraction / @fraction);
-      
-      float: left;
-      width: @gutterbits * ((@gridbits - @portion) * @fraction);
-      
     }
     
+
+    @media (min-width: 1382px) {
+      
+      @gridbits: (@1382width / @gutterwidth);
+      
+      width: @columnwidth;
+      .margin-x(@gutterbits * 0.5);
+      
+    }
+
   }
-
-
-
+  
+  
+// The End ---------------------------------------------------------
