@@ -39,7 +39,7 @@
 
 .horizontal(@startColor: @white, @endColor: @lightergrey) {
 background-color : @endColor;
-background-image : -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
+//background-image : -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
 background-image : -webkit-linear-gradient(left, @startColor, @endColor);                    // Safari 5.1+, Chrome 10+
 background-image :    -moz-linear-gradient(left, @startColor, @endColor);                    // FF 3.6+
 background-image :     -ms-linear-gradient(left, @startColor, @endColor);                    // IE10
@@ -50,7 +50,7 @@ background-repeat: repeat-x;
 
 .vertical(@startColor: @white, @endColor: @lightergrey) {
 background-color : @endColor;
-background-image : -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
+//background-image : -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
 background-image : -webkit-linear-gradient(top, @startColor, @endColor);                     // Safari 5.1+, Chrome 10+
 background-image :    -moz-linear-gradient(top, @startColor, @endColor);                     // FF 3.6+
 background-image :     -ms-linear-gradient(top, @startColor, @endColor);                     // IE10
@@ -72,15 +72,6 @@ background-repeat: repeat-x;
 
 
 // General ---------------------------------------------------------
-
-// .appearance(VALUE)
-
-.appearance(@value) {
--webkit-appearance: @value;
-   -moz-appearance: @value;
-        appearance: @value;
-}
-
 
 // .border-radius(VALUE);
 
@@ -183,13 +174,35 @@ background-repeat: repeat-x;
 
 
 .translate3d(@x, @y, @z) {
--webkit-transform: translate(@x, @y, @z);
-   -moz-transform: translate(@x, @y, @z);
-    -ms-transform: translate(@x, @y, @z);
-     -o-transform: translate(@x, @y, @z);
-        transform: translate(@x, @y, @z);
+-webkit-transform: translate3d(@x, @y, @z);
+   -moz-transform: translate3d(@x, @y, @z);
+    -ms-transform: translate3d(@x, @y, @z);
+     -o-transform: translate3d(@x, @y, @z);
+        transform: translate3d(@x, @y, @z);
 }
 
+
+
+
+
+// Technical -------------------------------------------------------
+
+
+// .appearance(VALUE)
+
+.appearance(@value) {
+-webkit-appearance: @value;
+   -moz-appearance: @value;
+        //appearance: @value; // Soon. Maybe.
+}
+
+// .backface-visibility(VALUE);
+
+.backface-visibility(@value) {
+-webkit-backface-visibility: @value;
+   -moz-backface-visibility: @value;
+        //backface-visibility: @value; // Soon. Maybe.
+}
 
 // .background-alpha(VALUE, VALUE);
 
@@ -282,6 +295,8 @@ background-repeat: repeat-x;
   padding-bottom: @bottom;
 }
 
+
+// Helpers ---------------------------------------------------------
 
 // Chrome Frame
 
