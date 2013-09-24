@@ -286,6 +286,22 @@ background-repeat: repeat-x;
         box-sizing: @boxsize;
 }
 
+// .column-count(VALUE);
+
+.column-count(@count) {
+  -webkit-column-count: @count;
+     -moz-column-count: @count;
+          column-count: @count; 
+}
+
+// .column-gap(VALUE);
+
+.column-gap(@gap) {
+  -webkit-column-gap: @gap;
+     -moz-column-gap: @gap;
+          column-gap: @gap;
+}
+
 
 // .margin-x(VALUE)
 
@@ -341,6 +357,18 @@ background-repeat: repeat-x;
 .padding-y(@top, @bottom) {
   padding-top: @top;
   padding-bottom: @bottom;
+}
+
+// .border-x(VALUE)
+.border-x(@value) {
+  border-left: @value;
+  border-right: @value;
+}
+
+// .border-y(VALUE)
+.border-y(@value) {
+  border-top: @value;
+  border-bottom: @value;
 }
 
 
@@ -449,23 +477,29 @@ background-repeat: repeat-x;
 .arrow(@_, @size, @color, @display: block) {
   content: ''; // usually a psuedo
   display: @display;
+  color: transparent;
+  background-color: transparent;
   width: 0;
 	height: 0;
-	border: @size solid transparent;
+	border: @size inset transparent;
 }
 
 .arrow(left, @size, @color) {
 	border-right-color: @color;
+	border-right-style: solid;
 }
 
 .arrow(up, @size, @color) {
 	border-bottom-color: @color;
+	border-bottom-style: solid;
 }
 
 .arrow(right, @size, @color) {
 	border-left-color: @color;
+	border-left-style: solid;
 }
 
 .arrow(down, @size, @color) {
 	border-top-color: @color;
+	border-top-style: solid;
 }

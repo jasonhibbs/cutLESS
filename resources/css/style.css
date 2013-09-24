@@ -2054,6 +2054,10 @@ li ol {
   font-size: 1.6rem;
   margin: 0 0 0;
 }
+.delist {
+  list-style: none;
+  padding: 0;
+}
 blockquote {
   margin: 0 0 24px 0;
   padding: 12px 20px;
@@ -2281,7 +2285,6 @@ input[type="color"] {
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
   -webkit-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
   -moz-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
   -ms-transition: border-color 0.2s, background-color 0.2s, box-shadow 1s;
@@ -2598,7 +2601,6 @@ input[type="image"],
   user-select: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
   -webkit-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
   -moz-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
   -ms-transition: background 0.2s, border 0.1s, box-shadow 0.2s;
