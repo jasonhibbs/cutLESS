@@ -30,6 +30,11 @@ input[type="image"],
   .user-select(none);
   .appearance(none);
   .transition(~"background 0.2s, border 0.1s, box-shadow 0.2s");
+  
+  &,
+  &:visited {
+    color: @buttoncolor;
+  }
 
   &:focus,
   &:hover {

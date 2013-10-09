@@ -1,4 +1,4 @@
-# cutLESS
+# cutLESS 1.0.0
 
 cutLESS is a slightly less bloated framework for responsibly responsive development.
 
