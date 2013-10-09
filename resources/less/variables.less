@@ -5,26 +5,55 @@
 
 @bodycolor                  : @white;
 @textcolor                  : @darkgrey;
-
+@htmlcolor                  : @bodycolor;
+@highlightcolor             : fadeout(@compcolor, 45%);
 
 // Typography ------------------------------------------------------
 
 @basefont                   : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
+
 @basefontsize               : 16px;
 @baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
+
 @baseheadingfont            : inherit;
 @baseheadingfontweight      : 500;
 @baseheadingfontcolor       : inherit;
 
 @altfont                    : Cambria, Georgia, Times, 'Times New Roman', serif;
+@codefont                   : Menlo, Monaco, monospace;
 
-@codefont                   : Monaco, Courier New, monospace;
+
+
+// Grid Variables --------------------------------------------------
+  
+// The width you’d like your gutters to be
+@gutterwidth                : 20px;
+
+// Helpful for calculating 
+@gridwidth                  : 100%;
+
+// The width you’d like your layout to be at these breakpoints
+// Remember this width includes 1/2 a gutter at both sides
+
+@480width                   : 400px;
+@600width                   : 560px;
+@768width                   : 640px;
+@992width                   : 960px;
+@1382width                  : 1280px;
+
+
+
+// Shorthand -----------------------------------
+@blh                        : @baselineheight;
+@gw                         : @gutterwidth;
+
 
 
 // Colours ---------------------------------------------------------
 
 @basecolor                  : #48D;
 @compcolor                  : #D44;
+
 @bordercolor                : @lightergrey;
 
 
@@ -48,12 +77,12 @@
 
 // Colour Palettes
 
-@alertcolor                 : rgb(252,248,227);
-@errorcolor                 : rgb(218,79,73);
-@infocolor                  : rgb(217,237,247);
-@inversecolor               : rgb(65,65,65);
-@successcolor               : rgb(91,183,91);
-@warningcolor               : rgb(250,167,50);
+@alertcolor                 : hsl( 050, 70%, 60%);
+@errorcolor                 : hsl( 005, 70%, 60%);
+@infocolor                  : hsl( 200, 50%, 60%);
+@successcolor               : hsl( 120, 38%, 56%);
+@warningcolor               : hsl( 032, 80%, 50%);
+@inversecolor               : hsl( 000, 00%, 40%);
 
 
 // Social
@@ -71,26 +100,27 @@
 
 @tablebackground            : transparent;
 @tablestripe                : darken(@white, 3%);
-@tablehover                 : fadeout(@basecolor, 80%);
+@tablehover                 : fadeout(@black, 97%);
 @tableborder                : lighten(@lightgrey, 10%);
 @tableborderwidth           : 1px;
 @tableborderstyle           : solid;
 
 // Forms
 
-@inputbackground            : @white;
-@inputborder                : @lightgrey;
+@inputtextcolor             : @textcolor;
+@inputbackground            : @lightergrey;
+@inputborder                : @lightergrey;
 @inputborderwidth           : 1px;
 @inputborderstyle           : solid;
 @inputhover                 : @basecolor;
-@inputfocus                 : @basecolor;
-@placeholdercolor           : @lightgrey;
+@inputfocus                 : @inputhover;
+@placeholdercolor           : @grey;
 
 // Buttons
 
 @buttonbackground            : @lightergrey;
 @buttoncolor                 : @textcolor;
-@buttonborder                : darken(@buttonbackground, 2%);
-@buttonhover                 : darken(@buttonbackground, 5%);
-//@buttonfocus                 : @inputfocus;
+@buttonborder                : @buttonbackground;
+@buttonhover                 : darken(@buttonbackground, 6%);
+@buttonborderhover           : @buttonhover;
 

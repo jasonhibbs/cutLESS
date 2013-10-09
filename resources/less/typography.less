@@ -24,38 +24,38 @@ h2 small {
 
 h1 {
   .font-size(36);
-  line-height: (@baselineheight * 2);
-  margin: @baselineheight 0;
+  line-height: (@blh * 2);
+  margin: @blh 0;
 }
 
 h2 {
   .font-size(30);
-  line-height: (@baselineheight * 1.5);
-  margin: @baselineheight 0;
+  line-height: (@blh * 1.5);
+  margin: @blh 0;
 }
 
 h3 {
   .font-size(24);
-  line-height: (@baselineheight * 1.5);
-  margin: @baselineheight 0;
+  line-height: (@blh * 1.5);
+  margin: @blh 0;
 }
 
 h4 {
   .font-size(21);
-  line-height: (@baselineheight * 1);
-  margin: @baselineheight 0;
+  line-height: (@blh * 1);
+  margin: @blh 0;
 }
 
 h5 {
   .font-size(18);
-  line-height: (@baselineheight * 1);
-  margin: @baselineheight 0 0;
+  line-height: (@blh * 1);
+  margin: @blh 0 0;
 }
 
 h6 {
   .font-size(16);
-  line-height: (@baselineheight * 1);
-  margin: @baselineheight 0 0;
+  line-height: (@blh * 1);
+  margin: @blh 0 0;
 }
 
 
@@ -69,8 +69,8 @@ dl,
 address {
   .font-size(16);
   margin-top: 0;
-  margin-bottom: @baselineheight;
-  line-height: @baselineheight;
+  margin-bottom: @blh;
+  line-height: @blh;
 }
 
 small { 
@@ -80,11 +80,12 @@ small {
   // This is for baseline fixing only, remove/override if causing problems
   display: inline-block;
   margin-bottom: -1px;
+  line-height: 1em;
 }
 
 ul,
 ol {
-  margin: 0 0 @baselineheight 0;
+  margin: 0 0 @blh 0;
   padding: 0 0 0 (@gutterwidth * 2);
 }
 
@@ -94,6 +95,53 @@ li ol {
   margin: 0 0 0;
 }
 
+
+
+.tiered {
+  // For a Table of Contents for example
+  // <ol>’s only
+  
+  counter-reset: primary;
+  list-style-type: none;
+  
+  li {
+    counter-increment: primary;
+    position: relative;
+    
+    &:before {
+      content: counter(primary) '.';
+
+      position: absolute;
+      left: -(@gutterwidth * 2);
+    }
+  }
+  
+  ol {
+    counter-reset: secondary;
+    
+    li {
+      counter-increment: secondary;
+      &:before {
+        content: counter(primary) '.' counter(secondary);
+      }
+    }
+    
+    ol {
+      counter-reset: tertiary;
+      
+      li {
+        counter-increment: tertiary;
+        &:before {
+          content: counter(primary) '.' counter(secondary) '.' counter(tertiary);
+        }
+      }
+    }
+  }  
+}
+
+
+
+
 // Quick class/mixin for removing list styles
 .delist {
   list-style: none;
@@ -101,25 +149,147 @@ li ol {
 }
 
 
-// Blockquote ------------------------------------------------------
+// Blockquotes, Messages, and Panels -------------------------------
 
-blockquote  {
-  margin: 0 0 @baselineheight 0;
-  padding: (@baselineheight * 0.5) @gutterwidth;
+blockquote,
+.message,
+.panel  {
+  margin: 0 0 @blh 0;
+  padding: (@blh * 0.5) @gutterwidth;
   
-  color: lighten(@textcolor, 20%);
+  color: @textcolor;
   background-color: darken(@bodycolor, 3%);
   border-left: (@gutterwidth * 0.25) solid darken(@bodycolor, 13%);
   
   //font-family: @altfont;
   
-  p:last-of-type {
-    margin-bottom: (@baselineheight * 0.25);
+  i:first-child {
+    position: relative;
+    left: -(@gutterwidth * 1/3);
   }
   
-  small {
+  p:last-of-type {
+    margin-bottom: (@blh * 0);
+  }
+  
+  > small {
+    margin: (@blh * 0.25) 0 0;
+    
     &:before {
       content: '\2014\00a0'; //&ndash;&nbsp;
+    }
+  }
+}
+
+.message-primary {
+  .message-color(@basecolor);
+}
+
+.message-alert {
+  .message-color(@alertcolor);
+}
+
+.message-error {
+  .message-color(@errorcolor);
+}
+
+.message-info {
+  .message-color(@infocolor);
+}
+
+.message-warning {
+  .message-color(@warningcolor);
+}
+
+.message-success {
+  .message-color(@successcolor);
+}
+
+.message-inverse {
+  .message-color(@inversecolor);
+}
+
+.message-color(@thiscolor) {
+
+  border-color: @thiscolor;
+  background-color: lighten(@thiscolor, 36%);
+  
+  i {
+    color: @thiscolor;
+  }
+}
+
+
+
+
+// Panel ---------------------------------------
+
+.panel {
+  border-left: none;
+  border-top: (@blh * 0.25) solid darken(@bodycolor, 13%);
+  padding-bottom: (@blh * 1);
+  
+  i:first-child {
+    left: 0;
+  }
+}
+
+.panel-primary {
+  .panel-color(@basecolor);
+}
+
+.panel-alert {
+  .panel-color(@alertcolor);
+}
+
+.panel-error {
+  .panel-color(@errorcolor);
+}
+
+.panel-info {
+  .panel-color(@infocolor);
+}
+
+.panel-warning {
+  .panel-color(@warningcolor);
+}
+
+.panel-success {
+  .panel-color(@successcolor);
+}
+
+.panel-inverse {
+  .panel-color(@inversecolor);
+}
+
+.panel-color(@thiscolor) {
+
+  border-color: @thiscolor;
+  background-color: lighten(@thiscolor, 36%);
+  
+  i {
+    color: @thiscolor;
+  }
+  
+  a {
+    @thislinkcolor: darken(@thiscolor, 20%);
+    
+    &,
+    &:visited {  
+      color: @thislinkcolor;
+    }
+    
+    &,
+    & i {
+      .transition(color 0.2s);
+    }
+    
+    &:hover,
+    &:focus {
+      &,
+      & i {
+        color: darken(@thislinkcolor, 10%);
+      }
     }
   }
 }
@@ -129,7 +299,7 @@ blockquote  {
 // Definition lists ------------------------------------------------
 
 dl {
-  margin-bottom: @baselineheight;
+  margin-bottom: @blh;
 }
 
 dt {
@@ -137,7 +307,7 @@ dt {
 }
 
 dd {
-  margin: 0 0 (@baselineheight / 2) (@gutterwidth * 2);
+  margin: 0 0 (@blh / 2) (@gutterwidth * 2);
 }
 
 
@@ -169,7 +339,7 @@ code,
 kbd,
 samp {
   font-family: @codefont;
-  .font-size(15);
+  .font-size(14);
 }
 
 code,
@@ -179,35 +349,53 @@ samp {
   margin-bottom: -1px;
   padding: 0 4px;
   
-  color: lighten(@textcolor, 10%);
   background-color: @lightergrey;
+  background-color: lighten(@basecolor, 38%);
+  
+  border-bottom: 1px solid lighten(@basecolor, 32%);
+  height: (@blh);
+  white-space: nowrap;
 }
 
 
 
 // Code ------------------------------------------------------------
 
-pre[rel] {
+pre[class*="language-"] {
   display: block;
   position: relative;
-  color: @lightergrey;
   
-  line-height: (@baselineheight * 0.75);
+  color: @codetext;
+  .text-shadow(0 1px rgba(0,0,0,0.3));
   
-  background-color: @darkgrey;
+  line-height: (@blh * 0.75);
   
-  margin: 0 0 @baselineheight 0;
+  background-color: @codebg;
+  
+  margin: 0 0 @blh 0;
+  
+  direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	//tab-size: 2;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	//hyphens: none;
   
   
-  
-  
-  &[rel]:before {
-    content: attr(rel);
+  &[class*="language-"]:before {
+    content: attr(data-language);
     display: block;
     position: absolute;
     top: 0; left: 0;
     width: 100%;
-    line-height: (@baselineheight * 1.5);
+    line-height: (@blh * 1.5);
     padding: 0 (@gutterwidth * 0.75);
     
     font-family: @basefont;
@@ -221,15 +409,89 @@ pre[rel] {
   code {
     display: block;
     height: auto;
-    padding: (@baselineheight * 2) @gutterwidth (@baselineheight * 0.5);
+    .font-size(12);
+    padding: (@blh * 2) @gutterwidth (@blh * 0.5);
     
-    color: @lightergrey;
+    color: @codetext;
     background: none;
+    border: none;
     
     vertical-align: baseline;
     white-space: pre;
     overflow: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 }
 
+// Prism.js Extras -----------------------------
+
+@codebg: rgb(57,57,57);
+@codetext: rgb(108,153,187);
+@codecomments: @grey;
+@codetags: rgb(255, 207, 127);
+@codeprop: rgb(215, 137, 060);
+@codevar: rgb(217, 218, 255);
+@codestring: rgb(165, 194, 97);
+@codeimportant: rgb(213,74,32);
+@codekeywords: rgb(204,118,46);
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: @grey;
+}
+
+.token.punctuation {
+	color: @lightergrey;
+}
+
+.namespace {
+	opacity: 0.7;
+}
+
+.token.tag,
+.token.selector {
+  color: @codetags;
+}
+
+.token.property,
+.token.constant,
+.token.symbol {
+	color: @codeprop;
+}
+
+.token.attr-name,
+.token.string,
+.token.builtin {
+	color: @codestring;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.boolean,
+.token.operator,
+.token.entity,
+.token.url,
+.style .token.string,
+.token.variable {
+	color: @codevar;
+}
+
+.language-css .token.string,
+.token-string {
+  color: @codestring;
+}
+
+.token.keyword {
+  color: @codekeywords;
+}
+
+.token.regex,
+.token.important {
+	color: @codeimportant;
+}
+
+.token.entity {
+	cursor: help;
+}

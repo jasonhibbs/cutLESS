@@ -5,12 +5,12 @@ input[type="reset"],
 input[type="button"],
 input[type="submit"],
 input[type="image"],
-.button {
+.btn {
   display: inline-block;
   margin-bottom: 0; // For input.button
   
   .font-size(14);
-  height: (@baselineheight * 1.25);
+  height: (@blh * 1.25);
 
   text-align: center;
   white-space: nowrap;
@@ -21,6 +21,7 @@ input[type="image"],
   color: @buttoncolor;
   background: @buttonbackground;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  
   border: 1px solid transparent;
   
   .box-sizing(border-box);
@@ -32,12 +33,12 @@ input[type="image"],
 
   &:focus,
   &:hover {
+    color: @buttoncolor;
     background: @buttonhover;
     text-decoration: none;
   }
 
-  &:active,
-  &.active {
+  &:active {
     outline: 0;
     background-image: none;
     
@@ -51,26 +52,100 @@ input[type="image"],
     .opacity(0.6);
     .box-shadow(none);
   }
-
 }
 
 button,
 input[type="reset"],
 input[type="button"],
 input[type="submit"],
-.button {
+.btn {
   padding: 0 (@gutterwidth / 2);
   border: 1px solid @buttonborder;
+  border-bottom-color: darken(@buttonborder, 10%);
   //.box-shadow(0 1px 2px rgba(0,0,0,0.2));
   
   &:focus,
   &:hover {
-    border-color: @buttonhover;
+    border-color: @buttonborderhover;
+    border-bottom-color: darken(@buttonborderhover, 10%);
   }
   
-  &:active,
-  &.active {
+  &:active {
     border-top: 2px solid darken(@buttonhover, 10%);
+    border-bottom-color: transparent;
     //.box-shadow(0 1px 1px rgba(0,0,0,0.2));
   }
 }
+
+
+.btn {
+  line-height: (@blh * 1.2);
+}
+
+.btn-primary {
+  .btn-color(@basecolor);
+}
+
+.btn-alert {
+  .btn-color(@alertcolor);
+}
+
+.btn-error {
+  .btn-color(@errorcolor);
+}
+
+.btn-info {
+  .btn-color(@infocolor);
+}
+
+.btn-success {
+  .btn-color(@successcolor);
+}
+
+.btn-warning {
+  .btn-color(@warningcolor);
+}
+
+.btn-inverse {
+  .btn-color(@inversecolor);
+}
+
+.btn-color(@thiscolor) {
+
+  &,
+  &:visited {
+
+    color: contrast(@thiscolor, darken(@thiscolor, 30%), lighten(@thiscolor, 50%), 64%);
+    background-color: @thiscolor;
+    border-color: @thiscolor;
+    border-bottom-color: darken(@thiscolor, 15%);
+    
+    &:focus,
+    &:hover {
+    
+      text-decoration: none;
+    
+      .if() when (luma(@thiscolor) < 64%) {
+        background-color: darken(@thiscolor, 7%);
+        border-color: darken(@thiscolor, 7%);
+        border-bottom-color: darken(@thiscolor, 20%);
+        color: lighten(@thiscolor, 50%);
+      }
+      
+      .if() when (luma(@thiscolor) > 64%) {
+        background-color: lighten(@thiscolor, 7%);
+        border-color: lighten(@thiscolor, 7%);
+        border-bottom-color: darken(@thiscolor, 15%);
+        color: darken(@thiscolor, 30%);
+      }
+      
+      .if();    
+    }
+    
+    &:active {
+      border-top-color: darken(@thiscolor, 15%);
+      border-bottom-color: @thiscolor;
+    }
+  }
+}
+

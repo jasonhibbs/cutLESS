@@ -75,9 +75,12 @@ input[type="color"] {
   background-color: @inputbackground;
   border: @inputborderwidth @inputborderstyle @inputborder;
   color: @textcolor;
+
+  border-top-color: darken(@inputborder, 7%);
   
   //.inset-shadow(0 1px 1px rgba(0,0,0,0.1));
   .border-radius(4px);
+  .box-sizing(border-box);
   .appearance(none);
   .transition(~'border-color 0.2s, background-color 0.2s, box-shadow 1s');
   
@@ -94,13 +97,21 @@ input[type="color"] {
   
   &:invalid,
   &.invalid {
-    border: @inputborderwidth @inputborderstyle lighten(@errorcolor, 25%);
+    border-color: lighten(@errorcolor, 36%);
+    border-top-color: lighten(@errorcolor, 29%);
     background-color: lighten(@errorcolor, 36%);
+    
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: lighten(@errorcolor, 15%);
+    }
     
     &:focus,
     &:active {
-      background-color: @white;
-      .box-shadow(0 0 5px fadeout(@errorcolor, 60%));
+      //border-color: lighten(@errorcolor, 25%);
+      //background-color: @white;
+      //.box-shadow(0 0 5px fadeout(@errorcolor, 60%));
     }
   }
 }
@@ -121,12 +132,13 @@ select {
   
   height: (@baselineheight);
   max-width: 100%;
-  .box-sizing(border-box);
+ 
 }
 
 
 select {
   vertical-align: text-top;
+   .box-sizing(border-box);
 }
 
 
@@ -170,7 +182,7 @@ input[type="date"],
 input[type="month"],
 input[type="week"],
 input[type="datetime-local"] {
-  height: 22px;
+  height: 24px;
 }
 
 

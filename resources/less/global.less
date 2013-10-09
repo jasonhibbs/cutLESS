@@ -3,24 +3,34 @@
 // Variables -------------------------------------------------------
 
 
+// Shorthand Column (remove in non-responsive layouts) -------------
+.column(@fraction: 1/1) { @gridbits: (320 / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
 
 // Root ------------------------------------------------------------
 
 .head,
 .foot,
 .page {
-  .clearfix();
+  &:extend(.clearfix all);
 }
 
 nav {
 
+  @navitems: 3; // Change this to the number of items in your <nav>
+
   ul {
+    .delist();
     margin-bottom: 0;
     list-style: none;
     
-    max-height: (@baselineheight * 3); // Change this to the height of your <nav> list
+    max-height: (@blh * @navitems); // Or change this to the height of your open nav
     overflow: hidden;
     .transition(max-height 0.4s);
+    
+    li a {
+      display: block;
+    }
     
     &.closed {
       max-height: 0;
@@ -29,8 +39,8 @@ nav {
   
   .menu_bar {
     .font-size(16);
-    line-height: @baselineheight;
-    margin: 0 0 @baselineheight;
+    line-height: @blh;
+    margin: 0 0 @blh;
     cursor: pointer;
   }
 }
@@ -40,17 +50,17 @@ nav {
 .head {
   .site_title,
   nav {
-    .column();
+    .column-all();
   }
 }
 
 // Footer //////////////////////////////////////////////////////////
 
 .foot {
-  padding-bottom: (@baselineheight * 3);
+  padding-bottom: (@blh * 3);
   
   .bottom_line {
-    .column();
+    .column-all();
   }
 }
 
@@ -58,98 +68,4 @@ nav {
 
 .content {
   
-}
-
-
-
-
-
-
-
-
-
-// Demo ////////////////////////////////////////////////////////////
-
-.default_demo {
-  
-  
-  .demo_wrap {
-    .column();
-  }
-
-  
-  svg {
-    display: block;
-  }
-  
-  audio,
-  video {
-    margin-bottom: (@baselineheight / 4);
-  }
-  
-  .striped {
-    .striped-table();
-  }
-}
-
-.gridding_demo {
-  h2 {
-    .column();
-  }
-  
-}
-
-.demo {
-  height: (@baselineheight * 5);
-  background-color: fadeout(@lightergrey, 50%);
-  margin-bottom: (@baselineheight / 2);
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: (@baselineheight / 2) (@gutterwidth);
-  border: 1px solid @lightgrey;
-  .border-radius(4px);
-}
-
-.first {
-  .column(5/4);
-}
-
-.second {
-  .column(1/2);
-}
-
-.third {
-  .column(1/3);
-  .nudge-column();
-}
-
-.fourth {
-  .column(1/4);
-}
-
-
-
-.grid_test {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  left: 0; top: 0; bottom: 0; right: 0;
-  overflow: hidden;
-  pointer-events: none;
-  
-  ul {
-    list-style: none;
-  }
-  
-  li {
-    .column(1/12);
-    border: 1px solid fadeout(@compcolor, 95%);
-    border-top: none;
-    border-bottom: none;
-    
-    background: fadeout(@compcolor, 97%);
-    height: 2000px;
-    //z-index: 999;
-  }
 }

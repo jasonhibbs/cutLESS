@@ -9,9 +9,9 @@
   font-size: ~"@{rem}rem";
 }
 
-.line-height(@line-height: 1.5) {
-  line-height: (@line-height * @basefontsize);
-  line-height: ~"@{line-height}rem";
+
+.line-height(@line-height: 1) {
+  line-height: (@baselineheight * @line-height);
 }
 
 .text-overflow {
@@ -45,6 +45,7 @@ background-image :    -moz-linear-gradient(left, @startColor, @endColor);       
 background-image :     -ms-linear-gradient(left, @startColor, @endColor);                    // IE10
 background-image :      -o-linear-gradient(left, @startColor, @endColor);                    // Opera 11.10
 background-image :         linear-gradient(left, @startColor, @endColor);                    // W3C
+          filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=1 );
 background-repeat: repeat-x;
 }
 
@@ -56,6 +57,7 @@ background-image :    -moz-linear-gradient(top, @startColor, @endColor);        
 background-image :     -ms-linear-gradient(top, @startColor, @endColor);                     // IE10
 background-image :      -o-linear-gradient(top, @startColor, @endColor);                     // Opera 11.10
 background-image :         linear-gradient(top, @startColor, @endColor);                     // W3C
+          filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=0 );
 background-repeat: repeat-x;
 }
 
@@ -66,6 +68,7 @@ background-image :    -moz-linear-gradient(@deg, @startColor, @endColor);  // FF
 background-image :     -ms-linear-gradient(@deg, @startColor, @endColor);  // IE10
 background-image :      -o-linear-gradient(@deg, @startColor, @endColor);  // Opera 11.10
 background-image :         linear-gradient(@deg, @startColor, @endColor);  // W3C
+          filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=1 );
 background-repeat: repeat-x;
 }
 
@@ -103,7 +106,7 @@ background-repeat: repeat-x;
 // .text-shadow(HORIZONTAL VERTICAL BLUR COLOR))
 
 .text-shadow(@shadow) {
--webkit-text-shadow: @shadow;
+//-webkit-text-shadow: @shadow;
    -moz-text-shadow: @shadow;
         text-shadow: @shadow;
 }
@@ -183,7 +186,7 @@ background-repeat: repeat-x;
 
 // .transition(PROPERTY DURATION DELAY(OPTIONAL) TIMING-FINCTION);
 
-.transition(@transition: all ease 0.2s) {
+.transition(@transition: all 0.2s 0 ease) {
 -webkit-transition: @transition;
    -moz-transition: @transition;
     -ms-transition: @transition;
@@ -193,7 +196,7 @@ background-repeat: repeat-x;
 
 // .transition-transform(DURATION DELAY(OPTIONAL) TIMING-FINCTION);
 
-.transition-transform(@options: ease 0.2s) {
+.transition-transform(@options: 0.2s 0 ease) {
 -webkit-transition:-webkit-transform @options;
    -moz-transition:   -moz-transform @options;
     -ms-transition:    -ms-transform @options;
@@ -372,6 +375,14 @@ background-repeat: repeat-x;
 }
 
 
+// .border-image()
+.border-image(@value) {
+-webkit-border-image: @value;
+   -moz-border-image: @value;
+        border-image: @value;
+}
+
+
 // Helpers ---------------------------------------------------------
 
 // Chrome Frame
@@ -404,7 +415,7 @@ background-repeat: repeat-x;
 // Image Replacement
 
 .hide-text {
-  text-indent: -200%;
+  text-indent: 200%;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -474,9 +485,9 @@ background-repeat: repeat-x;
 
 // .arrow(DIRECTION, SIZE, COLOUR, DISPLAY)
 
-.arrow(@_, @size, @color, @display: block) {
+.arrow(@_, @size, @color) {
   content: ''; // usually a psuedo
-  display: @display;
+  display: block;
   color: transparent;
   background-color: transparent;
   width: 0;
@@ -502,4 +513,31 @@ background-repeat: repeat-x;
 .arrow(down, @size, @color) {
 	border-top-color: @color;
 	border-top-style: solid;
+}
+
+// .border-bevel(SIZE, COLOUR)
+
+.border-bevel(@size, @bgcolor) {
+  background: @bgcolor;
+  background:
+      -webkit-linear-gradient(45deg,  transparent @size, @bgcolor @size),
+      -webkit-linear-gradient(135deg, transparent @size, @bgcolor @size),
+      -webkit-linear-gradient(225deg, transparent @size, @bgcolor @size),
+      -webkit-linear-gradient(315deg, transparent @size, @bgcolor @size);
+  background:                                     
+         -moz-linear-gradient(45deg,  transparent @size, @bgcolor @size),
+         -moz-linear-gradient(135deg, transparent @size, @bgcolor @size),
+         -moz-linear-gradient(225deg, transparent @size, @bgcolor @size),
+         -moz-linear-gradient(315deg, transparent @size, @bgcolor @size);
+  background:                                     
+           -o-linear-gradient(45deg,  transparent @size, @bgcolor @size),
+           -o-linear-gradient(135deg, transparent @size, @bgcolor @size),
+           -o-linear-gradient(225deg, transparent @size, @bgcolor @size),
+           -o-linear-gradient(315deg, transparent @size, @bgcolor @size);
+  
+  background-position: bottom left, bottom right, top right, top left;
+  -moz-background-size: 51% 51%;
+  -webkit-background-size: 51% 51%;
+  background-size: 51% 51%;
+  background-repeat: no-repeat;
 }

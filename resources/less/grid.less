@@ -14,7 +14,6 @@
   .column-reset(@amount: 0) {
     .margin-x(@amount);       // Remove margin only on the x-axis
     .padding-x(@amount);      // Remove padding only on the x-axis
-    .box-sizing(content-box); // Default box-sizing
     width: auto;              // Default width
     float: none;              // Remove float
   }
@@ -32,21 +31,7 @@
   }
 
 
-// Grid Variables --------------------------------------------------
-  
-  // The width you’d like your gutters to be
-  @gutterwidth: 20px;
-  
-  // Helpful for calculating 
-  @gridwidth: 100%;
 
-  // The width you’d like your layout to be at these breakpoints
-  // Remember this width includes 1/2 a gutter at both sides
-  @480width:  400px;
-  @600width:  560px;
-  @768width:  640px;
-  @992width:  960px;
-  @1382width: 1280px;
 
 
 // Layout (Grid Container) -----------------------------------------
@@ -63,13 +48,14 @@
     width: 93.75%;      // 300 / 320 = 93.75%
     position: relative; // For nudging
     .margin-x(auto);    // Centre layout
-    .clearfix();        // Columns are floated
+    &:extend(.clearfix all);        // Columns are floated
     
     
     // class="fixed layout" --------------------
     // For when you’ve designed for each breakpoint
     
-    &.fixed {
+    &.fixed,
+    .fixed & {
       @media (min-width: 480px) {
         width: @480width;
       }
@@ -95,7 +81,8 @@
     // class="liquid layout" -------------------
     // For when you’re not ready to go full-liquid
     
-    &.liquid {
+    &.liquid,
+    .liquid & {
       @media (min-width: 480px) {
         width: percentage(@480width / 480);
       }
@@ -122,7 +109,41 @@
 
 // Column Mixin ----------------------------------------------------
 
+  
   .column(@fraction: 1/1) {
+
+    // This is redefined at each breakpoint,
+    // and if used, needs to be used at successive breakpoints, too.
+    
+
+    // Some calculations -----------------------
+    @gridbits: (960 / @gutterwidth);
+    // Assume 960 for non-responsive layouts
+    
+    @gutterbits: (@gridwidth / @gridbits);
+    // @gridbits as a percentage
+  
+    @portion: (1 / @fraction);
+    // How many columns could I fit in a row given @fraction
+    // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
+    
+    // This is the complicated bit
+    @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction);
+    // e.g.       (100% / 48) * ((48        - 2)        * 1/2)        = 47.916666667%
+  
+    float: left;
+    width: @columnwidth;
+    .margin-x(@gutterbits * 0.5); 
+  }
+
+
+
+
+  .column-all(@fraction: 1/1) {
+  
+    // This will basically take care of itself,
+    // So long as you have one of those good layouts,
+    // where the good design is good.
     
     // Some calculations -----------------------
     

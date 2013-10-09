@@ -1,6 +1,7 @@
 // Helpers /////////////////////////////////////////////////////////
 var $window = $(window);
 var window_width = $window.width();
+var breakpoint = 0;
 
 
 // Scripts /////////////////////////////////////////////////////////
@@ -33,8 +34,7 @@ $window.resize(function(){
   }
 
   // In case people are just testing our responsive skills, make sure the menu opens again…
-  var w = $(window).width();
-  if(w > 600 && $('.head nav ul')) {
+  if(window_width > 600 && $('.head nav ul')) {
     $('.head nav ul').removeClass('closed');
   }
 
@@ -44,5 +44,11 @@ $window.resize(function(){
 
 // Load ////////////////////////////////////////////////////////////
 $window.load(function () {
+  
+  // Animate scrolling on Hash Links (minus @baselineheight * 2)
+  $(".head nav li a").click(function(e){
+    e.preventDefault();
+    $('html,body').animate({scrollTop:$(this.hash).offset().top - 48}, 400);
+  });
   
 });
