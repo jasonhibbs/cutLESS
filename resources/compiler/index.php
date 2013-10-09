@@ -1,5 +1,28 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
+$old_dir = getcwd();
+chdir(get_template_directory() . "/resources/compiler");
+$dir = '../compiled';
+
+function rrmdir($dir) { 
+   if (is_dir($dir)) { 
+     $objects = scandir($dir); 
+     foreach ($objects as $object) { 
+       if ($object != "." && $object != "..") { 
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object); 
+       } 
+     } 
+     reset($objects); 
+     rmdir($dir); 
+   } 
+} 
+
+if (file_exists($dir)) rrmdir($dir);
+mkdir ($dir, 0775);
+
 /*
 	Compiler Version 1
 	TODO:
@@ -12,8 +35,8 @@ $config = file('config.txt');
 $options = array(
 	"dont_update" => "false",	
 	"global_file" => "true",
-	"style_base" => "../css/index.min.css",
-	"script_base" => "../js/index.min.js",
+	"style_base" => "../compiled/style.css",
+	"script_base" => "../compiled/script.min.js",
 	"less_folder" => "../less/",
 	"css_folder" => "../css/",
 	"js_folder" => "../js/",
@@ -98,4 +121,6 @@ if ($js_dirty || $css_dirty) {
 		file_put_contents(trim($file), $output);		
 	}
 }
+
+chdir($old_dir);
 ?>
