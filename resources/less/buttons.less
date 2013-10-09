@@ -116,41 +116,43 @@ input[type="submit"],
 }
 
 .btn-color(@thiscolor) {
-
+    
+  background-color: @thiscolor;
+  border-color: @thiscolor;
+  border-bottom-color: darken(@thiscolor, 15%);
+  
   &,
   &:visited {
-
-    color: contrast(@thiscolor, darken(@thiscolor, 30%), lighten(@thiscolor, 50%), 64%);
-    background-color: @thiscolor;
-    border-color: @thiscolor;
-    border-bottom-color: darken(@thiscolor, 15%);
-    
-    &:focus,
-    &:hover {
-    
-      text-decoration: none;
-    
-      .if() when (luma(@thiscolor) < 64%) {
-        background-color: darken(@thiscolor, 7%);
-        border-color: darken(@thiscolor, 7%);
-        border-bottom-color: darken(@thiscolor, 20%);
-        color: lighten(@thiscolor, 50%);
-      }
-      
-      .if() when (luma(@thiscolor) > 64%) {
-        background-color: lighten(@thiscolor, 7%);
-        border-color: lighten(@thiscolor, 7%);
-        border-bottom-color: darken(@thiscolor, 15%);
-        color: darken(@thiscolor, 30%);
-      }
-      
-      .if();    
-    }
-    
-    &:active {
-      border-top-color: darken(@thiscolor, 15%);
-      border-bottom-color: @thiscolor;
-    }
+    color: contrast(@thiscolor, darken(@thiscolor, 30%), lighten(@thiscolor, 52%), 64%);
   }
+
+  
+  &:focus,
+  &:hover {
+  
+    text-decoration: none;
+  
+    .if() when (luma(@thiscolor) < 64%) {
+      background-color: darken(@thiscolor, 7%);
+      border-color: darken(@thiscolor, 7%);
+      border-bottom-color: darken(@thiscolor, 20%);
+      color: lighten(@thiscolor, 50%);
+    }
+    
+    .if() when (luma(@thiscolor) > 64%) {
+      background-color: lighten(@thiscolor, 7%);
+      border-color: lighten(@thiscolor, 7%);
+      border-bottom-color: darken(@thiscolor, 15%);
+      color: darken(@thiscolor, 30%);
+    }
+    
+    .if();    
+  }
+  
+  &:active {
+    border-top-color: darken(@thiscolor, 15%);
+    border-bottom-color: @thiscolor;
+  }
+
 }
 

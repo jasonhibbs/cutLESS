@@ -258,7 +258,8 @@ background-repeat: repeat-x;
 // .background-alpha(VALUE, VALUE);
 
 .background-alpha(@color: @white, @alpha: 1) {
-  background-color : hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+  @percent: percent(1 - @alpha);
+  background-color : fadeout(@color, @percent);
 }
 
 
@@ -483,7 +484,7 @@ background-repeat: repeat-x;
 
 // Cool Stuff ------------------------------------------------------
 
-// .arrow(DIRECTION, SIZE, COLOUR, DISPLAY)
+// .arrow(DIRECTION, SIZE, COLOUR)
 
 .arrow(@_, @size, @color) {
   content: ''; // usually a psuedo

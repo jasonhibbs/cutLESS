@@ -91,7 +91,6 @@ ol {
 
 li ul,
 li ol {
-  .font-size(16);
   margin: 0 0 0;
 }
 
@@ -104,13 +103,14 @@ li ol {
   counter-reset: primary;
   list-style-type: none;
   
+  
   li {
     counter-increment: primary;
     position: relative;
     
+    
     &:before {
       content: counter(primary) '.';
-
       position: absolute;
       left: -(@gutterwidth * 2);
     }
@@ -118,6 +118,7 @@ li ol {
   
   ol {
     counter-reset: secondary;
+    list-style-type: none;
     
     li {
       counter-increment: secondary;
@@ -381,14 +382,13 @@ pre[class*="language-"] {
 
 	-moz-tab-size: 2;
 	-o-tab-size: 2;
-	//tab-size: 2;
+	tab-size: 2;
 
 	-webkit-hyphens: none;
 	-moz-hyphens: none;
 	-ms-hyphens: none;
 	//hyphens: none;
-  
-  
+	
   &[class*="language-"]:before {
     content: attr(data-language);
     display: block;
@@ -421,19 +421,23 @@ pre[class*="language-"] {
     overflow: hidden;
     overflow-x: auto;
   }
+  
+  &.language-markup code {
+  	color: @lightergrey;
+	}
 }
 
 // Prism.js Extras -----------------------------
 
-@codebg: rgb(57,57,57);
-@codetext: rgb(108,153,187);
-@codecomments: @grey;
-@codetags: rgb(255, 207, 127);
-@codeprop: rgb(215, 137, 060);
-@codevar: rgb(217, 218, 255);
-@codestring: rgb(165, 194, 97);
-@codeimportant: rgb(213,74,32);
-@codekeywords: rgb(204,118,46);
+@codebg         : rgb(57,57,57);
+@codetext       : rgb(108,153,187);
+@codecomments   : @grey;
+@codetags       : rgb(255,207,127);
+@codeprop       : rgb(215,137,060);
+@codevar        : rgb(217, 218, 255);
+@codestring     : rgb(165, 194, 97);
+@codeimportant  : rgb(255, 90, 55);
+@codekeywords   : rgb(204,118,46);
 
 .token.comment,
 .token.prolog,
@@ -451,6 +455,7 @@ pre[class*="language-"] {
 }
 
 .token.tag,
+.token.tag .punctuation,
 .token.selector {
   color: @codetags;
 }
