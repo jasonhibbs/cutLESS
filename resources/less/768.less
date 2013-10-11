@@ -4,7 +4,7 @@
 
 
 // Column (needs redefining) ---------------------------------------
-.column(@fraction: 1/1) { @gridbits: (@768width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+.column(@fraction) { @gridbits: (@768width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
 
 // Root ------------------------------------------------------------

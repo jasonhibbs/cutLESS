@@ -85,7 +85,7 @@ background-repeat: repeat-x;
 }
 
 
-// .box-shadow(HORIZONTAL VERTICAL BLUR COLOR))
+// .box-shadow(HORIZONTAL VERTICAL BLUR COLOR)
 
 .box-shadow(@shadow) {
 -webkit-box-shadow: @shadow;
@@ -94,7 +94,7 @@ background-repeat: repeat-x;
 }
 
 
-// .inset-shadow(HORIZONTAL VERTICAL BLUR COLOR))
+// .inset-shadow(HORIZONTAL VERTICAL BLUR COLOR)
 
 .inset-shadow(@shadow) {
 -webkit-box-shadow: inset @shadow;
@@ -103,12 +103,23 @@ background-repeat: repeat-x;
 }
 
 
-// .text-shadow(HORIZONTAL VERTICAL BLUR COLOR))
+// .text-shadow(HORIZONTAL VERTICAL BLUR COLOR)
 
 .text-shadow(@shadow) {
 //-webkit-text-shadow: @shadow;
    -moz-text-shadow: @shadow;
         text-shadow: @shadow;
+}
+
+
+// .filter(VALUE)
+
+.filter(@filters) {
+-webkit-filter: @filters;
+   -moz-filter: @filters;
+    -ms-filter: @filters;
+     -o-filter: @filters;
+        filter: @filters;
 }
 
 

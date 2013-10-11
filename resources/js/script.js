@@ -1,3 +1,5 @@
+//@codekit-prepend "plugins.js"
+
 // Helpers /////////////////////////////////////////////////////////
 var $window = $(window);
 var window_width = $window.width();
@@ -44,11 +46,5 @@ $window.resize(function(){
 
 // Load ////////////////////////////////////////////////////////////
 $window.load(function () {
-  
-  // Animate scrolling on Hash Links (minus @baselineheight * 2)
-  $(".head nav li a").click(function(e){
-    e.preventDefault();
-    $('html,body').animate({scrollTop:$(this.hash).offset().top - 48}, 400);
-  });
   
 });

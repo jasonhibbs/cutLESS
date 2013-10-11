@@ -4,7 +4,7 @@
 
 
 // Shorthand Column (remove in non-responsive layouts) -------------
-.column(@fraction: 1/1) { @gridbits: (320 / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+.column(@fraction) { @gridbits: (320 / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
 
 // Root ------------------------------------------------------------
@@ -50,7 +50,7 @@ nav {
 .head {
   .site_title,
   nav {
-    .column-all();
+    .column-all(1/1);
   }
 }
 
@@ -60,7 +60,7 @@ nav {
   padding-bottom: (@blh * 3);
   
   .bottom_line {
-    .column-all();
+    .column-all(1/1);
   }
 }
 
