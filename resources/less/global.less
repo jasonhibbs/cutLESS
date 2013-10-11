@@ -15,42 +15,32 @@
   &:extend(.clearfix all);
 }
 
+
 nav {
-
-  @navitems: 3; // Change this to the number of items in your <nav>
-
+  
   ul {
     .delist();
-    margin-bottom: 0;
-    list-style: none;
-    
-    max-height: (@blh * @navitems); // Or change this to the height of your open nav
-    overflow: hidden;
-    .transition(max-height 0.4s);
+    margin: 0;
     
     li a {
       display: block;
-    }
-    
-    &.closed {
-      max-height: 0;
     }
   }
   
   .menu_bar {
     .font-size(16);
     line-height: @blh;
-    margin: 0 0 @blh;
     cursor: pointer;
   }
 }
+
 
 // Header //////////////////////////////////////////////////////////
 
 .head {
   .site_title,
-  nav {
-    .column-all(1/1);
+  nav.dropper {
+    .column-all(1);
   }
 }
 
@@ -60,7 +50,7 @@ nav {
   padding-bottom: (@blh * 3);
   
   .bottom_line {
-    .column-all(1/1);
+    .column-all(1);
   }
 }
 

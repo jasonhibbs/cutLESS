@@ -110,10 +110,11 @@
 // Column Mixin ----------------------------------------------------
 
   
-  .column(@fraction: 1/1) {
+  .column(@fraction) {
 
     // This is redefined at each breakpoint,
-    // and if used, needs to be used at successive breakpoints, too.
+    // as opposed to including breakpoints,
+    // thus, needs to be used at successive breakpoints.
     
 
     // Some calculations -----------------------
@@ -139,7 +140,7 @@
 
 
 
-  .column-all(@fraction: 1/1) {
+  .column-all(@fraction) {
   
     // This will basically take care of itself,
     // So long as you have one of those good layouts,

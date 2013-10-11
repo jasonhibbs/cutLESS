@@ -14,13 +14,15 @@ var breakpoint = 0;
 
 $(function(){
   if(window_width <= 600) {
-    $('.head nav ul').addClass('closed');
+    $('nav.dropper ul').addClass('closed');
+    $('.drawer_layout').removeClass('unwrap');
   }
 });
 
 // Toggle the menu
 $('.menu_bar').click(function() {
-  $('.head nav ul').toggleClass('closed');
+  $('nav.dropper ul').toggleClass('closed');
+  $('.drawer_layout').toggleClass('unwrap');
 });
 
 
@@ -36,8 +38,9 @@ $window.resize(function(){
   }
 
   // In case people are just testing our responsive skills, make sure the menu opens again…
-  if(window_width > 600 && $('.head nav ul')) {
-    $('.head nav ul').removeClass('closed');
+  if(window_width > 600) {
+    $('nav.dropper ul').removeClass('closed');
+    //$('body').addClass('unwrap');
   }
 
 
@@ -46,5 +49,7 @@ $window.resize(function(){
 
 // Load ////////////////////////////////////////////////////////////
 $window.load(function () {
+  
+  
   
 });

@@ -1,0 +1,239 @@
+// Navigation Helpers //////////////////////////////////////////////
+
+// Dropper Layout --------------------------------------------------
+nav.dropper {
+
+  @navitems: 3; // Change this to the number of items in your <nav>
+
+  ul {
+    max-height: (@blh * @navitems); // Or change this to the height of your open nav
+    
+    .delist(); 
+    overflow: hidden;
+    .transition(max-height 0.4s);
+    
+    li a {
+      display: block;
+    }
+    
+    &.closed {
+      max-height: 0;
+    }
+  }
+  
+  .menu_bar {
+    margin: 0 0 @blh;
+  }
+}
+
+
+// Drawer Layout ---------------------------------------------------
+.drawer_layout {
+  @drawerbuttonsize: 45px;
+  @drawerwidth: 80%;
+  
+  & {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  
+  &.unwrap {
+    overflow-x: hidden;
+
+    .page_wrap {
+      .translate3d(@drawerwidth,0,0);
+    }
+    
+    .menu_bar i:before {
+      content: @remove;
+    }  
+  }
+  
+  
+  .page_wrap {
+    position: relative;
+    .translate3d(0,0,0);
+    .backface-visibility(hidden);
+    
+    .transition-transform(0.3s);
+  }
+  
+  nav.drawer {
+    width: @drawerwidth;
+    position: absolute;
+    top: 0; bottom: 0;
+    height: 100%;
+    left: 0;
+    z-index: 1337;
+    
+    .translate3d(-100%,0,0);
+    .backface-visibility(hidden);
+    
+    background: @lightergrey;
+    
+    a {
+      .padding-x(5%);
+    }
+  }
+  
+  .menu_bar {
+    position: absolute;
+    top: 0;
+    right: -(@drawerbuttonsize);
+    width: @drawerbuttonsize;
+    height: @drawerbuttonsize;
+    z-index: 1338;
+
+    .button_colors() when (luma(@bodycolor) < 64%) {
+      color: @white;
+      background: fadeout(#FFF, 95%);
+    }
+    
+    .button_colors() when (luma(@bodycolor) > 64%) {
+      color: @textcolor;
+      background: fadeout(#000, 95%);
+    }
+    
+    .button_colors();
+    
+    .font-size( unit(@drawerbuttonsize) * 0.65);
+    line-height: (@drawerbuttonsize * 0.95);
+    text-align: center;
+  }
+  
+  
+}
+
+
+
+
+@media only screen and (min-width: 600px) {
+
+  // Drawer Layout ---------------------------------------------------
+  .drawer_layout {
+  
+    @drawerwidth: 60%;
+  
+    &.unwrap {
+    
+      .page_wrap {
+        .translate3d(@drawerwidth,0,0);
+      } 
+    }
+    
+    nav.drawer {
+      width: @drawerwidth;
+    } 
+  }
+  
+}
+
+
+@media only screen and (min-width: 768px) {
+  
+  // Column (needs redefining) ---------------------------------------
+  .column(@fraction) { @gridbits: (@768width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  
+  
+  .menu_bar {
+    display: none;
+  }
+  
+  // Dropper Layout ----------------------------------------
+  nav.dropper {
+    margin-bottom: (@blh);
+    li {
+      display: inline-block;
+    }
+  }
+  
+  // Drawer Layout ---------------------------------------------------
+  // Unfortunately, a drawer layout needs significant help to be put
+  // back into a gridded layout. Expect to see it at every breakpoint.
+  
+  .drawer_layout {
+    
+    &.unwrap {
+      overflow: auto;
+      
+      .page_wrap {
+        .translate3d(0%,0,0);
+      }
+    }
+  
+    .page_wrap {
+      .translate3d(0%,0,0);
+      .transition(none);
+    }
+    
+    nav.drawer {
+      position: static;
+      display: block;
+      width: auto;
+      .translate3d(0%,0,0);
+      
+      background: none;
+      margin: 0 auto (@blh);
+      
+      width: @768width;
+      
+      .clearfix();
+      
+      ul {
+        margin: 0 auto;
+        .column(1);
+      }
+      
+      li {
+        display: inline-block;
+      }
+      
+      a {
+        .padding-x(0);
+      }
+    }
+  }
+  
+}
+
+
+@media only screen and (min-width: 992px) {
+  
+  // Column (needs redefining) ---------------------------------------
+  .column(@fraction) { @gridbits: (@992width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  
+  // Drawer Layout -----------------------------------------
+  .drawer_layout {
+  
+    nav.drawer {
+      width: @992width;
+      
+      ul {  
+        .column(1);
+      }
+    }
+  }
+  
+}
+
+
+@media only screen and (min-width: 1382px) {
+  
+  // Column (needs redefining) ---------------------------------------
+  .column(@fraction) { @gridbits: (@1382width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  
+  // Drawer Layout -----------------------------------------
+  .drawer_layout {
+  
+    nav.drawer {
+      width: @1382width;
+      
+      ul {  
+        .column(1);
+      }
+    }
+  }
+  
+}
+
