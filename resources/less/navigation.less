@@ -1,12 +1,25 @@
 // Navigation Helpers //////////////////////////////////////////////
 
+// General Nav -----------------------------------------------------
+nav.dropper,
+nav.drawer {
+  
+  > ul ul {
+    display: none;
+  }
+}
+
+
 // Dropper Layout --------------------------------------------------
 nav.dropper {
 
   @navitems: 3; // Change this to the number of items in your <nav>
+  
+  > ul {
+    max-height: (@blh * @navitems); // Or change this to the height of your open nav
+  }
 
   ul {
-    max-height: (@blh * @navitems); // Or change this to the height of your open nav
     
     .delist(); 
     overflow: hidden;
@@ -27,109 +40,125 @@ nav.dropper {
 }
 
 
-// Drawer Layout ---------------------------------------------------
-.drawer_layout {
-  @drawerbuttonsize: 45px;
-  @drawerwidth: 80%;
-  
-  & {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-  }
-  
-  &.unwrap {
-    overflow-x: hidden;
-
-    .page_wrap {
-      .translate3d(@drawerwidth,0,0);
-    }
-    
-    .menu_bar i:before {
-      content: @remove;
-    }  
-  }
-  
-  
-  .page_wrap {
-    position: relative;
-    .translate3d(0,0,0);
-    .backface-visibility(hidden);
-    
-    .transition-transform(0.3s);
-  }
-  
-  nav.drawer {
-    width: @drawerwidth;
-    position: absolute;
-    top: 0; bottom: 0;
-    height: 100%;
-    left: 0;
-    z-index: 1337;
-    
-    .translate3d(-100%,0,0);
-    .backface-visibility(hidden);
-    
-    background: @lightergrey;
-    
-    a {
-      .padding-x(5%);
-    }
-  }
-  
-  .menu_bar {
-    position: absolute;
-    top: 0;
-    right: -(@drawerbuttonsize);
-    width: @drawerbuttonsize;
-    height: @drawerbuttonsize;
-    z-index: 1338;
-    
-    margin: 0;
-
-    .button_colors() when (luma(@bodycolor) < 64%) {
-      color: @white;
-      background: fadeout(#FFF, 95%);
-    }
-    
-    .button_colors() when (luma(@bodycolor) > 64%) {
-      color: @textcolor;
-      background: fadeout(#000, 95%);
-    }
-    
-    .button_colors();
-    
-    .font-size( unit(@drawerbuttonsize) * 0.65);
-    line-height: (@drawerbuttonsize * 0.95);
-    text-align: center;
-  }
-  
-  
-}
 
 
-
-
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 767px) {
 
   // Drawer Layout ---------------------------------------------------
   .drawer_layout {
-  
-    @drawerwidth: 60%;
-  
-    &.unwrap {
+    @drawerbuttonsize: 45px;
+    @drawerwidth: 80%;
     
+    & {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
+    
+    &.unwrap {
+      overflow-x: hidden;
+  
       .page_wrap {
         .translate3d(@drawerwidth,0,0);
-      } 
+      }
+      
+      .menu_bar i:before {
+        content: @remove;
+      }  
+    }
+    
+    
+    .page_wrap {
+      position: relative;
+      .translate3d(0,0,0);
+      .backface-visibility(hidden);
+      
+      .transition-transform(0.3s);
     }
     
     nav.drawer {
+      
       width: @drawerwidth;
-    } 
+      position: absolute;
+      top: 0; bottom: 0;
+      height: 100%;
+      left: 0;
+      z-index: 1337;
+      
+      .margin-x(0);
+      float: none;
+            
+      .translate3d(-100%,0,0);
+      .backface-visibility(hidden);
+      
+      background: @lightergrey;
+      
+      a {
+        .padding-x(5%);
+      }
+      
+      > ul ul {
+        display: none;
+      }
+    }
+    
+    .menu_bar {
+      position: absolute;
+      top: 0;
+      right: -(@drawerbuttonsize);
+      width: @drawerbuttonsize;
+      height: @drawerbuttonsize;
+      z-index: 1338;
+      
+      .font-size( unit(@drawerbuttonsize) * 0.65);
+      line-height: (@drawerbuttonsize * 0.95);
+      text-align: center;
+      
+      margin: 0;
+  
+      .button_colors() when (luma(@bodycolor) < 64%) {
+        color: @white;
+        background: fadeout(#FFF, 95%);
+      }
+      
+      .button_colors() when (luma(@bodycolor) > 64%) {
+        color: @textcolor;
+        background: fadeout(#000, 95%);
+      }
+      
+      .button_colors();
+    }
+  
   }
   
+  
+  
+  @media (min-width: 600px) {
+  
+    // Drawer Layout ---------------------------------------------------
+    .drawer_layout {
+    
+      @drawerwidth: 60%;
+    
+      &.unwrap {
+      
+        .page_wrap {
+          .translate3d(@drawerwidth,0,0);
+        } 
+      }
+      
+      nav.drawer {
+        width: @drawerwidth;
+      } 
+    }
+  
+  }
+  
+  
+  
 }
+
+
 
 
 @media only screen and (min-width: 768px) {
@@ -138,17 +167,67 @@ nav.dropper {
   .column(@fraction) { @gridbits: (@768width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
   
   
+  // General Nav -----------------------------------------------------
+
+  nav.dropper,
+  nav.drawer {
+    margin-bottom: (@blh);
+  
+    ul, li {
+      overflow: visible;
+      max-height: none;
+    }
+    
+    > ul > li {
+      display: inline-block;
+    }
+    
+    li {
+      position: relative;
+      white-space: nowrap;
+      
+      ul {
+        display: block;
+        position: absolute;
+        
+        //top: (@blh);
+        
+        
+        z-index: 3000;
+
+        opacity: 0;
+        pointer-events: none;
+        .transition(opacity 0.4s);
+        
+        background: @white;
+        
+        li {
+          display: block;
+        }
+      }
+    
+      > ul {
+        
+        li > ul {
+          top: 0;
+          right: -100%;
+        }
+      }
+      
+      &:hover {
+        
+        > ul {
+          opacity: 1;
+          pointer-events: all;          
+        }
+      }
+    }
+  }
+  
   .menu_bar {
     display: none;
   }
   
-  // Dropper Layout ----------------------------------------
-  nav.dropper {
-    margin-bottom: (@blh);
-    li {
-      display: inline-block;
-    }
-  }
   
   // Drawer Layout ---------------------------------------------------
   // Unfortunately, a drawer layout needs significant help to be put
@@ -160,60 +239,34 @@ nav.dropper {
       overflow: auto;
       
       .page_wrap {
-        .translate3d(0%,0,0);
+        .transform-reset();
       }
     }
   
     .page_wrap {
-      .translate3d(0%,0,0);
+      .transform-reset();
       .transition(none);
     }
     
     nav.drawer {
-      position: static;
-      display: block;
-      width: auto;
-      .translate3d(0%,0,0);
-      
-      background: none;
-      margin: 0 auto (@blh);
-      
       width: @768width;
-      
-      .clearfix();
-      
-      ul {
-        margin: 0 auto;
-        .column(1);
-      }
-      
-      li {
-        display: inline-block;
-      }
-      
-      a {
-        .padding-x(0);
-      }
+      .margin-x(auto);
+      float: none;
     }
   }
   
 }
 
 
+
+
 @media only screen and (min-width: 992px) {
-  
-  // Column (needs redefining) ---------------------------------------
-  .column(@fraction) { @gridbits: (@992width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
-  
+
   // Drawer Layout -----------------------------------------
   .drawer_layout {
   
     nav.drawer {
       width: @992width;
-      
-      ul {  
-        .column(1);
-      }
     }
   }
   
@@ -222,18 +275,11 @@ nav.dropper {
 
 @media only screen and (min-width: 1382px) {
   
-  // Column (needs redefining) ---------------------------------------
-  .column(@fraction) { @gridbits: (@1382width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
-  
   // Drawer Layout -----------------------------------------
   .drawer_layout {
   
     nav.drawer {
       width: @1382width;
-      
-      ul {  
-        .column(1);
-      }
     }
   }
   

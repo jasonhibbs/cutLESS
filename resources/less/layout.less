@@ -221,6 +221,23 @@
 }
 
 
+@media only screen and (max-width: 479px) {
+  
+  *[class*=col_] {
+    
+    &.mobile_full {
+      .layout {
+        width: 100%;
+        
+        .content_box {
+          width: 100%;
+          .margin-x(0);
+        }
+      }
+    }
+  }
+  
+}
 
 
 @media only screen and (min-width: 480px) {
