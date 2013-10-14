@@ -8,14 +8,37 @@
 
 // Base Styles -----------------------------------------------------
 
-div[class*=col_] {
+*[class*=col_] {
   background-color: @lightergrey;
   margin-bottom: (@blh);
   padding-top: (@blh);
   position: relative;
   
-  div[class*=col_] {
+  *[class*=col_] {
     padding-top: 0;
+    position: relative;
+  }
+  
+  .content_group {
+    clear: both;
+    overflow: hidden;
+    
+    &.defined,
+    &.bg {
+      margin-bottom: (@blh);
+    }
+    
+    &.defined {
+      border-bottom: 2px solid @lightgrey;
+    }
+    
+    &.bg {
+      background-color: @lightgrey;
+      
+      .bg {
+        background-color: @lightergrey;
+      }
+    }
   }
   
   .content_box {
@@ -24,7 +47,11 @@ div[class*=col_] {
     
     &.bg {
       background-color: @lightgrey;
-      padding: (@gw / 2) (@blh / 2);
+      padding: 0 (@gw / 2);
+      
+      &.thumb figure {
+        margin-top: (@gw / 2);
+      }
     }
   }
   
@@ -46,12 +73,14 @@ div[class*=col_] {
 
 .edit_mode {
   
-  div[class*=col_] {    
+  *[class*=col_] {    
+    
     &:before {
       content: attr(class);
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 2000;
       
       .font-size(10);
       line-height: 20px;
@@ -70,8 +99,17 @@ div[class*=col_] {
     }
   }
   
+  .content_group,
   .content_box {
     position: relative;
+    
+    //outline: 3px solid transparent;
+    //.transition(outline-color 0.2s);
+    
+    &:before,
+    &:after {
+      z-index: 1000;
+    }
   
     &:before {
       content: attr(class);
@@ -85,10 +123,11 @@ div[class*=col_] {
       color: darken(@errorcolor, 36%);
       background: fadeout(@white, 50%);
       .padding-x(8px);
+      z-index: 1001;
       
       .transition(background 0.2s);
-      z-index: 2000;
     }
+    
     
     &:after {
       content: '';
@@ -102,21 +141,34 @@ div[class*=col_] {
       .transition(border-color 0.2s);
     }
     
+    
+    
     &:hover {
+      //outline-color: fadeout(@white, 20%);
     
       &:before {
         background: fadeout(@white, 10%);
       }
       
       &:after {
-        border-color: fadeout(@white, 20%);
+        border-color: fadeout(@grey, 20%);
       }
     }
+  }
+  
+  .content_box {
+    z-index: 1001;
   }
 }
 
 
 // Column Classes --------------------------------------------------
+
+.content_group {
+  h1 {
+    .column-all(1);
+  }
+}
 
 .col_1 {
   .content_box {
@@ -136,7 +188,7 @@ div[class*=col_] {
   .content_box {
     .column(1/2);
     
-    &:nth-child(2n + 1) {
+    &:nth-of-type(2n + 1) {
       clear: left;
     }
   }
@@ -189,7 +241,7 @@ div[class*=col_] {
     .content_box {
       .column(1/2);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: left;
       }
     }
@@ -229,7 +281,7 @@ div[class*=col_] {
     .content_box.thumb {
       .column(1/2);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: left;
       }
     }
@@ -240,7 +292,7 @@ div[class*=col_] {
     .content_box {
       .column(1/2);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: left;
       }
     }
@@ -251,11 +303,11 @@ div[class*=col_] {
     .content_box {
       .column(1/3);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: none;
       }
       
-      &:nth-child(3n + 1) {
+      &:nth-of-type(3n + 1) {
         clear: left;
       }
     }
@@ -302,7 +354,7 @@ div[class*=col_] {
     .content_box {
       .column(1/2);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: left;
       }
     }
@@ -313,11 +365,11 @@ div[class*=col_] {
     .content_box {
       .column(1/3);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: none;
       }
       
-      &:nth-child(3n + 1) {
+      &:nth-of-type(3n + 1) {
         clear: left;
       }
     }
@@ -352,12 +404,13 @@ div[class*=col_] {
     .content_box {
       .column(1/2);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: left;
       }
       
       
-      &.thumb {
+      &.thumb,
+      &.thumb.bg {
         figure {
           float: left;
           width: (@gw * 7);
@@ -374,7 +427,7 @@ div[class*=col_] {
     .content_box {
       .column(1/3);
       
-      &:nth-child(3n + 1) {
+      &:nth-of-type(3n + 1) {
         clear: left;
       }
     }
@@ -385,11 +438,11 @@ div[class*=col_] {
     .content_box {
       .column(1/4);
       
-      &:nth-child(2n + 1) {
+      &:nth-of-type(2n + 1) {
         clear: none;
       }
       
-      &:nth-child(4n + 1) {
+      &:nth-of-type(4n + 1) {
         clear: left;
       }
     }
@@ -400,11 +453,11 @@ div[class*=col_] {
     .content_box {
       .column(1/6);
       
-      &:nth-child(3n + 1) {
+      &:nth-of-type(3n + 1) {
         clear: none;
       }
       
-      &:nth-child(6n + 1) {
+      &:nth-of-type(6n + 1) {
         clear: left;
       }
     }
