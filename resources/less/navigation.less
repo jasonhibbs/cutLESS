@@ -171,6 +171,7 @@ nav.dropper {
 
   nav.dropper,
   nav.drawer {
+    .clearfix();
     margin-bottom: (@blh);
   
     ul, li {
@@ -253,6 +254,11 @@ nav.dropper {
       .margin-x(auto);
       float: none;
     }
+    
+    
+    &.liquid nav.drawer {
+      width: percentage(@768width / 768);
+    }
   }
   
 }
@@ -268,6 +274,10 @@ nav.dropper {
     nav.drawer {
       width: @992width;
     }
+    
+    &.liquid nav.drawer {
+      width: percentage(@992width / 992);
+    }
   }
   
 }
@@ -280,6 +290,10 @@ nav.dropper {
   
     nav.drawer {
       width: @1382width;
+    }
+    
+    &.liquid nav.drawer {
+      width: percentage(@1382width / 1382);
     }
   }
   

@@ -5,54 +5,68 @@
   background-color: darken(#FFF, 0.5%);
 }
 
+// Column (needs redefining) -------------------------------------
+@gridbits: (320 / @gutterwidth);
+@gutterbits: (@gridwidth / @gridbits);
+
+.column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+
+// Other Variables and mixins --------------------------------------
+  
+.inner-columns(@num, @margin) {
+  float: left;
+  width: ((100% - (@margin * (@num - 1))) / @num);
+  margin-right: percentage(@margin / 100);
+  
+  &:nth-of-type(@{num}n) {
+    margin-right: 0;
+  }
+  
+  &:nth-of-type(@{num}n + 1) {
+    clear: left;    
+  }
+}
+
+.package-columns(@margin) {
+  
+  .two_columns .content_box {
+    .inner-columns(2, @margin);
+  }
+  
+  .three_columns .content_box {
+    .inner-columns(3, @margin);
+  }
+  
+  .four_columns .content_box {
+    .inner-columns(4, @margin);
+    
+    &:nth-of-type(2n + 1) {
+      clear: none;
+    }
+  }
+}
+
 
 // Base Styles -----------------------------------------------------
 
-*[class*=col_] {
+[class*=_column] {
   background-color: @lightergrey;
   margin-bottom: (@blh);
   padding-top: (@blh);
   position: relative;
   
-  *[class*=col_] {
+  overflow: hidden;
+  clear: both;
+  
+  
+  [class^=col_] {
     padding-top: 0;
     position: relative;
   }
   
-  .content_group {
-    clear: both;
-    overflow: hidden;
-    
-    &.defined,
-    &.bg {
-      margin-bottom: (@blh);
-    }
-    
-    &.defined {
-      border-bottom: 2px solid @lightgrey;
-    }
-    
-    &.bg {
-      background-color: @lightgrey;
-      
-      .bg {
-        background-color: @lightergrey;
-      }
-    }
-  }
-  
-  .content_box {
-    margin-bottom: (@blh);
-    overflow: hidden;
-    
-    &.bg {
-      background-color: @lightgrey;
-      padding: 0 (@gw / 2);
-      
-      &.thumb figure {
-        margin-top: (@gw / 2);
-      }
-    }
+  [class*=_column] {
+    margin-bottom: 0;
   }
   
   &.img_bg {
@@ -67,13 +81,86 @@
       }
     }
   }
+  
+  &.centred {
+    // This technique requires code to be reformatted
+    // Removing white-space between content_boxes
+    text-align: center;
+    
+    .content_box {
+      float: none;
+      display: inline-block;
+      vertical-align: top;
+      text-align: left;
+    }
+  }
 }
+
+
+.content_group {
+  clear: both;
+  overflow: hidden;
+  
+  &.defined,
+  &.bg {
+    margin-bottom: (@blh);
+  }
+  
+  &.defined {
+    border-bottom: 2px solid @lightgrey;
+  }
+  
+  &.bg {
+    background-color: @lightgrey;
+    
+    .bg {
+      background-color: @lightergrey;
+    }
+  }
+}
+
+.content_box {
+  margin-bottom: (@blh);
+  overflow: hidden;
+  
+  &.bg {
+    background-color: @lightgrey;
+    padding: 0 (@gw / 2);
+    
+    &.thumb figure {
+      margin-top: (@gw / 2);
+    }
+  }
+  
+  &.listing {
+    ul {
+      .delist();
+    }
+    
+    li {
+      line-height: ((@blh * 1.5) - 1px);
+      border-bottom: 1px solid @lightgrey;
+      
+      &:first-child {
+        line-height: ((@blh * 1.5) - 2px);
+        border-top: 1px solid @lightgrey;
+      }
+    }
+    
+    li a {
+      display: block;
+    }   
+  }
+}
+
+
 
 // Editing ---------------------------------------------------------
 
 .edit_mode {
   
-  *[class*=col_] {    
+  [class*=_column],
+  [class^=col_] {    
     
     &:before {
       content: attr(class);
@@ -170,21 +257,21 @@
   }
 }
 
-.col_1 {
+.one_column {
   .content_box {
     .column-all(1);
   }
 }
 
-.col_2,
-.col_3,
-.col_4 {
+.two_columns,
+.three_columns,
+.four_columns {
   .content_box {
     .column(1);
   }
 }
 
-.col_6 {
+.six_columns {
   .content_box {
     .column(1/2);
     
@@ -194,25 +281,33 @@
   }
 }
 
-.col_3_2_1 {
-  .col_3_2,
-  .col_3_1 {
-    .column(1);
+.three_columns {
+  .col_twothirds,
+  .col_onethird {
+        
+    .content_box {
+      width: 100%;
+      .margin-x(0);
+    }
   }
   
-  .col_3_1 .content_box {
-    margin-bottom: (@blh * 1.5);
+  .col_onethird .content_box {
+    margin-bottom: (@blh * 0.5);
   }
 }
 
-.col_4_3_1 {
-  .col_4_3,
-  .col_4_1 {
-    .column(1);
+.four_columns {
+  .col_threequarters,
+  .col_onequarter {
+        
+    .content_box {
+      width: 100%;
+      .margin-x(0);
+    }
   }
   
-  .col_4_1 .content_box {
-    margin-bottom: (@blh * 1.5);
+  .col_onequarter .content_box {
+    margin-bottom: (@blh * 0.5);
     
     h4 {
       line-height: (@blh * 1.5);
@@ -220,18 +315,63 @@
   }
 }
 
+.free_columns {
+  .onecol {
+    .column-all(1/12);
+  }
+  .twocol {
+    .column-all(2/12);
+  }
+  .threecol {
+    .column-all(3/12);
+  }
+  .fourcol {
+    .column-all(4/12);
+  }
+  .fivecol {
+    .column-all(5/12);
+  }
+  .sixcol {
+    .column-all(6/12);
+  }
+  .sevencol {
+    .column-all(7/12);
+  }
+  .eightcol {
+    .column-all(8/12);
+  }
+  .ninecol {
+    .column-all(9/12);
+  }
+  .tencol {
+    .column-all(10/12);
+  }
+  .elevencol {
+    .column-all(11/12);
+  }
+  .twelvecol {
+    .column-all(12/12);
+  }
+}
+
+
 
 @media only screen and (max-width: 479px) {
   
-  *[class*=col_] {
+  *[class*=_column] {
     
     &.mobile_full {
+      
       .layout {
         width: 100%;
         
         .content_box {
           width: 100%;
           .margin-x(0);
+          
+          &.listing li a {
+            .padding-x((100% - 87.5) / 2);
+          }
         }
       }
     }
@@ -243,18 +383,22 @@
 @media only screen and (min-width: 480px) {
    
   // Column (needs redefining) -------------------------------------
-  .column(@fraction) { @gridbits: (@480width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  @gridbits: (@480width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+  
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  
   
   // Column Classes ------------------------------------------------
-  .col_2,
-  .col_3,
-  .col_4 {
+  .two_columns,
+  .three_columns,
+  .four_columns {
     .content_box {
       .column(1);
     }
   }
   
-  .col_6 {
+  .six_columns {
     .content_box {
       .column(1/2);
       
@@ -264,16 +408,16 @@
     }
   }
   
-  .col_3_2_1 {
-    .col_3_2,
-    .col_3_1 {
+  .three_columns {
+    .col_twothirds,
+    .col_onethird {
       .column(1);
     }
   }
   
-  .col_4_3_1 {
-    .col_4_3,
-    .col_4_1 {
+  .four_columns {
+    .col_threequarters,
+    .col_onequarter {
       .column(1);
     }
   }
@@ -284,17 +428,26 @@
 @media only screen and (min-width: 600px) {
 
   // Column (needs redefining) -------------------------------------
-  .column(@fraction) { @gridbits: (@600width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  @gridbits: (@600width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+  
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+  // Inner Columns -------------------------------------------------
+  
+  [class^=col_] {
+    .package-columns(2);
+  }
 
   // Column Classes ------------------------------------------------
-  .col_2,
-  .col_3 {
+  .two_columns,
+  .three_columns {
     .content_box {
       .column(1);
     }
   }
   
-  .col_2 {
+  .two_columns {
     .content_box.thumb {
       .column(1/2);
       
@@ -305,7 +458,7 @@
   }
   
   
-  .col_4 {
+  .four_columns {
     .content_box {
       .column(1/2);
       
@@ -316,7 +469,7 @@
   }
   
   
-  .col_6 {
+  .six_columns {
     .content_box {
       .column(1/3);
       
@@ -330,16 +483,16 @@
     }
   }
   
-  .col_3_2_1 {
-    .col_3_2,
-    .col_3_1 {
+  .three_columns {
+    .col_twothirds,
+    .col_onethird {
       .column(1);
     }
   }
   
-  .col_4_3_1 {
-    .col_4_3,
-    .col_4_1 {
+  .four_columns {
+    .col_threequarters,
+    .col_onequarter {
       .column(1);
     }
   }
@@ -350,24 +503,33 @@
 @media only screen and (min-width: 768px) {
 
   // Column (needs redefining) -------------------------------------
-  .column(@fraction) { @gridbits: (@768width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  @gridbits: (@768width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+  
+  .column(@fraction) { @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+  // Inner Columns -------------------------------------------------
+  
+  [class^=col_] {
+    .package-columns(2);
+  }
 
   // Column Classes ------------------------------------------------
-  .col_2,
-  .col_3 {
+  .two_columns,
+  .three_columns {
     .content_box {
       .column(1);
     }
   }
   
-  .col_2 {
+  .two_columns {
     .content_box.thumb {
       .column(1/2);
     }
   }
   
   
-  .col_4 {
+  .four_columns {
     .content_box {
       .column(1/2);
       
@@ -378,7 +540,7 @@
   }
   
   
-  .col_6 {
+  .six_columns {
     .content_box {
       .column(1/3);
       
@@ -393,16 +555,16 @@
   }
   
   
-  .col_3_2_1 {
-    .col_3_2,
-    .col_3_1 {
+  .three_columns {
+    .col_twothirds,
+    .col_onethird {
       .column(1);
     }
   }
   
-  .col_4_3_1 {
-    .col_4_3,
-    .col_4_1 {
+  .four_columns {
+    .col_threequarters,
+    .col_onequarter {
       .column(1);
     }
   }
@@ -414,10 +576,19 @@
 @media only screen and (min-width: 992px) {
 
   // Column (needs redefining) -------------------------------------
-  .column(@fraction) { @gridbits: (@992width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  @gridbits: (@992width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+  
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+  // Inner Columns -------------------------------------------------
+  
+  [class^=col_] {
+    .package-columns(3);
+  }
 
   // Column Classes ------------------------------------------------
-  .col_2 {
+  .two_columns {
     .content_box {
       .column(1/2);
       
@@ -440,7 +611,7 @@
   
   
   
-  .col_3 {
+  .three_columns {
     .content_box {
       .column(1/3);
       
@@ -451,7 +622,7 @@
   }
   
   
-  .col_4 {
+  .four_columns {
     .content_box {
       .column(1/4);
       
@@ -466,7 +637,7 @@
   }
   
   
-  .col_6 {
+  .six_columns {
     .content_box {
       .column(1/6);
       
@@ -481,28 +652,27 @@
   }
   
   
-  .col_3_2_1 {
+  .three_columns {
     
-    .col_3_2 {
+    .col_twothirds {
       .column(2/3);
     }
   
-    .col_3_1 {
+    .col_onethird {
       .column(1/3);
     }
   }
   
-  .col_4_3_1 {
+  .four_columns {
     
-    .col_4_3 {
+    .col_threequarters {
       .column(3/4);
     }
   
-    .col_4_1 {
+    .col_onequarter {
       .column(1/4);
     }
   }
-
 
 }
 
@@ -510,55 +680,64 @@
 @media only screen and (min-width: 1382px) {
 
   // Column (needs redefining) -------------------------------------
-  .column(@fraction) { @gridbits: (@1382width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  @gridbits: (@1382width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+   
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+  // Inner Columns -------------------------------------------------
+  
+  [class^=col_] {
+    .package-columns(2);
+  }
 
   // Column Classes ------------------------------------------------
-  .col_2 {
+  .two_columns {
     .content_box {
       .column(1/2);
     }
   }
   
   
-  .col_3 {
+  .three_columns {
     .content_box {
       .column(1/3);
     }
   }
   
   
-  .col_4 {
+  .four_columns {
     .content_box {
       .column(1/4);
     }
   }
   
   
-  .col_6 {
+  .six_columns {
     .content_box {
       .column(1/6);
     }
   }
   
   
-  .col_3_2_1 {
+  .three_columns {
     
-    .col_3_2 {
+    .col_twothirds {
       .column(2/3);
     }
   
-    .col_3_1 {
+    .col_onethird {
       .column(1/3);
     }
   }
   
-  .col_4_3_1 {
+  .four_columns {
     
-    .col_4_3 {
+    .col_threequarters {
       .column(3/4);
     }
   
-    .col_4_1 {
+    .col_onequarter {
       .column(1/4);
     }
   }
