@@ -14,7 +14,7 @@ var breakpoint = 0;
 
 $(function(){
   if(window_width <= 600) {
-    $('nav.dropper ul').addClass('closed');
+    $('nav.dropper ul, nav.topper .layout > ul').addClass('closed');
     $('.drawer_layout').removeClass('unwrap');
   }
 });
@@ -22,6 +22,7 @@ $(function(){
 // Toggle the menu
 $('.menu_bar').click(function() {
   $('nav.dropper ul').toggleClass('closed');
+  $('.topper_layout .layout > ul').toggleClass('closed');
   $('.drawer_layout').toggleClass('unwrap');
 });
 
@@ -39,8 +40,7 @@ $window.resize(function(){
 
   // In case people are just testing our responsive skills, make sure the menu opens again…
   if(window_width > 600) {
-    $('nav.dropper ul').removeClass('closed');
-    //$('body').addClass('unwrap');
+    $('nav.dropper ul, nav.topper .layout > ul').removeClass('closed');
   }
 
 
@@ -50,6 +50,8 @@ $window.resize(function(){
 // Load ////////////////////////////////////////////////////////////
 $window.load(function () {
   
-  
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
   
 });

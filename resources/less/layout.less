@@ -1,10 +1,5 @@
 // Layout Maker ////////////////////////////////////////////////////
 
-.page_wrap.overlay {
-  .filter(blur(4px) brightness(0.5) ~'saturate(1.5)' contrast(0.75));
-  background-color: darken(#FFF, 0.5%);
-}
-
 // Column (needs redefining) -------------------------------------
 @gridbits: (320 / @gutterwidth);
 @gutterbits: (@gridwidth / @gridbits);
@@ -12,45 +7,9 @@
 .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
 
-// Other Variables and mixins --------------------------------------
-  
-.inner-columns(@num, @margin) {
-  float: left;
-  width: ((100% - (@margin * (@num - 1))) / @num);
-  margin-right: percentage(@margin / 100);
-  
-  &:nth-of-type(@{num}n) {
-    margin-right: 0;
-  }
-  
-  &:nth-of-type(@{num}n + 1) {
-    clear: left;    
-  }
-}
+// General Grid Contexts -------------------------------------------
+[class^=grid_] {
 
-.package-columns(@margin) {
-  
-  .two_columns .content_box {
-    .inner-columns(2, @margin);
-  }
-  
-  .three_columns .content_box {
-    .inner-columns(3, @margin);
-  }
-  
-  .four_columns .content_box {
-    .inner-columns(4, @margin);
-    
-    &:nth-of-type(2n + 1) {
-      clear: none;
-    }
-  }
-}
-
-
-// Base Styles -----------------------------------------------------
-
-[class*=_column] {
   background-color: @lightergrey;
   margin-bottom: (@blh);
   padding-top: (@blh);
@@ -59,21 +18,37 @@
   overflow: hidden;
   clear: both;
   
+  // Layout ----------------------------------------------
+  .layout {
+    
+  }
   
-  [class^=col_] {
+  
+  
+  // Grid Unit Span --------------------------------------
+  [class^=span_] {
     padding-top: 0;
     position: relative;
+    clear: both;
+    
+    [class~=unit] {
+      .margin-x(0);
+      width: 100%;
+    }
   }
   
-  [class*=_column] {
-    margin-bottom: 0;
+  // Grid Child ------------------------------------------
+  [class^=grid_] {
+    margin-bottom: 0;    
   }
   
+  
+  // Options ---------------------------------------------
   &.img_bg {
     background: center center no-repeat;
     .background-size(cover);    
     
-    .content_box {
+    .unit {
       color: @white;
       
       &.bg {
@@ -82,12 +57,12 @@
     }
   }
   
-  &.centred {
+  &.centered {
     // This technique requires code to be reformatted
-    // Removing white-space between content_boxes
+    // Removing white-space between unites
     text-align: center;
     
-    .content_box {
+    [class~=unit] {
       float: none;
       display: inline-block;
       vertical-align: top;
@@ -97,32 +72,13 @@
 }
 
 
-.content_group {
-  clear: both;
-  overflow: hidden;
-  
-  &.defined,
-  &.bg {
-    margin-bottom: (@blh);
-  }
-  
-  &.defined {
-    border-bottom: 2px solid @lightgrey;
-  }
-  
-  &.bg {
-    background-color: @lightgrey;
-    
-    .bg {
-      background-color: @lightergrey;
-    }
-  }
-}
-
-.content_box {
+// Grid Unit -------------------------------------------------------
+.unit {
   margin-bottom: (@blh);
-  overflow: hidden;
+  //overflow: hidden;
   
+  
+  // Options ---------------------------------------------
   &.bg {
     background-color: @lightgrey;
     padding: 0 (@gw / 2);
@@ -132,7 +88,26 @@
     }
   }
   
+  &.thumb figure {
+    
+    i {
+      display: block;
+      text-align: center;
+      padding: 20%;
+      .font-size(48);
+    }
+  }
+  
+  &.centered {
+    text-align: center !important;
+  }
+  
   &.listing {
+  
+    h6 {
+      line-height: (@blh * 1.5);
+    }
+    
     ul {
       .delist();
     }
@@ -154,20 +129,362 @@
 }
 
 
+// Defined Grid Contexts -------------------------------------------
+
+// One Column --------------------------------------------
+.grid_1 {
+  
+  [class~=unit] {
+    .column-all(1);
+  }
+  
+}
+
+// Two Columns -------------------------------------------
+.grid_2 {
+  
+  [class~=unit] {
+    .column(1);
+    
+    &:nth-of-type(2n + 1) {
+      clear: left;
+    }
+  }
+
+}
+
+// Three Columns -----------------------------------------
+.grid_3 {
+
+  // Units -------------------------------------
+  [class~=unit] {
+    .column(1);
+    
+    &:nth-of-type(3n + 1) {
+      clear: left;
+    }
+  }
+  
+  [class~=unit],
+  [class^=span_] {
+    
+  }
+    
+  
+  // 2/3 ---------------------------------------
+  .span_2 {
+    .column(1);
+    
+    // 1/6 --------------------------
+    .grid_4 {
+      
+      .unit {
+        .column(1/2);
+        
+        &:nth-of-type(3n + 1) {
+          clear: none;
+        }
+        
+        &:nth-of-type(2n + 1) {
+          clear: left;
+        }
+      }
+    }
+    
+    // 1/3 --------------------------
+    .grid_2 {
+      
+      .unit {
+        
+      }
+    }
+  }
+  
+  // 1/3 ---------------------------------------
+  .span_1 {
+    .column(1);
+    
+    // 1/6 --------------------------
+    .grid_2 {
+      
+      .unit {
+        .column(1/2);
+        
+        &:nth-of-type(2n + 1) {
+          clear: left;
+        }
+        
+        &:nth-of-type(3n + 1) {
+          clear: none;
+        }
+      }
+    }
+  }
+
+}
+
+// Four Columns ------------------------------------------
+.grid_4 {
+  
+  [class~=unit] {
+    .column(1);
+    
+    &:nth-of-type(2n + 1) {
+      
+    }
+  }
+  
+  // Units -------------------------------------
+  [class~=unit],
+  [class^=span_] {
+    
+  }
+  
+  // 3/4 ---------------------------------------
+  .span_3 {
+    .column(1);
+    
+    // 1/5.3333333333 ----------------
+    .grid_4 {
+      
+      .unit {
+        .column(1/2);
+        
+        &:nth-of-type(2n + 1) {
+          clear: left;
+        }
+      }
+    }
+    
+    // 1/4 --------------------------
+    .grid_3 {
+      
+      .unit {
+      
+      }
+    }
+  }
+  
+  // 1/2 ---------------------------------------
+  .span_2 {
+    .column(1);
+    
+    // 1/6 --------------------------
+    .grid_3 {
+      
+      .unit {
+      
+      }
+    }
+    
+    // 1/4 --------------------------
+    .grid_2 {
+      
+      .unit {
+      
+      }
+    }
+  }
+  
+  // 1/4 ---------------------------------------
+  .span_1 {
+    .column(1);
+  }
+  
+  &.small_units {
+    
+    [class~=unit] {
+      .column(1/2);  
+    }
+  }
+  
+}
+
+// Six Columns -------------------------------------------
+.grid_6 {
+  
+  // Units -------------------------------------
+  [class~=unit] {
+    .column(1/2);
+    
+    &:nth-of-type(2n + 1) {
+      clear: left;
+    }
+    
+    &:nth-of-type(6n + 1) {
+      clear: left;
+    }
+  }
+  
+  .unit,
+  [class^=span_] {
+    
+  }
+  
+  // 5/6 ---------------------------------------
+  .span_5 {
+    .column-all(1);
+  }
+  
+  // 2/3 ---------------------------------------
+  .span_4 {
+    .column-all(1);
+    
+    // 1/6 --------------------------
+    .grid_4 {
+      
+      .unit {
+      
+      }
+    }
+    
+    // 1/3 --------------------------
+    .grid_2 {
+      
+      .unit {
+      
+      }
+    }
+  }
+  
+  // 1/2 ---------------------------------------
+  .span_3 {
+    .column-all(1);
+    
+    // 1/6 --------------------------
+    .grid_3 {
+      
+      .unit {
+      
+      }
+    }
+  }
+  
+  // 1/3---------------------------------------
+  .span_2 {
+    .column(1);
+    
+    // 1/6 --------------------------
+    .grid_2 {
+      
+      .unit {
+      
+      }
+    }
+  }
+  
+  // 1/6 ---------------------------------------
+  .span_1 {
+    .column(1);
+  }
+
+}
+
+
+// Twelve Columns ----------------------------------------
+.grid_12 {
+  
+  
+  [class~=unit],
+  .span_1 {
+    .column-all(1/12);
+  }
+  
+  .span_2 {
+    .column-all(2/12);
+  }
+  
+  .span_3 {
+    .column-all(3/12);
+  }
+  
+  .span_4 {
+    .column-all(4/12);
+  }
+  
+  .span_5 {
+    .column-all(5/12);
+  }
+  
+  .span_6 {
+    .column-all(6/12);
+  }
+  
+  .span_7 {
+    .column-all(7/12);
+  }
+  
+  .span_8 {
+    .column-all(8/12);
+  }
+  
+  .span_9 {
+    .column-all(9/12);
+  }
+  
+  .span_10 {
+    .column-all(10/12);
+  }
+  
+  .span_11 {
+    .column-all(11/12);
+  }
+  
+  .span_12 {
+    .column-all(12/12);
+  }
+
+}
+
+
+// Other Bits ------------------------------------------------------
+
+.content_group {
+  clear: both;
+  overflow: hidden;
+  
+  h1 {
+    .column-all(1);
+  }
+  
+  &.defined,
+  &.bg {
+    margin-bottom: (@blh);
+  }
+  
+  &.defined {
+    border-bottom: 2px solid @lightgrey;
+  }
+  
+  &.bg {
+    background-color: @lightgrey;
+    
+    .bg {
+      background-color: @lightergrey;
+    }
+  }
+}
+
+
+
 
 // Editing ---------------------------------------------------------
 
 .edit_mode {
+
+  /* Z Index
   
-  [class*=_column],
-  [class^=col_] {    
+  */
+  
+  [class^=grid_],
+  [class^=span_] {    
     
     &:before {
       content: attr(class);
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 2000;
+      z-index: 102;
       
       .font-size(10);
       line-height: 20px;
@@ -187,15 +504,12 @@
   }
   
   .content_group,
-  .content_box {
+  [class~=unit] {
     position: relative;
-    
-    //outline: 3px solid transparent;
-    //.transition(outline-color 0.2s);
     
     &:before,
     &:after {
-      z-index: 1000;
+      z-index: 100;
     }
   
     &:before {
@@ -210,7 +524,7 @@
       color: darken(@errorcolor, 36%);
       background: fadeout(@white, 50%);
       .padding-x(8px);
-      z-index: 1001;
+      z-index: 102;
       
       .transition(background 0.2s);
     }
@@ -231,144 +545,38 @@
     
     
     &:hover {
-      //outline-color: fadeout(@white, 20%);
     
       &:before {
         background: fadeout(@white, 10%);
       }
       
       &:after {
-        border-color: fadeout(@grey, 20%);
+        border-color: fadeout(#FAF, 40%);
       }
     }
   }
   
-  .content_box {
-    z-index: 1001;
+  .unit {
+    z-index: 101;
   }
 }
 
 
-// Column Classes --------------------------------------------------
-
-.content_group {
-  h1 {
-    .column-all(1);
-  }
-}
-
-.one_column {
-  .content_box {
-    .column-all(1);
-  }
-}
-
-.two_columns,
-.three_columns,
-.four_columns {
-  .content_box {
-    .column(1);
-  }
-}
-
-.six_columns {
-  .content_box {
-    .column(1/2);
-    
-    &:nth-of-type(2n + 1) {
-      clear: left;
-    }
-  }
-}
-
-.three_columns {
-  .col_twothirds,
-  .col_onethird {
-        
-    .content_box {
-      width: 100%;
-      .margin-x(0);
-    }
-  }
-  
-  .col_onethird .content_box {
-    margin-bottom: (@blh * 0.5);
-  }
-}
-
-.four_columns {
-  .col_threequarters,
-  .col_onequarter {
-        
-    .content_box {
-      width: 100%;
-      .margin-x(0);
-    }
-  }
-  
-  .col_onequarter .content_box {
-    margin-bottom: (@blh * 0.5);
-    
-    h4 {
-      line-height: (@blh * 1.5);
-    }
-  }
-}
-
-.free_columns {
-  .onecol {
-    .column-all(1/12);
-  }
-  .twocol {
-    .column-all(2/12);
-  }
-  .threecol {
-    .column-all(3/12);
-  }
-  .fourcol {
-    .column-all(4/12);
-  }
-  .fivecol {
-    .column-all(5/12);
-  }
-  .sixcol {
-    .column-all(6/12);
-  }
-  .sevencol {
-    .column-all(7/12);
-  }
-  .eightcol {
-    .column-all(8/12);
-  }
-  .ninecol {
-    .column-all(9/12);
-  }
-  .tencol {
-    .column-all(10/12);
-  }
-  .elevencol {
-    .column-all(11/12);
-  }
-  .twelvecol {
-    .column-all(12/12);
-  }
-}
-
-
-
+// Max-width 480 ---------------------------------------------------
 @media only screen and (max-width: 479px) {
   
-  *[class*=_column] {
+  [class^=grid_] {
     
     &.mobile_full {
       
       .layout {
         width: 100%;
         
-        .content_box {
+        .unit {
           width: 100%;
           .margin-x(0);
           
+          &.listing h6,
           &.listing li a {
             .padding-x((100% - 87.5) / 2);
           }
@@ -380,51 +588,280 @@
 }
 
 
+
+// Min-width 480 ---------------------------------------------------
 @media only screen and (min-width: 480px) {
-   
+
   // Column (needs redefining) -------------------------------------
   @gridbits: (@480width / @gutterwidth);
   @gutterbits: (@gridwidth / @gridbits);
   
   .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
-  
-  
-  // Column Classes ------------------------------------------------
-  .two_columns,
-  .three_columns,
-  .four_columns {
-    .content_box {
-      .column(1);
+
+  // Defined Grid Contexts -------------------------------------------
+
+  // One Column --------------------------------------------
+  .grid_1 {
+    
+    [class~=unit] {
+      
     }
+    
   }
   
-  .six_columns {
-    .content_box {
+  // Two Columns -------------------------------------------
+  .grid_2 {
+    
+    [class~=unit] {
+      .column(1);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+    }
+  
+  }
+  
+  // Three Columns -----------------------------------------
+  .grid_3 {
+  
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1);
+      
+      &:nth-of-type(3n + 1) {
+        
+      }
+    }
+    
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+      
+    
+    // 2/3 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+        }
+      }
+      
+      // 1/4.5 --------------------------
+      .grid_3 {
+
+        .unit {
+          
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3 ---------------------------------------
+    .span_1 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+        }
+      }
+    }
+  
+  }
+  
+  // Four Columns ------------------------------------------
+  .grid_4 {
+    
+    [class~=unit] {
       .column(1/2);
       
       &:nth-of-type(2n + 1) {
         clear: left;
       }
     }
-  }
-  
-  .three_columns {
-    .col_twothirds,
-    .col_onethird {
+    
+    // Units -------------------------------------
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+    
+    // 3/4 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/5.3333333333 ----------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            clear: left;
+          }
+        }
+      }
+
+      // 1/4 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/4 ---------------------------------------
+    .span_1 {
       .column(1);
     }
+    
+    
+    // Smaller Units -----------------------------
+    &.small_units {
+    
+      [class~=unit] {
+        .column(1/2);  
+      }
+    }
+    
   }
   
-  .four_columns {
-    .col_threequarters,
-    .col_onequarter {
+  // Six Columns -------------------------------------------
+  .grid_6 {
+    
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1/2);
+      
+      &:nth-of-type(2n + 1) {
+        clear: left;
+      }
+      
+      &:nth-of-type(6n + 1) {
+        clear: left;
+      }
+    }
+    
+    .unit,
+    [class^=span_] {
+      
+    }
+    
+    // 5/6 ---------------------------------------
+    .span_5 {
       .column(1);
     }
+    
+    // 2/3 ---------------------------------------
+    .span_4 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/6 ---------------------------------------
+    .span_1 {
+      .column(1);
+    }
+  
   }
   
 }
 
-
+// Min-width 600 ---------------------------------------------------
 @media only screen and (min-width: 600px) {
 
   // Column (needs redefining) -------------------------------------
@@ -433,44 +870,212 @@
   
   .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
-  // Inner Columns -------------------------------------------------
   
-  [class^=col_] {
-    .package-columns(2);
-  }
+  // Defined Grid Contexts -------------------------------------------
 
-  // Column Classes ------------------------------------------------
-  .two_columns,
-  .three_columns {
-    .content_box {
+  // One Column --------------------------------------------
+  .grid_1 {
+    
+    [class~=unit] {
+      
+    }
+    
+  }
+  
+  // Two Columns -------------------------------------------
+  .grid_2 {
+    
+    [class~=unit] {
+      .column(1);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+    }
+  
+  }
+  
+  // Three Columns -----------------------------------------
+  .grid_3 {
+  
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1);
+      
+      &:nth-of-type(3n + 1) {
+        
+      }
+    }
+    
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+      
+    
+    // 2/3 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/3);
+          
+          &:nth-of-type(3n + 1) {
+            clear: left;
+          }
+          
+          &:nth-of-type(2n + 1) {
+            clear: none;
+          }
+        }
+      }
+      
+      // 1/4.5 --------------------------
+      .grid_3 {
+
+        .unit {
+          .column(1/3);
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(3n + 1) {
+            clear: none;
+          }
+          
+          &:nth-of-type(2n + 1) {
+            clear: left;
+          }
+        }
+      }
+    }
+    
+    // 1/3 ---------------------------------------
+    .span_1 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+        }
+      }
+    }
+  
+  }
+  
+  // Four Columns ------------------------------------------
+  .grid_4 {
+    
+    [class~=unit] {
+     .column(1/2);
+     
+      &:nth-of-type(2n + 1) {
+        
+      }
+      
+      &:nth-of-type(4n + 1) {
+        
+      }
+    }
+    
+    // Units -------------------------------------
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+    
+    // 3/4 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/5.3333333333 ----------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            clear: left;
+          }
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/4 ---------------------------------------
+    .span_1 {
       .column(1);
     }
-  }
-  
-  .two_columns {
-    .content_box.thumb {
-      .column(1/2);
-      
-      &:nth-of-type(2n + 1) {
-        clear: left;
+    
+    // Smaller Units -----------------------------
+    &.small_units {
+    
+      [class~=unit] {
+        .column(1/3); 
+        
+        &:nth-of-type(2n + 1) {
+          clear: none;
+        }
+        
+        &:nth-of-type(3n + 1) {
+          clear: left;
+        }
       }
     }
+    
   }
   
-  
-  .four_columns {
-    .content_box {
-      .column(1/2);
-      
-      &:nth-of-type(2n + 1) {
-        clear: left;
-      }
-    }
-  }
-  
-  
-  .six_columns {
-    .content_box {
+  // Six Columns -------------------------------------------
+  .grid_6 {
+    
+    // Units -------------------------------------
+    [class~=unit] {
       .column(1/3);
       
       &:nth-of-type(2n + 1) {
@@ -480,151 +1085,195 @@
       &:nth-of-type(3n + 1) {
         clear: left;
       }
+      
+      &:nth-of-type(6n + 1) {
+        clear: left;
+      }
     }
-  }
-  
-  .three_columns {
-    .col_twothirds,
-    .col_onethird {
+    
+    .unit,
+    [class^=span_] {
+      
+    }
+    
+    // 5/6 ---------------------------------------
+    .span_5 {
       .column(1);
     }
-  }
-  
-  .four_columns {
-    .col_threequarters,
-    .col_onequarter {
+    
+    // 2/3 ---------------------------------------
+    .span_4 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/6 ---------------------------------------
+    .span_1 {
       .column(1);
     }
+  
   }
-
+  
 }
 
-
+// Min-width 768 ---------------------------------------------------
 @media only screen and (min-width: 768px) {
 
   // Column (needs redefining) -------------------------------------
   @gridbits: (@768width / @gutterwidth);
   @gutterbits: (@gridwidth / @gridbits);
   
-  .column(@fraction) { @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
-  // Inner Columns -------------------------------------------------
   
-  [class^=col_] {
-    .package-columns(2);
-  }
+  // Defined Grid Contexts -------------------------------------------
 
-  // Column Classes ------------------------------------------------
-  .two_columns,
-  .three_columns {
-    .content_box {
-      .column(1);
+  // One Column --------------------------------------------
+  .grid_1 {
+    
+    [class~=unit] {
+      
     }
+    
   }
   
-  .two_columns {
-    .content_box.thumb {
-      .column(1/2);
-    }
-  }
-  
-  
-  .four_columns {
-    .content_box {
+  // Two Columns -------------------------------------------
+  .grid_2 {
+    
+    [class~=unit] {
       .column(1/2);
       
       &:nth-of-type(2n + 1) {
-        clear: left;
+        
       }
     }
+  
   }
   
+  // Three Columns -----------------------------------------
+  .grid_3 {
   
-  .six_columns {
-    .content_box {
+    // Units -------------------------------------
+    [class~=unit] {
       .column(1/3);
-      
-      &:nth-of-type(2n + 1) {
-        clear: none;
-      }
       
       &:nth-of-type(3n + 1) {
         clear: left;
       }
     }
-  }
-  
-  
-  .three_columns {
-    .col_twothirds,
-    .col_onethird {
-      .column(1);
-    }
-  }
-  
-  .four_columns {
-    .col_threequarters,
-    .col_onequarter {
-      .column(1);
-    }
-  }
-
-
-}
-
-
-@media only screen and (min-width: 992px) {
-
-  // Column (needs redefining) -------------------------------------
-  @gridbits: (@992width / @gutterwidth);
-  @gutterbits: (@gridwidth / @gridbits);
-  
-  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
-
-  // Inner Columns -------------------------------------------------
-  
-  [class^=col_] {
-    .package-columns(3);
-  }
-
-  // Column Classes ------------------------------------------------
-  .two_columns {
-    .content_box {
-      .column(1/2);
+    
+    [class~=unit],
+    [class^=span_] {
       
-      &:nth-of-type(2n + 1) {
-        clear: left;
+    }
+      
+    
+    // 2/3 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/3);
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+        }
       }
       
+      // 1/4.5 --------------------------
+      .grid_3 {
+
+        .unit {
+          .column(1/3);
+        }
+      }
       
-      &.thumb,
-      &.thumb.bg {
-        figure {
-          float: left;
-          width: (@gw * 7);
-          margin-top: (@blh);
-          margin-right: (@gw);
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
         }
       }
     }
-  }
-  
-  
-  
-  .three_columns {
-    .content_box {
-      .column(1/3);
+    
+    // 1/3 ---------------------------------------
+    .span_1 {
+      .column(1);
       
-      &:nth-of-type(3n + 1) {
-        clear: left;
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+        }
       }
     }
+  
   }
   
-  
-  .four_columns {
-    .content_box {
-      .column(1/4);
+  // Four Columns ------------------------------------------
+  .grid_4 {
+    
+    [class~=unit] {
+     .column(1/4);
       
       &:nth-of-type(2n + 1) {
         clear: none;
@@ -634,12 +1283,389 @@
         clear: left;
       }
     }
+    
+    // Units -------------------------------------
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+    
+    // 3/4 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/5.3333333333 --------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/4);
+          
+          &:nth-of-type(2n + 1) {
+            clear: none;
+          }
+          
+          &:nth-of-type(4n + 1) {
+            clear: left;
+          }
+        }
+      }
+      
+      // 1/4 -------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 3/8 -------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 -------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/4 -------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/4 ---------------------------------------
+    .span_1 {
+      .column(1);
+    }
+    
+    // Smaller Units -----------------------------
+    &.small_units {
+    
+      [class~=unit] {
+        .column(1/3); 
+      }
+    }
+    
+  }
+  
+  // Six Columns -------------------------------------------
+  .grid_6 {
+    
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1/3);
+      
+      &:nth-of-type(2n + 1) {
+        clear: none;
+      }
+      
+      &:nth-of-type(3n + 1) {
+        clear: left;
+      }
+      
+      &:nth-of-type(6n + 1) {
+        clear: left;
+      }
+    }
+    
+    .unit,
+    [class^=span_] {
+      
+    }
+    
+    // 5/6 ---------------------------------------
+    .span_5 {
+      .column(1);
+    }
+    
+    // 2/3 ---------------------------------------
+    .span_4 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_3 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3---------------------------------------
+    .span_2 {
+      .column(1);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/6 ---------------------------------------
+    .span_1 {
+      .column(1);
+    }
+  
+  }
+  
+}
+
+// Min-width 992 ---------------------------------------------------
+@media only screen and (min-width: 992px) {
+  
+  // Column (needs redefining) -------------------------------------
+  @gridbits: (@992width / @gutterwidth);
+  @gutterbits: (@gridwidth / @gridbits);
+  
+  .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
+
+  // General Grid Contexts -------------------------------------------
+  [class^=grid_] {
+  
+    // Grid Unit Span --------------------------------------
+    [class^=span_] {
+      clear: none;
+    }
   }
   
   
-  .six_columns {
-    .content_box {
+  // Defined Grid Contexts -------------------------------------------
+
+  // One Column --------------------------------------------
+  .grid_1 {
+    
+    [class~=unit] {
+      
+    }
+    
+  }
+  
+  // Two Columns -------------------------------------------
+  .grid_2 {
+    
+    [class~=unit] {
+      .column(1/2);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+    }
+  
+  }
+  
+  // Three Columns -----------------------------------------
+  .grid_3 {
+  
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1/3);
+      
+      &:nth-of-type(3n + 1) {
+        
+      }
+    }
+    
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+      
+    
+    // 2/3 ---------------------------------------
+    .span_2 {
+      .column(2/3);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/4);
+          
+          &:nth-of-type(3n + 1) {
+            clear: none;
+          }
+          
+          &:nth-of-type(4n + 1) {
+            clear: left;
+          }
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+        }
+      }
+    }
+    
+    // 1/3 ---------------------------------------
+    .span_1 {
+      .column(1/3);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+        }
+      }
+    }
+  
+  }
+  
+  // Four Columns ------------------------------------------
+  .grid_4 {
+    
+    [class~=unit] {
+     .column(1/4);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+      
+      &:nth-of-type(4n + 1) {
+        
+      }
+    }
+    
+    // Units -------------------------------------
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+    
+    // 3/4 ---------------------------------------
+    .span_3 {
+      .column(3/4);
+      
+      // 1/5.3333333333 ----------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/4);
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 3/8 -------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_2 {
+      .column(1/2);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/4 ---------------------------------------
+    .span_1 {
+      .column(1/4);
+    }
+    
+    // Smaller Units -----------------------------
+    &.small_units {
+    
+      [class~=unit] {
+        .column(1/4); 
+        
+        &:nth-of-type(3n + 1) {
+          clear: none;
+        }
+        
+        &:nth-of-type(4n + 1) {
+          clear: left;
+        }
+      }
+    }
+    
+  }
+  
+  // Six Columns -------------------------------------------
+  .grid_6 {
+    
+    // Units -------------------------------------
+    [class~=unit] {
       .column(1/6);
+      
+      &:nth-of-type(2n + 1) {
+        clear: none;
+      }
       
       &:nth-of-type(3n + 1) {
         clear: none;
@@ -649,97 +1675,335 @@
         clear: left;
       }
     }
-  }
-  
-  
-  .three_columns {
     
-    .col_twothirds {
+    .unit,
+    [class^=span_] {
+      
+    }
+    
+    // 5/6 ---------------------------------------
+    .span_5 {
+      .column(5/6);
+    }
+    
+    // 2/3 ---------------------------------------
+    .span_4 {
       .column(2/3);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
     }
-  
-    .col_onethird {
-      .column(1/3);
-    }
-  }
-  
-  .four_columns {
     
-    .col_threequarters {
-      .column(3/4);
+    // 1/2 ---------------------------------------
+    .span_3 {
+      .column(1/2);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3---------------------------------------
+    .span_2 {
+      .column(1/3);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/6 ---------------------------------------
+    .span_1 {
+      .column(1/6);
     }
   
-    .col_onequarter {
-      .column(1/4);
-    }
   }
-
 }
 
-
+// Min-width 1382 --------------------------------------------------
 @media only screen and (min-width: 1382px) {
-
+  
   // Column (needs redefining) -------------------------------------
   @gridbits: (@1382width / @gutterwidth);
   @gutterbits: (@gridwidth / @gridbits);
-   
+  
   .column(@fraction) {@portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
-  // Inner Columns -------------------------------------------------
-  
-  [class^=col_] {
-    .package-columns(2);
-  }
+  // Defined Grid Contexts -------------------------------------------
 
-  // Column Classes ------------------------------------------------
-  .two_columns {
-    .content_box {
+  // One Column --------------------------------------------
+  .grid_1 {
+    
+    [class~=unit] {
+      
+    }
+    
+  }
+  
+  // Two Columns -------------------------------------------
+  .grid_2 {
+    
+    [class~=unit] {
       .column(1/2);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
     }
+  
   }
   
+  // Three Columns -----------------------------------------
+  .grid_3 {
   
-  .three_columns {
-    .content_box {
+    // Units -------------------------------------
+    [class~=unit] {
       .column(1/3);
+      
+      &:nth-of-type(3n + 1) {
+        
+      }
     }
+    
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+      
+    
+    // 2/3 ---------------------------------------
+    .span_2 {
+      .column(2/3);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/4);
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+        }
+      }
+    }
+    
+    // 1/3 ---------------------------------------
+    .span_1 {
+      .column(1/3);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+          
+          &:nth-of-type(2n + 1) {
+            
+          }
+          
+          &:nth-of-type(3n + 1) {
+            
+          }
+        }
+      }
+    }
+  
   }
   
-  
-  .four_columns {
-    .content_box {
+  // Four Columns ------------------------------------------
+  .grid_4 {
+    
+    [class~=unit] {
+     .column(1/4);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+      
+      &:nth-of-type(4n + 1) {
+        
+      }
+    }
+    
+    // Units -------------------------------------
+    [class~=unit],
+    [class^=span_] {
+      
+    }
+    
+    // 3/4 ---------------------------------------
+    .span_3 {
+      .column(3/4);
+      
+      // 1/5.3333333333 ----------------
+      .grid_4 {
+        
+        .unit {
+          .column(1/4);
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 3/8 -------------------------
+      .grid_2 {
+        
+        .unit {
+          .column(1/2);
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_2 {
+      .column(1/2);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/4 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/4 ---------------------------------------
+    .span_1 {
       .column(1/4);
     }
+    
+    // Smaller Units -----------------------------
+    &.small_units {
+    
+      [class~=unit] {
+        .column(1/4);
+      }
+    }
+    
   }
   
-  
-  .six_columns {
-    .content_box {
+  // Six Columns -------------------------------------------
+  .grid_6 {
+    
+    // Units -------------------------------------
+    [class~=unit] {
+      .column(1/6);
+      
+      &:nth-of-type(2n + 1) {
+        
+      }
+      
+      &:nth-of-type(3n + 1) {
+        
+      }
+      
+      &:nth-of-type(6n + 1) {
+        
+      }
+    }
+    
+    .unit,
+    [class^=span_] {
+      
+    }
+    
+    // 5/6 ---------------------------------------
+    .span_5 {
+      .column(5/6);
+    }
+    
+    // 2/3 ---------------------------------------
+    .span_4 {
+      .column(2/3);
+      
+      // 1/6 --------------------------
+      .grid_4 {
+        
+        .unit {
+        
+        }
+      }
+      
+      // 1/3 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/2 ---------------------------------------
+    .span_3 {
+      .column(1/2);
+      
+      // 1/6 --------------------------
+      .grid_3 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/3---------------------------------------
+    .span_2 {
+      .column(1/3);
+      
+      // 1/6 --------------------------
+      .grid_2 {
+        
+        .unit {
+        
+        }
+      }
+    }
+    
+    // 1/6 ---------------------------------------
+    .span_1 {
       .column(1/6);
     }
-  }
   
-  
-  .three_columns {
-    
-    .col_twothirds {
-      .column(2/3);
-    }
-  
-    .col_onethird {
-      .column(1/3);
-    }
-  }
-  
-  .four_columns {
-    
-    .col_threequarters {
-      .column(3/4);
-    }
-  
-    .col_onequarter {
-      .column(1/4);
-    }
   }
 }
 
@@ -749,7 +2013,99 @@
 
 
 
+.flexslider {
+  margin: 0;
+  padding: 0;
+  
+  position: relative;
+  
+  .slides {
 
-
-
-
+    &:extend(.clearfix all);    
+    
+    .delist();
+    margin: 0;
+    
+    > li {
+      display: none;
+      -webkit-backface-visibility: hidden;
+    } 
+    
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+  
+  .flex-control-nav,
+  .flex-direction-nav {
+    .delist();
+    margin: 0;
+    
+    a {
+      cursor: pointer;
+    }
+  }
+  
+  .flex-direction-nav {
+    li {
+      position: absolute;
+      z-index: 100;
+      
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+      
+      top: 50%;
+      margin-top: -21px;
+      
+      a {
+        display: block;
+        height: 100%;
+        font-size: 0;
+        text-align: center;
+        
+        &:before {
+          font-family: FontAwesome;
+          content: @chevron-left;
+          .font-size(28);
+          color: @white;
+        }
+      }
+      
+      &:last-child {
+        right: 0;
+        
+        a:before {
+          content: @chevron-right;
+        }
+      }
+    }
+  }
+  
+  .flex-control-nav {
+    position: absolute;
+    bottom: (@blh / 2);
+    width: 100%;
+    text-align: center;
+    
+    li {
+      display: inline-block;
+      
+      a {
+        display: block;
+        background-color: @white;
+        width: 8px;
+        height: 8px;
+        .border-radius(100%);
+  
+        .hide-text();
+        .margin-x(@gw / 4);
+      }
+    }
+  }
+  
+  .no-js & .slides > li:first-child {
+    display: block;
+  }
+}

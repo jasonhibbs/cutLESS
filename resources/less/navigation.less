@@ -9,6 +9,12 @@ nav.drawer {
   }
 }
 
+nav.topper {
+  .layout > ul ul {
+    display: none;
+  }
+}
+
 
 // Dropper Layout --------------------------------------------------
 nav.dropper {
@@ -40,6 +46,51 @@ nav.dropper {
 }
 
 
+// Topper Layout ---------------------------------------------------
+nav.topper {
+  
+  @navitems: 3; // Change this to the number of items in your <nav>
+  
+  .layout > ul {
+    max-height: ((@blh * 1.5) * @navitems); // Or change this to the height of your open nav
+    
+    .transition(max-height 0.4s);
+    
+    > li {
+      line-height: (@blh * 1.5);
+    }
+    
+    &.closed {
+      max-height: 0;
+    }
+  }
+  
+  h1 {
+    .margin-y(0);
+    
+    .site_title {
+      margin-left: 0;
+      width: auto;
+      float: none;
+    }
+  }
+  
+  
+  .menu_bar {
+    display: block !important;
+    position: relative;
+    line-height: (@blh * 2);
+    
+    i {
+      position: absolute;
+      top: 0;
+      right: 0;
+      
+      line-height: (@blh * 2);
+    }
+  }
+  
+}
 
 
 @media only screen and (max-width: 767px) {
@@ -95,6 +146,10 @@ nav.dropper {
       
       a {
         .padding-x(5%);
+      }
+      
+      > ul {
+        .margin-x(0) !important;
       }
       
       > ul ul {
@@ -155,11 +210,151 @@ nav.dropper {
   }
   
   
-  
 }
 
 
+@media only screen and (min-width: 600px) {
 
+  nav > ul > li > a {
+    padding-right: (@gw);
+  }
+  
+  
+  // General Nav -----------------------------------------------------
+
+  nav.dropper {
+    .clearfix();
+    margin-bottom: (@blh);
+  
+    ul, li {
+      overflow: visible;
+      max-height: none;
+    }
+    
+    ul {
+      .transition(none);
+    }
+    
+    > ul > li {
+      display: inline-block;
+    }
+    
+    li {
+      position: relative;
+      white-space: nowrap;
+      
+      ul {
+        display: block;
+        position: absolute;
+        
+        //top: (@blh);
+        
+        
+        z-index: 3000;
+
+        opacity: 0;
+        pointer-events: none;
+        .transition(opacity 0.4s);
+        
+        background: @white;
+        
+        li {
+          display: block;
+        }
+      }
+    
+      > ul {
+        
+        li > ul {
+          top: 0;
+          right: -100%;
+        }
+      }
+      
+      &:hover {
+        
+        > ul {
+          opacity: 1;
+          pointer-events: all;          
+        }
+      }
+    }
+    
+    .menu_bar {
+      display: none;
+    }
+  }
+  
+  
+  // Topper Layout ---------------------------------------------------
+  nav.topper {
+
+    .layout > ul {
+    
+      float: left;
+      
+      li {
+        display: inline-block;
+        line-height: (@blh * 2);
+      }
+    
+      &.closed {
+        max-height: none;
+      }
+    }
+    
+    h1 {
+      float: left;
+      margin-right: @gw;
+      white-space: nowrap;
+    }
+    
+    
+    .menu_bar {
+      display: block !important;
+      position: relative;
+      line-height: (@blh * 2);
+      
+      i {
+        display: none;
+      }
+    }
+  }
+  
+  
+  // Inline ----------------------------------------------------------
+  .inline {
+    
+    .drop_layout & {
+      
+      .site_title,
+      nav.dropper {
+        .column(1/2);
+      }
+      
+      nav.dropper {
+        margin-top: (@blh);
+        
+        > ul {
+          line-height: (@blh * 2);
+          text-align: right;
+          
+          > li > a {
+            padding-right: 0;
+            padding-left: (@gw);
+          }
+          
+          > li > ul {
+            right: 0;
+          }
+        }
+      }
+    }
+   
+    
+  }
+  
+}
 
 @media only screen and (min-width: 768px) {
   
@@ -169,7 +364,7 @@ nav.dropper {
   
   // General Nav -----------------------------------------------------
 
-  nav.dropper,
+  
   nav.drawer {
     .clearfix();
     margin-bottom: (@blh);
@@ -261,12 +456,64 @@ nav.dropper {
     }
   }
   
+  
+  
+  // Inline ----------------------------------------------------------
+  .inline {
+  
+    .drop_layout &,
+    .drawer_layout & {
+
+      .site_title {
+        .column(1/3);
+      }
+      
+      nav.dropper {
+        .column(2/3);
+      }
+    }
+    
+    .drawer_layout & {
+      
+      nav.drawer {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-top: (@blh);
+        margin-left: -(@768width / 2);
+        pointer-events: none;
+        
+        > ul {
+          
+          line-height: (@blh * 2);
+          text-align: right;
+          
+          > li {
+            pointer-events: all;
+          }
+          
+          > li > a {
+            padding-right: 0;
+            padding-left: (@gw);
+          }
+          
+          > li > ul {
+            right: 0;
+          }
+        }
+      }
+    }
+  }
+  
 }
 
 
 
 
 @media only screen and (min-width: 992px) {
+
+  // Column (needs redefining) ---------------------------------------
+  .column(@fraction) { @gridbits: (@992width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
 
   // Drawer Layout -----------------------------------------
   .drawer_layout {
@@ -280,10 +527,37 @@ nav.dropper {
     }
   }
   
+  
+  // Inline ----------------------------------------------------------
+  .inline {
+  
+    .drop_layout &,
+    .drawer_layout & {
+
+      .site_title {
+        .column(1/3);
+      }
+      
+      nav.dropper {
+        .column(2/3);
+      } 
+    }
+    
+    .drawer_layout & {
+      
+      nav.drawer {
+        margin-left: -(@992width / 2);
+      }
+    }
+  }
+  
 }
 
 
 @media only screen and (min-width: 1382px) {
+
+  // Column (needs redefining) ---------------------------------------
+  .column(@fraction) { @gridbits: (@1382width / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
   
   // Drawer Layout -----------------------------------------
   .drawer_layout {
@@ -294,6 +568,29 @@ nav.dropper {
     
     &.liquid nav.drawer {
       width: percentage(@1382width / 1382);
+    }
+  }
+  
+  // Inline ----------------------------------------------------------
+  .inline {
+  
+    .drop_layout &,
+    .drawer_layout & {
+
+      .site_title {
+        .column(1/3);
+      }
+      
+      nav.dropper {
+        .column(2/3);
+      } 
+    }
+    
+    .drawer_layout & {
+      
+      nav.drawer {
+        margin-left: -(@1382width / 2);
+      }
     }
   }
   
