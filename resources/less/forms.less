@@ -58,6 +58,7 @@ input,
 
 
 textarea,
+select,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -116,7 +117,21 @@ input[type="color"] {
   }
 }
 
-
+select {
+  border-top-color: @inputborder;
+  border-bottom-color: darken(@inputborder, 7%);
+  padding: 0 (@gw * 1.25) 0 (@gw * 0.25);
+  position: relative;
+  
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURQAAAAAAAAAAAAAAAAAAAAAAAOArGaIAAAAGdFJOU5kATI8dDe6564MAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==)
+              no-repeat
+              @lightergrey;
+  background-position: right 8px center;
+  background-position: 96% center\9;
+              
+  .background-size(8px auto);
+  
+}
 
 
 input,
