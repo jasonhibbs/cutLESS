@@ -22,7 +22,7 @@ input[type="image"],
   background: @buttonbackground;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   
-  border: 1px solid transparent;
+  border: @elementdepth solid transparent;
   
   .box-sizing(border-box);
   
@@ -65,7 +65,7 @@ input[type="button"],
 input[type="submit"],
 .btn {
   padding: 0 (@gutterwidth / 2);
-  border: 1px solid @buttonborder;
+  border: @elementdepth solid @buttonborder;
   border-bottom-color: darken(@buttonborder, 10%);
   //.box-shadow(0 1px 2px rgba(0,0,0,0.2));
   
@@ -76,7 +76,7 @@ input[type="submit"],
   }
   
   &:active {
-    border-top: 2px solid darken(@buttonhover, 10%);
+    border-top: (@elementdepth * 2) solid darken(@buttonhover, 10%);
     border-bottom-color: transparent;
     //.box-shadow(0 1px 1px rgba(0,0,0,0.2));
   }
@@ -119,11 +119,11 @@ input[type="submit"],
     
   background-color: @thiscolor;
   border-color: @thiscolor;
-  border-bottom-color: darken(@thiscolor, 15%);
+  border-bottom-color: darken(@thiscolor, 13%);
   
   &,
   &:visited {
-    color: contrast(@thiscolor, darken(@thiscolor, 30%), lighten(@thiscolor, 52%), 64%);
+    color: contrast(@thiscolor, darken(@thiscolor, 34%), lighten(@thiscolor, 52%), 64%);
   }
 
   
@@ -133,15 +133,15 @@ input[type="submit"],
     text-decoration: none;
   
     .if() when (luma(@thiscolor) < 64%) {
-      background-color: darken(@thiscolor, 7%);
-      border-color: darken(@thiscolor, 7%);
-      border-bottom-color: darken(@thiscolor, 20%);
+      background-color: desaturate(darken(@thiscolor, 6%), 8%);
+      border-color:     desaturate(darken(@thiscolor, 6%), 8%);
+      border-bottom-color: darken(@thiscolor, 22%);
       color: lighten(@thiscolor, 50%);
     }
     
     .if() when (luma(@thiscolor) > 64%) {
-      background-color: lighten(@thiscolor, 7%);
-      border-color: lighten(@thiscolor, 7%);
+      background-color: desaturate(lighten(@thiscolor, 9%), 8%);
+      border-color:     desaturate(lighten(@thiscolor, 9%), 8%);
       border-bottom-color: darken(@thiscolor, 15%);
       color: darken(@thiscolor, 30%);
     }

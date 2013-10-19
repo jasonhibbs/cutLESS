@@ -81,7 +81,7 @@
 @errorcolor                 : hsl( 005, 70%, 60%);
 @infocolor                  : hsl( 210, 65%, 60%);
 @successcolor               : hsl( 120, 38%, 56%);
-@warningcolor               : hsl( 032, 80%, 50%);
+@warningcolor               : hsl( 032, 80%, 56%);
 @inversecolor               : hsl( 000, 00%, 40%);
 
 
@@ -95,6 +95,10 @@
 
 
 // Elements --------------------------------------------------------
+
+// General
+
+@elementdepth               : 1px;
 
 // Tables
 
@@ -110,11 +114,11 @@
 @inputtextcolor             : @textcolor;
 @inputbackground            : @lightergrey;
 @inputborder                : @lightergrey;
-@inputborderwidth           : 1px;
+@inputborderwidth           : @elementdepth;
 @inputborderstyle           : solid;
 @inputhover                 : @basecolor;
 @inputfocus                 : @inputhover;
-@placeholdercolor           : @grey;
+@placeholdercolor           : mix(@inputbackground, @inputtextcolor, 60%);
 
 // Buttons
 

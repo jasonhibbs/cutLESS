@@ -75,7 +75,7 @@ input[type="tel"],
 input[type="color"] {
   background-color: @inputbackground;
   border: @inputborderwidth @inputborderstyle @inputborder;
-  color: @textcolor;
+  color: @inputtextcolor;
 
   border-top-color: darken(@inputborder, 7%);
   
@@ -125,7 +125,7 @@ select {
   
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURQAAAAAAAAAAAAAAAAAAAAAAAOArGaIAAAAGdFJOU5kATI8dDe6564MAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==)
               no-repeat
-              @lightergrey;
+              @inputbackground;
   background-position: right 8px center;
   background-position: 96% center\9;
               
@@ -152,8 +152,7 @@ select {
 
 
 select {
-  vertical-align: text-top;
-   .box-sizing(border-box);
+  vertical-align: top;
 }
 
 
@@ -249,11 +248,11 @@ textarea[readonly] {
 
 
 ::-webkit-input-placeholder {
-  /* .font-size(14); */
+  color: @placeholdercolor;
 }
 
 input:-moz-placeholder { 
-  /* .font-size(14); */
+  color: @placeholdercolor;
 }
 
 
