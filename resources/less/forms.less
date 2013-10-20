@@ -117,7 +117,10 @@ input[type="color"] {
   }
 }
 
-select {
+
+.gt-ie8 select {
+  // This looks terrible on IE8
+  
   border-top-color: @inputborder;
   border-bottom-color: darken(@inputborder, 7%);
   padding: 0 (@gw * 1.25) 0 (@gw * 0.25);
