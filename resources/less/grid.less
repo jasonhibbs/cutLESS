@@ -21,7 +21,7 @@
   // Nudge column by fraction of the grid
   // .nudge-column(-1/4) will move a column by { left: -25%; }
   
-  .nudge-column(@distance: 1/12) {
+  .nudge-column(@distance: (1/12)) {
     position: relative; // Keeps the column in the flow
     
     // Protect non-columned layouts
@@ -128,7 +128,7 @@
     // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
     
     // This is the complicated bit
-    @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction);
+    @columnwidth: (@gutterbits * ((@gridbits - @portion) * @fraction));
     // e.g.       (100% / 48) * ((48        - 2)        * 1/2)        = 47.916666667%
   
     float: left;
@@ -158,7 +158,7 @@
     // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
     
     // This is the complicated bit
-    @columnwidth: @gutterbits * ((@gridbits - @portion) * @fraction);
+    @columnwidth: (@gutterbits * ((@gridbits - @portion) * @fraction));
     // e.g.       (100% / 48) * ((48        - 2)        * 1/2)        = 47.916666667%
     
     
