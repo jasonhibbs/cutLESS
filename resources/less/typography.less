@@ -362,6 +362,26 @@ samp {
 
 // Code ------------------------------------------------------------
 
+pre {
+  margin: 0;
+  
+  code {
+    display: block;
+    height: auto;
+    .font-size(12);
+    line-height: 1.5em;
+    padding: (@blh / 2) (@gw);
+    
+    background: @lightergrey;
+    border: none;
+    
+    white-space: pre;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+}
+
+
 pre[class*="language-"] {
   display: block;
   position: relative;
@@ -407,19 +427,11 @@ pre[class*="language-"] {
   }
   
   code {
-    display: block;
-    height: auto;
-    .font-size(12);
+    
     padding: (@blh * 2) @gutterwidth (@blh * 0.5);
     
     color: @codetext;
-    background: none;
-    border: none;
     
-    vertical-align: baseline;
-    white-space: pre;
-    overflow: hidden;
-    overflow-x: auto;
   }
   
   &.language-markup code {
