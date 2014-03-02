@@ -6,12 +6,10 @@ var window_width = $window.width();
 var breakpoint = 0;
 
 
-// Scripts /////////////////////////////////////////////////////////
+// Functions /////////////////////////////////////////////////////////
 
 // Menu Bar --------------------------------------------------------
-
 // If we’re loading a narrow page, close the nav
-
 $(function(){
   if(window_width <= 600) {
     $('.head nav ul').addClass('closed');
@@ -25,14 +23,13 @@ $('.menu_bar').click(function() {
 
 
 // Resize //////////////////////////////////////////////////////////
-
 $window.resize(function(){
 
   // Update window width
   window_width = $window.width();
 
   function breakpoint() {
-    
+    // Still thinking about it.
   }
 
   // In case people are just testing our responsive skills, make sure the menu opens again…
@@ -40,11 +37,10 @@ $window.resize(function(){
     $('.head nav ul').removeClass('closed');
   }
 
-
 });
 
 
-// Load ////////////////////////////////////////////////////////////
+// Loaded //////////////////////////////////////////////////////////
 $window.load(function () {
   
 });

@@ -1,7 +1,7 @@
-# cutLESS 1.0.0
+# cutLESS 2.0.0
 
 cutLESS is a slightly less bloated framework for responsibly responsive development.
 
 [Read the docs](http://cutless.wearekatana.com/)
 
-Please note: this is very much a work in progress, provided as is, at your own risk.
+Please note: this is very much a work in progress, and thus provided as is, at your own risk.

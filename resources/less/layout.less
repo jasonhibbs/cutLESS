@@ -1,0 +1,272 @@
+// Layout //////////////////////////////////////////////////////////
+    
+//  Layout System for cutLESS
+//  by Jason Hibbs
+//  hello@jasonhibbs.co.uk
+
+// Media and Queries -----------------------------------------------
+
+@phone-width            :  320px;
+@phone-landscape-width  :  480px;
+@small-tablet-width     :  600px;
+@tablet-width           :  768px;
+@desktop-width          :  992px;
+@large-desktop-width    : 1382px;
+@huge-desktop-width     : 1872px;
+
+@phone                  : ~'screen and (min-width: @{phone-width})';
+@phone-landscape        : ~'screen and (min-width: @{phone-landscape-width})';
+@small-tablet           : ~'screen and (min-width: @{small-tablet-width})';
+@tablet                 : ~'screen and (min-width: @{tablet-width})';
+@desktop                : ~'screen and (min-width: @{desktop-width})';
+@large-desktop          : ~'screen and (min-width: @{large-desktop-width})';
+@huge-desktop           : ~'screen and (min-width: @{huge-desktop-width})';
+
+
+// Grid ////////////////////////////////////////////////////////////
+
+// A grid system, with focus on keeping gutter width
+// consistent over breakpoints. Extremely elegant,
+// but only when used with calc().
+// Otherwise, complicated.
+
+// Useful Mixins ---------------------------------------------------
+
+  // .column-reset() brutally strips a column of its column-ness
+  
+  .column-reset(@amount: 0) {
+    .margin-x(@amount);       // Remove margin only on the x-axis
+    .padding-x(@amount);      // Remove padding only on the x-axis
+    width: auto;              // Default width
+    float: none;              // Remove float
+  }
+  
+  // Nudge column by fraction of the grid
+  // .nudge-column(-1/4) will move a column by { left: -25%; }
+  
+  .nudge-column(@distance: (1/12)) {
+    position: relative; // Keeps the column in the flow
+    
+    // Protect non-columned layouts
+    @media @small-tablet {
+      left: percentage(@distance);
+    }
+  }
+
+// Layout (Grid Container) -----------------------------------------
+
+
+  // class="layout" -----------------------------
+  // Use only "layout" if you’re more confident than me
+  
+  .layout {
+  
+    // All layouts are liquid before the first breakpoint
+    // To give silly little devices a fighting chance
+    
+    width: @phone-layout; // 300 / 320 = 93.75%
+    position: relative;   // For nudging
+    .margin-x(auto);      // Centre layout
+    &:extend(.clearfix all); // Columns are floated
+    
+    
+    // class="fixed layout" --------------------
+    // For when you’ve designed for each breakpoint
+    
+    &.fixed,
+    .fixed & {
+      @media @phone-landscape {
+        width: @phone-landscape-layout;
+      }
+      
+      @media @small-tablet {
+        width: @small-tablet-layout;
+      }
+      
+      @media @tablet {
+        width: @tablet-layout;
+      }
+      
+      @media @desktop {
+        width: @desktop-layout;
+      }
+      
+      @media @large-desktop {
+        width: @large-desktop-layout;
+      }
+      
+      @media @huge-desktop {
+        width: @huge-desktop-layout;
+      }
+    }
+    
+    // class="liquid layout" -------------------
+    // For when you’re not ready to go full-fluid
+    
+    &.liquid,
+    .liquid & {
+      @media @phone-landscape {
+        width: percentage((@phone-landscape-layout / @phone-landscape-width));
+      }
+      
+      @media @small-tablet {
+        width: percentage((@small-tablet-layout / @small-tablet-width));
+      }
+      
+      @media @tablet {
+        width: percentage((@tablet-layout / @tablet-width));
+      }
+      
+      @media @desktop {
+        width: percentage((@desktop-layout / @desktop-width));
+      }
+      
+      @media @large-desktop {
+        width: percentage((@large-desktop-layout / @large-desktop-width));
+      }
+      
+      @media @huge-desktop {
+        width: percentage((@huge-desktop-layout / @huge-desktop-width));
+      }
+    }
+  }
+  
+  
+
+// Column Mixin ----------------------------------------------------
+
+  // Typical use mixin, use at each breakpoint, as and when
+  
+  .column(@fraction: 1/1) {
+    
+    // If you can use calc, you are a very lucky developer.
+    & when (@usecalc) {
+      @columnwidth: (100% * @fraction);
+      
+      float: left;
+      width: ~"calc(@{columnwidth} - @{gw})";
+      .margin-x((@gw / 2));
+    }
+    
+    // If you can’t use calc, you’ll have to redefine .column at
+    // each breakpoint, because this calculation needs to know
+    // about it's intended layout width
+    & when not (@usecalc) {
+      
+      // Some calculations -----------------------
+      @gridbits: (@phone-layout / @gw);
+      
+      & when not (@responsive) {
+        @gridbits: (@desktop-layout / @gw);
+      }
+      
+      @gutterbits: (100% / @gridbits);
+      // @gridbits as a percentage
+    
+      @portion: (1 / @fraction);
+      // How many columns could I fit in a row given @fraction
+      // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
+      
+      // This is the complicated bit
+      @columnwidth: (@gutterbits * ((@gridbits - @portion) * @fraction));
+      // e.g.       (100% / 48) * ((48        - 2)        * 1/2)        = 47.916666667%
+    
+      float: left;
+      width: @columnwidth;
+      .margin-x((@gutterbits * 0.5));
+    }
+  }
+
+
+  // Ease-of-use, best to use in global.less only,
+  // or return unexpected results.
+  
+  .column-all(@fraction: 1/1) {
+    
+    & when (@usecalc) {
+      .margin-x((@gw / 2));
+
+      @media @small-tablet {
+        @columnwidth: (100% * @fraction);
+        
+        float: left;
+        width: ~"calc(@{columnwidth} - @{gw})";
+      }
+    }
+    
+    & when not (@usecalc) {      
+      // Some calculations -----------------------
+      
+      @gridbits: (@phone-layout / @gw);
+      // How many gutters could fit in the current layout?
+      // Technically, phone-layout is redundant here
+      
+      @gutterbits: (100% / @gridbits);
+      // @gridbits as a percentage
+      
+      @portion: (1 / @fraction);
+      // How many columns could I fit in a row given @fraction
+      // e.g. Sixteen 1/16 columns, one and a half 2/3 columns, half of a 2/1 columns…
+      
+      // This is the complicated bit
+      @columnwidth: (@gutterbits * ((@gridbits - @portion) * @fraction));
+      // e.g.       (100% / 48) * ((48         - 2)        * 1/2) = 47.916666667%
+          
+      // Finishing -------------------------------
+      
+      .margin-x(((@gutterbits * 0.5)));
+      // Give half a gutter to each side
+      
+      .box-sizing(border-box);
+      // Make your content pretty without worrying about breaking the layout
+  
+      // Breakpoints -----------------------------
+      @media @phone-landscape {
+        // Because gutters remain constant over breakpoints
+        // @gridbits needs to be set in context to recalculate everything else
+        @gridbits: (@phone-landscape-layout / @gw);
+        
+        .margin-x(((@gutterbits * 0.5))); // Recalculated for current context
+      }
+      
+      @media @small-tablet {
+        @gridbits: (@small-tablet-layout / @gw);
+        
+        // Now we’re talking columns…
+        float: left;
+        width: @columnwidth;
+        .margin-x((@gutterbits * 0.5));
+      }
+      
+      @media @tablet {
+        @gridbits: (@tablet-layout / @gw);
+        
+        width: @columnwidth;
+        .margin-x((@gutterbits * 0.5));
+      }
+        
+      @media @desktop {
+        @gridbits: (@desktop-layout / @gw);
+        
+        width: @columnwidth;
+        .margin-x((@gutterbits * 0.5));
+      }
+        
+      @media @large-desktop {
+        @gridbits: (@large-desktop-layout / @gw);
+        
+        width: @columnwidth;
+        .margin-x((@gutterbits * 0.5));
+      }
+      
+      @media @huge-desktop {
+        @gridbits: (@huge-desktop-layout / @gw);
+        
+        width: @columnwidth;
+        .margin-x((@gutterbits * 0.5));
+      }
+    }
+  }
+  
+  
+// The End ---------------------------------------------------------

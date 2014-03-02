@@ -1,26 +1,26 @@
 // Tables  /////////////////////////////////////////////////////////
 
+table when (@styletables) {
+  .tabular();
+}
 
-table {
+.tabular() {
   width: 100%;
   white-space: nowrap;
-  margin-bottom : @baselineheight;
+  margin-bottom : @blh;
   border-collapse : collapse;
   border-spacing : 0;
   background-color : @tablebackground;
-  .box-sizing(border-box);
 
   th,
   td {
     vertical-align : top;
-    border-top : @tableborderwidth @tableborderstyle @tableborder;
-    padding: 0 (@baselineheight / 2);
+    border-top : @controlsborderwidth solid @tableborder;
+    padding: 0 (@blh / 2);
     .font-size(14);
-    line-height: ((@baselineheight * 1.5) - 2px);
+    line-height: ((@blh * 1.5) - 2px);
     text-align: left;
-    
-    height: (@baselineheight * 1.5);
-    .box-sizing(border-box);
+    height: (@blh * 1.5);
   }
 
   th {
@@ -40,7 +40,7 @@ table {
   }
 
   tbody + tbody {
-    border-top : (@tableborderwidth * 2) @tableborderstyle @tableborder;
+    border-top : (@controlsborderwidth * 2) solid @tableborder;
   }
 
   tbody tr td,
@@ -55,7 +55,7 @@ table {
   
   tbody tr:first-child td,
   tfoot tr:first-child th {
-    border-top-width: (@tableborderwidth * 2);
+    border-top-width: (@controlsborderwidth * 2);
   }
   
   // I was really proud of this, until Wikipedia did it too…
@@ -71,11 +71,7 @@ table {
 
 // Table Mixins ----------------------------------------------------
 
-
-// Apply to table element
-
-.striped-table(@color: @tablestripe) {
-  
+.striped-table(@color) {
   tbody tr:nth-child(odd) {
     background-color: @color;
   }
@@ -84,5 +80,4 @@ table {
   tbody tr:hover th {
     background-color: transparent;
   }
-  
 }

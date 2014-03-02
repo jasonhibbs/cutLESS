@@ -1,32 +1,23 @@
 // Global //////////////////////////////////////////////////////////
-
 // Variables -------------------------------------------------------
-
-
-// Shorthand Column (remove in non-responsive layouts) -------------
-.column(@fraction: 1) { @gridbits: (320 / @gutterwidth); @gutterbits: (@gridwidth / @gridbits); @portion: (1 / @fraction); @columnwidth: (@gutterbits * ((@gridbits - @portion) * @fraction)); float: left; width: @columnwidth; .margin-x(@gutterbits * 0.5); }
-
+@target: @phone-layout;
 
 // Root ------------------------------------------------------------
 
-.head,
-.foot,
-.page {
+[role="banner"],
+[role="main"],
+[role="contentinfo"] {
   &:extend(.clearfix all);
 }
 
-nav {
-
-  @navitems: 3; // Change this to the number of items in your <nav>
+[role="navigation"] {
+  @navitems: 2; // Change this to the number of items in your <nav>
 
   ul {
     .delist();
-    margin-bottom: 0;
-    list-style: none;
-    
     max-height: (@blh * @navitems); // Or change this to the height of your open nav
     overflow: hidden;
-    .transition(max-height 0.4s);
+    .transition(max-height 0.4s); // Or just remove this and max-height
     
     li a {
       display: block;
@@ -48,20 +39,13 @@ nav {
 // Header //////////////////////////////////////////////////////////
 
 .head {
-  .site_title,
-  nav {
-    .column-all(1/1);
-  }
+  
 }
 
 // Footer //////////////////////////////////////////////////////////
 
 .foot {
-  padding-bottom: (@blh * 3);
   
-  .bottom_line {
-    .column-all(1/1);
-  }
 }
 
 // Content /////////////////////////////////////////////////////////

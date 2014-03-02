@@ -1,130 +1,48 @@
-// Variables //////////////////////////////////////////////////////.
+// Variables ///////////////////////////////////////////////////////
 
-
-// Root ------------------------------------------------------------
-
-@bodycolor                  : @white;
-@textcolor                  : @darkgrey;
-@htmlcolor                  : @bodycolor;
-@highlightcolor             : fadeout(@compcolor, 45%);
-
-// Typography ------------------------------------------------------
-
-@basefont                   : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
-
-@basefontsize               : 16px;
-@baselineheight             : (1.5 * @basefontsize); // 1.5 * 16px = 24px
-
-@baseheadingfont            : inherit;
-@baseheadingfontweight      : 500;
-@baseheadingfontcolor       : inherit;
-
-@altfont                    : Cambria, Georgia, Times, 'Times New Roman', serif;
-@codefont                   : Menlo, Monaco, monospace;
-
-
-
-// Grid Variables --------------------------------------------------
-  
-// The width you’d like your gutters to be
-@gutterwidth                : 20px;
-
-// Helpful for calculating 
-@gridwidth                  : 100%;
-
-// The width you’d like your layout to be at these breakpoints
-// Remember this width includes 1/2 a gutter at both sides
-
-@480width                   : 400px;
-@600width                   : 560px;
-@768width                   : 640px;
-@992width                   : 960px;
-@1382width                  : 1280px;
-
-
-
-// Shorthand -----------------------------------
-@blh                        : @baselineheight;
-@gw                         : @gutterwidth;
-
+// Shorthand -------------------------------------------------------
+@blh               : @baselineheight;
+@gw                : @gutterwidth;
 
 
 // Colours ---------------------------------------------------------
+// Links ---------------------------------------
+@linkcolor         : @basecolor;
+@linkcolorhover    : darken(@linkcolor, 20);
+@linkcolorvisited  : desaturate(@linkcolor, 15);
+@linkcolorfocus    : darken(@linkcolor , 20);
 
-@basecolor                  : #48D;
-@compcolor                  : #D44;
+// Greyscale -----------------------------------
+@black             : rgb( 34, 34, 34);
+@darkgrey          : hsl( hue(@basecolor), 03%, 25% );
+@grey              : hsl( hue(@basecolor), 03%, 55% );
+@lightgrey         : hsl( hue(@basecolor), 03%, 85% );
+@lightergrey       : hsl( hue(@basecolor), 03%, 94% );
+@white             : rgb( 255, 255, 255);
 
-@bordercolor                : @lightergrey;
+// Colour Palettes -----------------------------
+@alertcolor        : hsl(050, 72%, 62%);
+@errorcolor        : hsl(005, 70%, 60%);
+@infocolor         : hsl(210, 65%, 60%);
+@successcolor      : hsl(120, 38%, 56%);
+@warningcolor      : hsl(032, 80%, 56%);
+@inversecolor      : hsl(000, 00%, 40%);
 
-
-// Links
-
-@linkcolor                  : @basecolor;
-@linkcolorhover             : darken(@linkcolor, 20);
-@linkcolorvisited           : desaturate(@linkcolor, 15);
-@linkcolorfocus             : darken(@linkcolor , 20);
-
-
-// Greyscale (with a hint of the base colour)
-
-@black                      : rgb( 34, 34, 34);
-@darkgrey                   : hsl( hue(@basecolor), 03%, 25% );
-@grey                       : hsl( hue(@basecolor), 03%, 55% );
-@lightgrey                  : hsl( hue(@basecolor), 03%, 85% );
-@lightergrey                : hsl( hue(@basecolor), 03%, 94% );
-@white                      : rgb( 255, 255, 255);
-
-
-// Colour Palettes
-
-@alertcolor                 : hsl( 050, 70%, 60%);
-@errorcolor                 : hsl( 005, 70%, 60%);
-@infocolor                  : hsl( 210, 65%, 60%);
-@successcolor               : hsl( 120, 38%, 56%);
-@warningcolor               : hsl( 032, 80%, 56%);
-@inversecolor               : hsl( 000, 00%, 40%);
-
-
-// Social
-
-@facebookcolor              : rgb(059, 089, 152);
-@twittercolor               : rgb(000, 170, 239);
-@linkedincolor              : rgb(000, 123, 182);
-@googlepluscolor            : rgb(222, 075, 052);
-@pinterestcolor             : rgb(203, 032, 039);
+// Social --------------------------------------
+@facebookcolor     : rgb(059, 089, 152);
+@twittercolor      : rgb(000, 170, 239);
+@tumblrcolor       : rgb(052, 082, 111);
+@linkedincolor     : rgb(000, 123, 182);
+@googlepluscolor   : rgb(222, 075, 052);
+@pinterestcolor    : rgb(203, 032, 039);
+@instagramcolor    : rgb(063, 114, 155);
+@youtubecolor      : rgb(196, 048, 043);
+@vimeocolor        : rgb(068, 187, 255);
 
 
 // Elements --------------------------------------------------------
 
-// General
-
-@elementdepth               : 1px;
-
-// Tables
-
-@tablebackground            : transparent;
-@tablestripe                : darken(@white, 3%);
-@tablehover                 : fadeout(@black, 97%);
-@tableborder                : lighten(@lightgrey, 10%);
-@tableborderwidth           : 1px;
-@tableborderstyle           : solid;
-
-// Forms
-
-@inputtextcolor             : @textcolor;
-@inputbackground            : @lightergrey;
-@inputborder                : @inputbackground;
-@inputborderwidth           : @elementdepth;
-@inputborderstyle           : solid;
-@inputhover                 : @basecolor;
-@inputfocus                 : @inputhover;
-@placeholdercolor           : mix(@inputbackground, @inputtextcolor, 60%);
-
-// Buttons
-
-@buttonbackground            : @lightergrey;
-@buttoncolor                 : @textcolor;
-@buttonborder                : @buttonbackground;
-@buttonhover                 : darken(@buttonbackground, 6%);
-@buttonborderhover           : @buttonhover;
-
+// Tables --------------------------------------
+@tablebackground   : @white;
+@tablehover        : fadeout(@black, 97%);
+@tableborder       : @decorcolor;

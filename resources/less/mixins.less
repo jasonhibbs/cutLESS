@@ -9,18 +9,13 @@
   font-size: ~"@{rem}rem";
 }
 
-
-.line-height(@line-height: 1) {
-  line-height: (@baselineheight * @line-height);
-}
-
-.text-overflow {
+.text-overflow() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.font-face( @family-name, @font-path, @font-weight:normal, @font-style:normal) {
+.font-face( @family-name, @font-path, @font-weight: normal, @font-style: normal) {
   @font-face {
     font-family: @family-name;
     src: url('@{font-path}.eot');
@@ -34,266 +29,187 @@
 }
 
 
-
 // Gradients -------------------------------------------------------
 
-.horizontal(@startColor: @white, @endColor: @lightergrey) {
-background-color : @endColor;
-//background-image : -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
-background-image : -webkit-linear-gradient(left, @startColor, @endColor);                    // Safari 5.1+, Chrome 10+
-background-image :    -moz-linear-gradient(left, @startColor, @endColor);                    // FF 3.6+
-background-image :     -ms-linear-gradient(left, @startColor, @endColor);                    // IE10
-background-image :      -o-linear-gradient(left, @startColor, @endColor);                    // Opera 11.10
-background-image :         linear-gradient(left, @startColor, @endColor);                    // W3C
-          //filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=1 );
-background-repeat: repeat-x;
+.horizontal(@start, @end) {
+  background-color : @end;
+  background-image : -webkit-linear-gradient(left, @start, @end);
+  background-image :     -ms-linear-gradient(left, @start, @end);
+  background-image :         linear-gradient(left, @start, @end);
+  background-repeat: repeat;
 }
 
-.vertical(@startColor: @white, @endColor: @lightergrey) {
-background-color : @endColor;
-//background-image : -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor));  // Safari 4+, Chrome 2+
-background-image : -webkit-linear-gradient(top, @startColor, @endColor);                     // Safari 5.1+, Chrome 10+
-background-image :    -moz-linear-gradient(top, @startColor, @endColor);                     // FF 3.6+
-background-image :     -ms-linear-gradient(top, @startColor, @endColor);                     // IE10
-background-image :      -o-linear-gradient(top, @startColor, @endColor);                     // Opera 11.10
-background-image :         linear-gradient(top, @startColor, @endColor);                     // W3C
-          //filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=0 );
-background-repeat: repeat-x;
+.vertical(@start, @end) {
+  background-color : @end;
+  background-image : -webkit-linear-gradient(top, @start, @end);
+  background-image :     -ms-linear-gradient(top, @start, @end);
+  background-image :         linear-gradient(top, @start, @end);
+  background-repeat: repeat;
 }
 
-.directional(@startColor: @white, @endColor: @lightergrey, @deg : 45deg) {
-background-color : @endColor;
-background-image : -webkit-linear-gradient(@deg, @startColor, @endColor);  // Safari 5.1+, Chrome 10+
-background-image :    -moz-linear-gradient(@deg, @startColor, @endColor);  // FF 3.6+
-background-image :     -ms-linear-gradient(@deg, @startColor, @endColor);  // IE10
-background-image :      -o-linear-gradient(@deg, @startColor, @endColor);  // Opera 11.10
-background-image :         linear-gradient(@deg, @startColor, @endColor);  // W3C
-          //filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=1 );
-background-repeat: repeat-x;
+.directional(@start, @end, @deg) {
+  background-color : @end;
+  background-image : -webkit-linear-gradient(@deg, @start, @end);
+  background-image :     -ms-linear-gradient(@deg, @start, @end);
+  background-image :         linear-gradient(@deg, @start, @end);
+  background-repeat: repeat;
+}
+
+.radial(@start, @end) {
+  background-color : @end;
+  background-image : -webkit-radial-gradient(center, ellipse cover, @start, @end);
+  background-image :     -ms-radial-gradient(center, ellipse cover, @start, @end);
+  background-image :         radial-gradient(ellipse at center,     @start, @end);
+  background-repeat: repeat;
 }
 
 
 
 // General ---------------------------------------------------------
 
-// .border-radius(VALUE);
-
+// No longer necessary
 .border-radius(@radius) {
 -webkit-border-radius: @radius;
    -moz-border-radius: @radius;
         border-radius: @radius;
 }
 
+.border-image(@value) {
+-webkit-border-image: @value;
+        border-image: @value;
+}
 
-// .box-shadow(HORIZONTAL VERTICAL BLUR COLOR)
-
+// Not really necessary
 .box-shadow(@shadow) {
 -webkit-box-shadow: @shadow;
-   -moz-box-shadow: @shadow;
         box-shadow: @shadow;
 }
 
-
-// .inset-shadow(HORIZONTAL VERTICAL BLUR COLOR)
-
+// As above
 .inset-shadow(@shadow) {
 -webkit-box-shadow: inset @shadow;
-   -moz-box-shadow: inset @shadow;
         box-shadow: inset @shadow;
 }
 
-
-// .text-shadow(HORIZONTAL VERTICAL BLUR COLOR)
-
-.text-shadow(@shadow) {
-//-webkit-text-shadow: @shadow;
-   -moz-text-shadow: @shadow;
-        text-shadow: @shadow;
-}
-
-
-// .filter(VALUE)
-
+// Only webkit supports this,
+// safe to assume no prefixes
 .filter(@filters) {
 -webkit-filter: @filters;
-   -moz-filter: @filters;
-    -ms-filter: @filters;
-     -o-filter: @filters;
         filter: @filters;
 }
 
 
-// .opacity(VALUE);
-
-.opacity(@opacity) {
--webkit-opacity: @opacity;
-   -moz-opacity: @opacity;
-        opacity: @opacity;
-}
-
-
-// .rotate(VALUEdeg);
-
-.rotate(@deg) {
--webkit-transform: rotate(@deg);
-   -moz-transform: rotate(@deg);
-    -ms-transform: rotate(@deg);
-     -o-transform: rotate(@deg);
-        transform: rotate(@deg);
-}
-
-// .rotateX(VALUEdeg);
-
-.rotateX(@deg) {
--webkit-transform: rotateX(@deg);
-   -moz-transform: rotateX(@deg);
-    -ms-transform: rotateX(@deg);
-     -o-transform: rotateX(@deg);
-        transform: rotateX(@deg);
-}
-
-// .rotateY(VALUEdeg);
-
-.rotateY(@deg) {
--webkit-transform: rotateY(@deg);
-   -moz-transform: rotateY(@deg);
-    -ms-transform: rotateY(@deg);
-     -o-transform: rotateY(@deg);
-        transform: rotateY(@deg);
-}
-
-// .rotateZ(VALUEdeg);
-
-.rotateZ(@deg) {
--webkit-transform: rotateZ(@deg);
-   -moz-transform: rotateZ(@deg);
-    -ms-transform: rotateZ(@deg);
-     -o-transform: rotateZ(@deg);
-        transform: rotateZ(@deg);
-}
-
-
-// .scale(VALUE);
-
-.scale(@ratio) {
--webkit-transform: scale(@ratio);
-   -moz-transform: scale(@ratio);
-    -ms-transform: scale(@ratio);
-     -o-transform: scale(@ratio);
-        transform: scale(@ratio);
-}
-
-
-// .skew(VALUE, VALUE);
-
-.skew(@x, @y) {
--webkit-transform: skew(@x, @y);
-   -moz-transform: skew(@x, @y);
-    -ms-transform: skew(@x, @y);
-     -o-transform: skew(@x, @y);
-        transform: skew(@x, @y);
-}
-
-
-// .transition(PROPERTY DURATION DELAY(OPTIONAL) TIMING-FINCTION);
-
-.transition(@transition: all 0.2s 0 ease) {
+.transition(@transition) {
 -webkit-transition: @transition;
-   -moz-transition: @transition;
-    -ms-transition: @transition;
      -o-transition: @transition;
         transition: @transition;
 }
 
-// .transition-transform(DURATION DELAY(OPTIONAL) TIMING-FINCTION);
+// 2D Transforms -------------------------------
 
-.transition-transform(@options: 0.2s 0 ease) {
--webkit-transition:-webkit-transform @options;
-   -moz-transition:   -moz-transform @options;
-    -ms-transition:    -ms-transform @options;
-     -o-transition:     -o-transform @options;
-        //transition:        transform @options;
+.rotate(@deg) {
+-webkit-transform: rotate(@deg);
+    -ms-transform: rotate(@deg);
+        transform: rotate(@deg);
 }
 
+.scale(@ratio) {
+-webkit-transform: scale(@ratio);
+    -ms-transform: scale(@ratio);
+        transform: scale(@ratio);
+}
 
-// .translate(VALUE, VALUE)
+.skew(@x, @y) {
+-webkit-transform: skew(@x, @y);
+    -ms-transform: skew(@x, @y);
+        transform: skew(@x, @y);
+}
 
 .translate(@x, @y) {
 -webkit-transform: translate(@x, @y);
-   -moz-transform: translate(@x, @y);
     -ms-transform: translate(@x, @y);
-     -o-transform: translate(@x, @y);
         transform: translate(@x, @y);
 }
 
+// 3D Transforms -------------------------------
+
+.rotateX(@deg) {
+-webkit-transform: rotateX(@deg);
+        transform: rotateX(@deg);
+}
+
+.rotateY(@deg) {
+-webkit-transform: rotateY(@deg);
+        transform: rotateY(@deg);
+}
+
+.rotateZ(@deg) {
+-webkit-transform: rotateZ(@deg);
+        transform: rotateZ(@deg);
+}
+
+.rotate3D(@x, @y, @z) {
+-webkit-transform: rotateX(@x) rotateY(@y) rotateZ(@z);
+        transform: rotateX(@x) rotateY(@y) rotateZ(@z);
+}
 
 .translate3d(@x, @y, @z) {
 -webkit-transform: translate3d(@x, @y, @z);
-   -moz-transform: translate3d(@x, @y, @z);
-    -ms-transform: translate3d(@x, @y, @z);
-     -o-transform: translate3d(@x, @y, @z);
         transform: translate3d(@x, @y, @z);
+}
+
+// Transforms ----------------------------------
+
+.transition-transform(@options) {
+-webkit-transition:-webkit-transform @options;
+        transition:    -ms-transform @options;
+        transition:        transform @options;
 }
 
 .transform-origin(@value) {
 -webkit-transform-origin: @value;
-   -moz-transform-origin: @value;
     -ms-transform-origin: @value;
-     -o-transform-origin: @value;
-        //transform-origin: @value;
+        transform-origin: @value;
 }
-
-
-
 
 
 // Technical -------------------------------------------------------
 
-
-// .appearance(VALUE)
-
+// Only useful for clearing an appearance
 .appearance(@value) {
 -webkit-appearance: @value;
    -moz-appearance: @value;
-        //appearance: @value; // Soon. Maybe.
+      //appearance: @value;
 }
 
-// .backface-visibility(VALUE);
-
+// Only useful for hiding a backface
 .backface-visibility(@value) {
 -webkit-backface-visibility: @value;
    -moz-backface-visibility: @value;
-        //backface-visibility: @value; // Soon. Maybe.
+        backface-visibility: @value;
 }
 
-// .background-alpha(VALUE, VALUE);
-
-.background-alpha(@color: @white, @alpha: 1) {
-  @percent: percent(1 - @alpha);
-  background-color : fadeout(@color, @percent);
+// Not really up to spec
+// But 'none' is extremely useful
+.user-select(@select) {
+-webkit-user-select: @select;
+   -moz-user-select: @select;
+    -ms-user-select: @select;
+        user-select: @select;
 }
 
 
-// .background-size(VALUE VALUE);
-
+// Still Drafting --------------------------------------------------
+// Basically, Android
 .background-size(@size) {
 -webkit-background-size: @size;
-   -moz-background-size: @size;
-     -o-background-size: @size;
         background-size: @size;
 }
 
-
-// .background-clip(VALUE); (border-box, padding-box, content-box)
-
 .background-clip(@clip) {
 -webkit-background-clip: @clip;
-   -moz-background-clip: @clip;
         background-clip: @clip;
 }
-
-
-// .box-sizing(VALUE); (border-box, padding-box, content-box)
 
 .box-sizing(@boxsize) {
 -webkit-box-sizing: @boxsize;
@@ -301,15 +217,11 @@ background-repeat: repeat-x;
         box-sizing: @boxsize;
 }
 
-// .column-count(VALUE);
-
 .column-count(@count) {
   -webkit-column-count: @count;
      -moz-column-count: @count;
           column-count: @count; 
 }
-
-// .column-gap(VALUE);
 
 .column-gap(@gap) {
   -webkit-column-gap: @gap;
@@ -317,97 +229,72 @@ background-repeat: repeat-x;
           column-gap: @gap;
 }
 
+.resize(@direction) {
+  resize: @direction;
+  overflow: auto;
+}
 
-// .margin-x(VALUE)
 
+// Should Exist ----------------------------------------------------
 .margin-x(@margin) {
   margin-left: @margin;
   margin-right: @margin;
 }
-
-// .margin-x(VALUE, VALUE)
 
 .margin-x(@left, @right) {
   margin-left: @left;
   margin-right: @right;
 }
 
-// .margin-y(VALUE)
-
 .margin-y(@margin) {
   margin-top: @margin;
   margin-bottom: @margin;
 }
-
-// .margin-y(VALUE, VALUE)
 
 .margin-y(@top, @bottom) {
   margin-top: @top;
   margin-bottom: @bottom;
 }
 
-// .padding-x(VALUE)
-
 .padding-x(@padding) {
   padding-left: @padding;
   padding-right: @padding;
 }
-
-// .padding-x(VALUE, VALUE)
 
 .padding-x(@left, @right) {
   padding-left: @left;
   padding-right: @right;
 }
 
-// .padding-y(VALUE)
-
 .padding-y(@padding) {
   padding-top: @padding;
   padding-bottom: @padding;
 }
-
-// .padding-y(VALUE, VALUE)
 
 .padding-y(@top, @bottom) {
   padding-top: @top;
   padding-bottom: @bottom;
 }
 
-// .border-x(VALUE)
 .border-x(@value) {
   border-left: @value;
   border-right: @value;
 }
 
-// .border-y(VALUE)
 .border-y(@value) {
   border-top: @value;
   border-bottom: @value;
 }
 
 
-// .border-image()
-.border-image(@value) {
--webkit-border-image: @value;
-   -moz-border-image: @value;
-        border-image: @value;
-}
-
-
 // Helpers ---------------------------------------------------------
-
-// Chrome Frame
 
 .chromeframe {
   margin: .2em 0;
   background: @lightgrey;
-  color: @black;
+  color: @textcolor;
   padding: .2em 0;
 }
-
-
-// Clearfix
 
 .clearfix {
   *zoom: 1;
@@ -423,50 +310,29 @@ background-repeat: repeat-x;
   }
 }
 
-
-// Image Replacement
-
 .hide-text {
   text-indent: 200%;
   white-space: nowrap;
   overflow: hidden;
 }
 
+.delist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-// Hide from visual and speaking browsers
+
+// Accessibility -------------------------------
 
 .hidden {
   display: none !important;
   visibility: hidden;
 }
 
-
-// Hide but maintain layout
-
 .invisible {
   visibility: hidden;
 }
-
-
-// .resize(VALUE) (none, both, horizontal, vertical, inherit)
-
-.resize(@direction: both) {
-  resize: @direction;
-  overflow: auto;
-}
-
-
-// .userselect(VALUE) (all, element, none, text)
-
-.user-select(@select) {
--webkit-user-select: @select;
-   -moz-user-select: @select;
-     -o-user-select: @select;
-        user-select: @select;
-}
-
-
-// Hidden but available to speaking browsers
 
 .visuallyhidden {
   overflow: hidden;
@@ -477,8 +343,6 @@ background-repeat: repeat-x;
   margin: -1px;
   padding: 0;
   border: 0;
-  
-  // Make visuallyhidden focusable with a keyboard
   
   &.focusable:active,
   &.focusable:focus {
@@ -492,10 +356,7 @@ background-repeat: repeat-x;
 }
 
 
-
-// Cool Stuff ------------------------------------------------------
-
-// .arrow(DIRECTION, SIZE, COLOUR)
+// Decoration ------------------------------------------------------
 
 .arrow(@_, @size, @color) {
   content: ''; // usually a psuedo
@@ -526,8 +387,6 @@ background-repeat: repeat-x;
 	border-top-color: @color;
 	border-top-style: solid;
 }
-
-// .border-bevel(SIZE, COLOUR)
 
 .border-bevel(@size, @bgcolor) {
   background: @bgcolor;

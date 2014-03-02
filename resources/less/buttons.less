@@ -7,152 +7,203 @@ input[type="submit"],
 input[type="image"],
 .btn {
   display: inline-block;
-  margin-bottom: 0; // For input.button
   
   .font-size(14);
-  height: (@blh * 1.25);
-
+  color: @textcolor;
+ 
+  max-width: 100%;
+  height: @blh;
+  line-height: (@blh - (@controlsborderwidth * 2));
+  
+  padding: 0 8px;
+  border: @controlsborderwidth solid @controlsbordercolor;
+  border-radius: @controlsroundness;
+  margin: 0;
+  
+  background: @controlsbackground;
+  .transition(~'border-color 0.2s, background-color 0.2s');
+  
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
+  
   cursor: pointer;
-  outline: none;
-  
-  color: @buttoncolor;
-  background: @buttonbackground;
-  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  
-  border: @elementdepth solid transparent;
-  
-  .box-sizing(border-box);
-  
-  .border-radius(3px);
-  .user-select(none);
-  .appearance(none);
-  .transition(~"background 0.2s, border 0.1s, box-shadow 0.2s");
-  
-  &,
-  &:visited {
-    color: @buttoncolor;
-  }
 
+  &,
+  &:visited,
+  &:hover {
+    color: @textcolor;
+    
+    & when (luma(@controlsbackground) < 64%) {
+      color: @white;
+    }
+  }
+  
   &:focus,
   &:hover {
-    color: @buttoncolor;
-    background: @buttonhover;
+    outline: none;
     text-decoration: none;
+    background: darken(@controlsbackground, 5%);
   }
-
-  &:active {
-    outline: 0;
-    background-image: none;
+  
+  & when (@controlsdepth) {
+    border-bottom-color: darken(@controlsbordercolor, 10%);
     
+    &:focus,
+    &:hover {
+      border-color: darken(@controlsbackground, 5%);
+      border-bottom-color: darken(@controlsbordercolor, 15%);
+    }
+    
+    &:active {
+      border-color: darken(@controlsbackground, 5%);
+      border-top-color: darken(@controlsbordercolor, 15%);
+      line-height: (@blh);
+    }
   }
-
+  
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
     cursor: not-allowed;
-    pointer-events: none; // Future-proof disabling of clicks
-    .opacity(0.6);
-    .box-shadow(none);
+    pointer-events: none;
+    opacity: 0.6;
   }
 }
 
-button,
-input[type="reset"],
-input[type="button"],
-input[type="submit"],
-.btn {
-  padding: 0 (@gutterwidth / 2);
-  border: @elementdepth solid @buttonborder;
-  border-bottom-color: darken(@buttonborder, 10%);
-  //.box-shadow(0 1px 2px rgba(0,0,0,0.2));
-  
-  &:focus,
-  &:hover {
-    border-color: @buttonborderhover;
-    border-bottom-color: darken(@buttonborderhover, 10%);
-  }
+// Sizing ----------------------------------------------------------
+
+.btn-small() {
+  .font-size(11);
+  height: @smallsize;
+  line-height: (@smallsize - (@controlsborderwidth * 2));
+  padding: 0 6px;
   
   &:active {
-    border-top: (@elementdepth * 2) solid darken(@buttonhover, 10%);
-    border-bottom-color: transparent;
-    //.box-shadow(0 1px 1px rgba(0,0,0,0.2));
+    line-height: @smallsize;  
   }
 }
 
-
-.btn {
-  line-height: (@blh * 1.2);
+.btn-base() {
+  .font-size(14);
+  height: @blh;
+  line-height: (@blh - (@controlsborderwidth * 2));
+  padding: 0 8px;
+  
+  &:active {
+    line-height: @blh;  
+  }
 }
 
-.btn-primary {
+.btn-large() {
+  .font-size(14);
+  height: @largesize;
+  line-height: (@largesize - (@controlsborderwidth * 2));
+  padding: 0 10px;
+  
+  &:active {
+    line-height: @largesize;  
+  }
+}
+
+.btn-xlarge() {
+  .font-size(16);
+  height: @xlargesize;
+  line-height: (@xlargesize - (@controlsborderwidth * 2));
+  padding: 0 14px;
+  
+  &:active {
+    line-height: @xlargesize;  
+  }
+}
+
+.btn-size(@size) {
+  .font-size(@size);
+  height: 2em;
+  line-height: 1.85em;
+  padding: 0 1em 0.15em;
+  
+  &:active {
+    border-top-width: (@controlsborderwidth * 2);
+  }
+}
+
+// Colours ---------------------------------------------------------
+
+.btn-primary() {
   .btn-color(@basecolor);
 }
 
-.btn-alert {
+.btn-alert() {
   .btn-color(@alertcolor);
 }
 
-.btn-error {
+.btn-error() {
   .btn-color(@errorcolor);
 }
 
-.btn-info {
+.btn-info() {
   .btn-color(@infocolor);
 }
 
-.btn-success {
+.btn-success() {
   .btn-color(@successcolor);
 }
 
-.btn-warning {
+.btn-warning() {
   .btn-color(@warningcolor);
 }
 
-.btn-inverse {
+.btn-inverse() {
   .btn-color(@inversecolor);
 }
 
 .btn-color(@thiscolor) {
-    
   background-color: @thiscolor;
   border-color: @thiscolor;
-  border-bottom-color: darken(@thiscolor, 13%);
+  & when (@controlsdepth) {
+    border-bottom-color: darken(@thiscolor, 15%);
+  }
   
   &,
   &:visited {
-    color: contrast(@thiscolor, darken(@thiscolor, 34%), lighten(@thiscolor, 52%), 64%);
+    color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 64%);
   }
-
   
   &:focus,
   &:hover {
-  
-    text-decoration: none;
-  
-    .if() when (luma(@thiscolor) < 64%) {
-      background-color: desaturate(darken(@thiscolor, 6%), 8%);
-      border-color:     desaturate(darken(@thiscolor, 6%), 8%);
-      border-bottom-color: darken(@thiscolor, 22%);
-      color: lighten(@thiscolor, 50%);
+    .colors() when (luma(@thiscolor) < 64%) {
+      background-color: desaturate(darken(@thiscolor, 5%), 8%);
+      border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
+      & when (@controlsdepth) {
+        border-bottom-color: darken(@thiscolor, 20%);
+      }
     }
-    
-    .if() when (luma(@thiscolor) > 64%) {
-      background-color: desaturate(lighten(@thiscolor, 9%), 8%);
-      border-color:     desaturate(lighten(@thiscolor, 9%), 8%);
-      border-bottom-color: darken(@thiscolor, 15%);
-      color: darken(@thiscolor, 30%);
+    .colors() when (luma(@thiscolor) > 64%) {
+      background-color: desaturate(darken(@thiscolor, 5%), 5%);
+      border-color:     desaturate(darken(@thiscolor, 5%), 5%);
+      & when (@controlsdepth) {
+        border-bottom-color: darken(@thiscolor, 20%);
+      }
     }
-    
-    .if();    
+    .colors();
   }
   
   &:active {
-    border-top-color: darken(@thiscolor, 15%);
-    border-bottom-color: @thiscolor;
+    .colors() when (luma(@thiscolor) < 64%) {
+      background-color: desaturate(darken(@thiscolor, 5%), 8%);
+      border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
+      & when (@controlsdepth) {
+        border-top-color: darken(@thiscolor, 20%);
+      }
+    }
+    .colors() when (luma(@thiscolor) > 64%) {
+      background-color: desaturate(darken(@thiscolor, 5%), 5%);
+      border-color:     desaturate(darken(@thiscolor, 5%), 5%);
+      & when (@controlsdepth) {
+        border-top-color: darken(@thiscolor, 20%);
+      }
+    }
+    .colors();
   }
-
 }
-

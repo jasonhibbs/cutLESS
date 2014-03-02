@@ -1,0 +1,69 @@
+// Settings ////////////////////////////////////////////////////////
+
+//  This is the first port of call
+//  for setting up a website.
+//  If further work is necessary,
+//  take a look at variable.less
+
+// Color -----------------------------------------------------------
+@basecolor              : #48D;
+@compcolor              : #D44;
+
+@decorcolor             : @lightergrey;
+
+@textcolor              : @darkgrey;
+@bodycolor              : transparent;
+@htmlcolor              : @white;
+@highlightcolor         : fadeout(@basecolor, 80%);
+
+
+// Typography ------------------------------------------------------
+
+@bodyfont               : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
+@headingfont            : inherit;
+@altfont                : Cambria, Georgia, Times, 'Times New Roman', serif;
+@codefont               : Menlo, Monaco, monospace;
+
+@basefontsize           : 16px;
+@baselineheight         : (1.5 * @basefontsize); // 24px
+
+@headingweight          : 500;
+@headingcolor           : inherit;
+
+
+// Support ---------------------------------------------------------
+@usecalc                : false;
+
+// Layout ----------------------------------------------------------
+@responsive             : true;   // Most of this section is moot, if false
+@layout                 : fixed;  //'liquid' or 'fixed'
+@gutterwidth            : 20px;
+
+@phone-layout           : 93.75%;
+@phone-landscape-layout : 400px;
+@small-tablet-layout    : 560px;
+@tablet-layout          : 640px;
+@desktop-layout         : 960px;
+@large-desktop-layout   : 1280px; // Remove support by reusing previous breakpoint
+@huge-desktop-layout    : 1600px;
+
+
+// Controls --------------------------------------------------------
+@controlsdepth          : true; // Tint upper or lower borders
+
+@controlsroundness      : 2px;  // Make zero for square controls
+@controlsborderwidth    : 1px;  // Minimum 1px for focus/hover styles
+
+@controlsbackground     : @lightergrey;
+@controlsbordercolor    : @controlsbackground;
+
+
+// Sizing ----------------------------------------------------------
+// Preset heights for inputs and buttons
+@smallsize              : (@blh * 0.75);
+@largesize              : (@blh * 1.25);
+@xlargesize             : (@blh * 1.50);
+
+
+// Tables ----------------------------------------------------------
+@styletables            : false; // If false, use .tabular to make tablular data look good
