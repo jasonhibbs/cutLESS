@@ -9,7 +9,6 @@ input[type="image"],
   display: inline-block;
   
   .font-size(14);
-  color: @textcolor;
  
   max-width: 100%;
   height: @blh;
@@ -166,7 +165,8 @@ input[type="image"],
   }
   
   &,
-  &:visited {
+  &:visited,
+  &:hover {
     color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 64%);
   }
   

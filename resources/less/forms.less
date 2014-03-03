@@ -1,5 +1,36 @@
 // Forms ///////////////////////////////////////////////////////////
 
+// Form ------------------------------------------------------------
+form { 
+  
+  fieldset { 
+    margin: 0 0 (@blh - @controlsborderwidth) 0;
+    padding: (@blh) (@gw * 0.5);
+    border: @controlsborderwidth solid @decorcolor;
+    
+    legend {
+      padding: (@blh * 0.25) (@gw * 0.5);
+      border: @controlsborderwidth solid @decorcolor;
+      background-color: @bodycolor;
+    
+    }
+  }
+
+  p {
+    margin-bottom: (@blh);
+  }
+  
+  ul {
+    list-style-type: none; 
+    margin: 0 0 @blh 0;
+    padding: 0;
+  }
+  
+  br {
+    display: none;
+  }
+}
+
 // General ---------------------------------------------------------
 input,
 textarea,
@@ -61,7 +92,7 @@ input[type="checkbox"]:focus {
 }
 
 input[type="search"] {
-  .appearance(none); // Specificity
+  .appearance(none); // Specificity for iOS7
 }
 
 input[type="file"] {
@@ -75,6 +106,7 @@ input[type="file"] {
 textarea {
   min-height: (@blh);
   overflow: auto;
+  padding-top: 0.2em;
   line-height: 1.25em;
   .resize(vertical);
 }
@@ -202,6 +234,9 @@ select {
 // Sizing ----------------------------------------------------------
 
 // Inputs --------------------------------------
+// Really only good for simple inputs
+// similar to type=text
+
 .input-small() {
  .font-size(11);
   height: @smallsize;
@@ -239,6 +274,9 @@ select {
 
 
 // All Controls --------------------------------
+// Far more powerful for styling
+// multiple types of inputs
+
 // Small -----------------------------
 .controls-small() {
   .font-size(11);
@@ -537,40 +575,3 @@ select {
     padding-right: 0 !important;
   }
 }
-
-
-
-/* For review...
-
-// Form ------------------------------------------------------------
-form { 
-  
-  fieldset { 
-    margin: 0 0 (@blh - 1px) 0;
-    padding: (@blh) (@gw * 0.5);
-    border: 1px solid @lightergrey;
-    
-    legend {
-      padding: (@blh * 0.25) (@gw * 0.5);
-      border: 1px solid @lightergrey;
-      background-color: @bodycolor;
-    
-    }
-  }
-
-  p {
-    margin-bottom: (@blh);
-  }
-  
-  ul {
-    list-style-type: none; 
-    margin: 0 0 @blh 0;
-    padding: 0;
-  }
-  
-  br {
-    display: none;
-  }
-}
-
-*/

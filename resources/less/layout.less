@@ -144,6 +144,7 @@
       @columnwidth: (100% * @fraction);
       
       float: left;
+      width: ~"-webkit-calc(@{columnwidth} - @{gw})";
       width: ~"calc(@{columnwidth} - @{gw})";
       .margin-x((@gw / 2));
     }
@@ -190,6 +191,7 @@
         @columnwidth: (100% * @fraction);
         
         float: left;
+        width: ~"-webkit-calc(@{columnwidth} - @{gw})";
         width: ~"calc(@{columnwidth} - @{gw})";
       }
     }

@@ -149,8 +149,8 @@ blockquote,
   padding: (@blh * 0.5) @gw;
   
   color: @textcolor;
-  background-color: darken(@bodycolor, 3%);
-  border-left: (@gw * 0.25) solid darken(@bodycolor, 13%);
+  background-color: darken(@lightergrey, 3%);
+  border-left: (@gw * 0.25) solid darken(@lightergrey, 13%);
   
   //font-family: @altfont;
   
@@ -163,7 +163,7 @@ blockquote,
     margin-bottom: (@blh * 0);
   }
   
-  > small {
+  > small:last-child {
     margin: (@blh * 0.25) 0 0;
     
     &:before {
