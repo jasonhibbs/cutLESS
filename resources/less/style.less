@@ -1,5 +1,5 @@
 // cutLESS
-// Version 0.0.2
+// Version 2.0.2
 
 // Normalise -----------------------------------
 @import (less) "normalize.css";
@@ -9,24 +9,19 @@
 @import "variables.less";
 @import "mixins.less";
 
-// Layout ------------------------------------
-@import "layout.less";
-
-// Site-wide Styles
-@import "base.less";
-
 // Typography ----------------------------------
 @import "../fontawesome/less/font-awesome.less";
 @import "typography.less";
-
-// Colour --------------------------------------
-@import "colour.less";
 
 // Elements ------------------------------------
 @import "elements.less";
 @import "forms.less";
 @import "tables.less";
 @import "buttons.less";
+
+// Layout ------------------------------------
+@import "layout.less";
+@import "base.less";
 
 
 // Layout //////////////////////////////////////////////////////////
@@ -35,25 +30,25 @@
 @import "global.less";
 
 // Print Styles
-@media print { @import "print.less"; }
+@media print            { @import "print.less"; }
 
 // 480px
-@media @phone-landscape  { @import "480.less";  }
+@media @phone-landscape { @import "480.less"; }
 
 // 600px
-@media @small-tablet  { @import "600.less";  }
+@media @small-tablet    { @import "600.less"; }
 
 // 768px
-@media @tablet  { @import "768.less";  }
+@media @tablet          { @import "768.less"; }
 
 // 992px
-@media @desktop  { @import "992.less";  }
+@media @desktop         { @import "992.less"; }
 
 // 1382px
-@media @large-desktop { @import "1382.less"; }
+@media @large-desktop   { @import "1382.less"; }
 
 // 1872px
-@media @huge-desktop { @import "1872.less"; }
+@media @huge-desktop    { @import "1872.less"; }
 
 // 2x
 @media
