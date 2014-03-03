@@ -19,6 +19,7 @@ select {
   .transition(~'border-color 0.2s, background-color 0.2s');
   
   vertical-align: top;
+  .appearance(none);
   
   & when (luma(@controlsbackground) < 64%) {
     color: @white;
@@ -60,7 +61,7 @@ input[type="checkbox"]:focus {
 }
 
 input[type="search"] {
-  .box-sizing(border-box);
+  .appearance(none); // Specificity
 }
 
 input[type="file"] {
