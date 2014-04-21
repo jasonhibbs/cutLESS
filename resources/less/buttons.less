@@ -8,18 +8,18 @@ input[type="image"],
 .btn {
   display: inline-block;
   
-  .font-size(14);
+  .font-size(12);
  
   max-width: 100%;
   height: @blh;
-  line-height: (@blh - (@controlsborderwidth * 2));
+  line-height: (@blh - (@buttonborderwidth * 2));
   
   padding: 0 8px;
-  border: @controlsborderwidth solid @controlsbordercolor;
-  border-radius: @controlsroundness;
+  border: @buttonborderwidth solid @buttonbordercolor;
+  border-radius: @buttonroundness;
   margin: 0;
   
-  background: @controlsbackground;
+  background: @buttonbackground;
   .transition(~'border-color 0.2s, background-color 0.2s');
   
   text-align: center;
@@ -33,7 +33,7 @@ input[type="image"],
   &:hover {
     color: @textcolor;
     
-    & when (luma(@controlsbackground) < 64%) {
+    & when (luma(@buttonbackground) < 64%) {
       color: @white;
     }
   }
@@ -42,21 +42,22 @@ input[type="image"],
   &:hover {
     outline: none;
     text-decoration: none;
-    background: darken(@controlsbackground, 5%);
+    background: darken(@buttonbackground, 5%);
+    border-color: darken(@buttonbackground, 5%);
   }
   
-  & when (@controlsdepth) {
-    border-bottom-color: darken(@controlsbordercolor, 10%);
+  & when (@buttondepth) {
+    border-bottom-color: darken(@buttonbordercolor, 10%);
     
     &:focus,
     &:hover {
-      border-color: darken(@controlsbackground, 5%);
-      border-bottom-color: darken(@controlsbordercolor, 15%);
+      border-color: darken(@buttonbackground, 5%);
+      border-bottom-color: darken(@buttonbordercolor, 15%);
     }
     
     &:active {
-      border-color: darken(@controlsbackground, 5%);
-      border-top-color: darken(@controlsbordercolor, 15%);
+      border-color: darken(@buttonbackground, 5%);
+      border-top-color: darken(@buttonbordercolor, 15%);
       line-height: (@blh);
     }
   }
@@ -75,7 +76,7 @@ input[type="image"],
 .btn-small() {
   .font-size(11);
   height: @smallsize;
-  line-height: (@smallsize - (@controlsborderwidth * 2));
+  line-height: (@smallsize - (@buttonborderwidth * 2));
   padding: 0 6px;
   
   &:active {
@@ -84,9 +85,9 @@ input[type="image"],
 }
 
 .btn-base() {
-  .font-size(14);
+  .font-size(12);
   height: @blh;
-  line-height: (@blh - (@controlsborderwidth * 2));
+  line-height: (@blh - (@buttonborderwidth * 2));
   padding: 0 8px;
   
   &:active {
@@ -97,7 +98,7 @@ input[type="image"],
 .btn-large() {
   .font-size(14);
   height: @largesize;
-  line-height: (@largesize - (@controlsborderwidth * 2));
+  line-height: (@largesize - (@buttonborderwidth * 2));
   padding: 0 10px;
   
   &:active {
@@ -108,7 +109,7 @@ input[type="image"],
 .btn-xlarge() {
   .font-size(16);
   height: @xlargesize;
-  line-height: (@xlargesize - (@controlsborderwidth * 2));
+  line-height: (@xlargesize - (@buttonborderwidth * 2));
   padding: 0 14px;
   
   &:active {
@@ -123,87 +124,67 @@ input[type="image"],
   padding: 0 1em 0.15em;
   
   &:active {
-    border-top-width: (@controlsborderwidth * 2);
+    border-top-width: (@buttonborderwidth * 2);
   }
 }
 
 // Colours ---------------------------------------------------------
 
-.btn-primary() {
-  .btn-color(@basecolor);
-}
+// Typical Colours
+.btn-primary { .btn-color(@basecolor);    }
+.btn-alert   { .btn-color(@alertcolor);   }
+.btn-error   { .btn-color(@errorcolor);   }
+.btn-info    { .btn-color(@infocolor);    }
+.btn-success { .btn-color(@successcolor); }
+.btn-warning { .btn-color(@warningcolor); }
+.btn-inverse { .btn-color(@inversecolor); }
 
-.btn-alert() {
-  .btn-color(@alertcolor);
-}
-
-.btn-error() {
-  .btn-color(@errorcolor);
-}
-
-.btn-info() {
-  .btn-color(@infocolor);
-}
-
-.btn-success() {
-  .btn-color(@successcolor);
-}
-
-.btn-warning() {
-  .btn-color(@warningcolor);
-}
-
-.btn-inverse() {
-  .btn-color(@inversecolor);
-}
-
+// Colour Builder
 .btn-color(@thiscolor) {
   background-color: @thiscolor;
   border-color: @thiscolor;
-  & when (@controlsdepth) {
+  & when (@buttondepth) {
     border-bottom-color: darken(@thiscolor, 15%);
   }
   
   &,
   &:visited,
   &:hover {
-    color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 64%);
+    color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 60%);
   }
   
   &:focus,
   &:hover {
-    .colors() when (luma(@thiscolor) < 64%) {
+    & when (luma(@thiscolor) < 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 8%);
       border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
-      & when (@controlsdepth) {
+      & when (@buttondepth) {
         border-bottom-color: darken(@thiscolor, 20%);
       }
     }
-    .colors() when (luma(@thiscolor) > 64%) {
+    & when (luma(@thiscolor) > 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 5%);
       border-color:     desaturate(darken(@thiscolor, 5%), 5%);
-      & when (@controlsdepth) {
+      & when (@buttondepth) {
         border-bottom-color: darken(@thiscolor, 20%);
       }
     }
-    .colors();
   }
   
   &:active {
-    .colors() when (luma(@thiscolor) < 64%) {
+    & when (luma(@thiscolor) < 64%) {
       background-color: desaturate(darken(@thiscolor, 5%), 8%);
       border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
-      & when (@controlsdepth) {
+      & when (@buttondepth) {
         border-top-color: darken(@thiscolor, 20%);
       }
     }
-    .colors() when (luma(@thiscolor) > 64%) {
+    & when (luma(@thiscolor) > 64%) {
       background-color: desaturate(darken(@thiscolor, 5%), 5%);
       border-color:     desaturate(darken(@thiscolor, 5%), 5%);
-      & when (@controlsdepth) {
+      & when (@buttondepth) {
         border-top-color: darken(@thiscolor, 20%);
       }
     }
-    .colors();
   }
 }

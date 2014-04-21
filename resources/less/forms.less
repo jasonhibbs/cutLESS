@@ -4,13 +4,13 @@
 form { 
   
   fieldset { 
-    margin: 0 0 (@blh - @controlsborderwidth) 0;
+    margin: 0 0 (@blh - @inputborderwidth) 0;
     padding: (@blh) (@gw * 0.5);
-    border: @controlsborderwidth solid @decorcolor;
+    border: @inputborderwidth solid @decorcolor;
     
     legend {
       padding: (@blh * 0.25) (@gw * 0.5);
-      border: @controlsborderwidth solid @decorcolor;
+      border: @inputborderwidth solid @decorcolor;
       background-color: @bodycolor;
     
     }
@@ -35,24 +35,24 @@ form {
 input,
 textarea,
 select {
- .font-size(14); 
+ .font-size(12); 
  
   max-width: 100%;
   height: @blh;
-  line-height: (@blh - (@controlsborderwidth * 2));
+  line-height: (@blh - (@inputborderwidth * 2));
   
   padding: 0 4px;
-  border: @controlsborderwidth solid @controlsbordercolor;
-  border-radius: @controlsroundness;
+  border: @inputborderwidth solid @inputbordercolor;
+  border-radius: @inputroundness;
   margin: 0;
   
-  background: @controlsbackground;
+  background: @inputbackground;
   .transition(~'border-color 0.2s, background-color 0.2s');
   
   vertical-align: top;
   .appearance(none);
   
-  & when (luma(@controlsbackground) < 64%) {
+  & when (luma(@inputbackground) < 64%) {
     color: @white;
   }
   
@@ -73,6 +73,11 @@ select {
       border-color: lighten(@errorcolor, 15%);
     }
   }
+}
+
+input:not([type="checkbox"],[type="radio"]),
+textarea {
+  .appearance(none);
 }
 
 // Specifics -------------------------------------------------------
@@ -115,18 +120,18 @@ textarea {
 // Placeholder -----------------------------------------------------
 
 ::-webkit-input-placeholder {
-  color: darken(@controlsbackground, 25%);
+  color: darken(@inputbackground, 25%);
   
-  & when (luma(@controlsbackground) < 64%) {
-    color: lighten(@controlsbackground, 25%);
+  & when (luma(@inputbackground) < 64%) {
+    color: lighten(@inputbackground, 25%);
   }
 }
 
 input:-moz-placeholder { 
-  color: darken(@controlsbackground, 25%);
+  color: darken(@inputbackground, 25%);
   
-  & when (luma(@controlsbackground) > 64%) {
-    color: lighten(@controlsbackground, 25%);
+  & when (luma(@inputbackground) > 64%) {
+    color: lighten(@inputbackground, 25%);
   }
 }
 
@@ -147,11 +152,11 @@ input:-moz-placeholder {
   select {    
     padding: 0 1.75em 0 0.375em;
     
-    & when (luma(@controlsbackground) < 64%) {
+    & when (luma(@inputbackground) < 64%) {
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURf///wAAAP///////////////6TQ+X8AAAAGdFJOU4AAQHgYCtMuA9sAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
     }
     
-    & when (luma(@controlsbackground) > 64%) {
+    & when (luma(@inputbackground) > 64%) {
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURQAAAAAAAAAAAAAAAAAAAAAAAOArGaIAAAAGdFJOU5kATI8dDe6564MAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
     }
     
@@ -214,8 +219,8 @@ input:-moz-placeholder {
 
 input,
 textarea {
-  & when (@controlsdepth) {
-    border-top-color: darken(@controlsbordercolor, 10%);
+  & when (@inputdepth) {
+    border-top-color: darken(@inputbordercolor, 10%);
     
     &:invalid,
     &.invalid {
@@ -225,8 +230,8 @@ textarea {
 }
 
 select {
-  & when (@controlsdepth) {
-    border-bottom-color: darken(@controlsbordercolor, 10%);
+  & when (@inputdepth) {
+    border-bottom-color: darken(@inputbordercolor, 10%);
   }
 }
 
@@ -234,51 +239,51 @@ select {
 // Sizing ----------------------------------------------------------
 
 // Inputs --------------------------------------
-// Really only good for simple inputs
-// similar to type=text
+// Really only good for simple inputs similar to type=text
 
-.input-small() {
+.input-small {
  .font-size(11);
   height: @smallsize;
-  line-height: (@smallsize - (@controlsborderwidth * 2));
-  padding: 0 3px;
+  line-height: (@smallsize - (@inputborderwidth * 2));
+  //padding: 0 3px; // Removing: only works for text or similar inputs
 }
 
-.input-base() {
+.input-base {
   .font-size(14);
   height: @blh;
-  line-height: (@blh - (@controlsborderwidth * 2));
-  padding: 0 4px;
+  line-height: (@blh - (@inputborderwidth * 2));
+  //padding: 0 4px; // Removing: only works for text or similar inputs
 }
 
-.input-large() {
+.input-large {
   .font-size(14);
   height: @largesize;
-  line-height: (@largesize - (@controlsborderwidth * 2));
-  padding: 0 6px;
+  line-height: (@largesize - (@inputborderwidth * 2));
+  //padding: 0 6px; // Removing: only works for text or similar inputs
 }
 
-.input-xlarge() {
+.input-xlarge {
   .font-size(16);
   height: @xlargesize;
-  line-height: (@xlargesize - (@controlsborderwidth * 2));
-  padding: 0 8px;
+  line-height: (@xlargesize - (@inputborderwidth * 2));
+  //padding: 0 8px; // Removing: only works for text or similar inputs
 }
 
 .input-size(@size) {
   .font-size(@size);
   height: 2em;
   line-height: 1.85em;
-  padding: 0 0.5em 0.15em;
+  //padding: 0 0.5em 0.15em; // Removing: only works for text or similar inputs
 }
 
 
 // All Controls --------------------------------
-// Far more powerful for styling
-// multiple types of inputs
+// Good for parents of controls
+// Keep code dry with :extend
+// e.g. form:extend(.controls-small all) {}
 
 // Small -----------------------------
-.controls-small() {
+.controls-small {
   .font-size(11);
 
   input,
@@ -294,8 +299,10 @@ select {
   }
   
   input,
-  select {
-    line-height: (@smallsize - (@controlsborderwidth * 2));
+  select,
+  .controls_group > span,
+  &.controls_group > span {
+    line-height: (@smallsize - (@inputborderwidth * 2));
   }
 
   textarea {
@@ -322,11 +329,26 @@ select {
       margin-top: 1px;
     }
   }
+  
+  .input_group {
+    a,
+    a i {
+      line-height: @smallsize;
+    }
+    a i {
+      .font-size(12);
+    }
+  }
+  
+  .controls_group > span,
+  &.controls_group > span {
+    padding: 0 6px;
+  }
 }
 
 // Base ------------------------------
-.controls-base() {
-  .font-size(14);
+.controls-base {
+  .font-size(12);
 
   input,
   textarea,
@@ -341,8 +363,10 @@ select {
   }
   
   input,
-  select {
-    line-height: (@blh - (@controlsborderwidth * 2));
+  select,
+  .controls_group > span,
+  &.controls_group > span {
+    line-height: (@blh - (@inputborderwidth * 2));
   }
   
   label {
@@ -373,10 +397,24 @@ select {
       margin-top: 4px;
     }
   }
+  
+  .input_group {
+    a,
+    a i {
+      line-height: @blh;
+    }
+    a i {
+      .font-size(14);
+    }
+  }
+  .controls_group > span,
+  &.controls_group > span {
+    padding: 0 8px;
+  }
 }
 
 // Large -----------------------------
-.controls-large() {
+.controls-large {
   .font-size(14);
   
   input,
@@ -391,8 +429,10 @@ select {
   }
   
   input,
-  select {
-    line-height: (@largesize - (@controlsborderwidth * 2));
+  select,
+  .controls_group > span,
+  &.controls_group > span {
+    line-height: (@largesize - (@inputborderwidth * 2));
   }
   
   label {
@@ -437,10 +477,25 @@ select {
       margin: 5px; 
     }
   }
+  
+  .input_group {
+    a,
+    a i {
+      line-height: @largesize;
+    }
+    a i {
+      .font-size(18);
+    }
+  }
+  
+  .controls_group > span,
+  &.controls_group > span {
+    padding: 0 10px;
+  }
 }
 
 // X-Large ---------------------------
-.controls-xlarge() {
+.controls-xlarge {
   .font-size(16);
   
   input,
@@ -455,8 +510,10 @@ select {
   }
   
   input,
-  select {
-    line-height: (@xlargesize - (@controlsborderwidth * 2));
+  select,
+  .controls_group > span,
+  &.controls_group > span {
+    line-height: (@xlargesize - (@inputborderwidth * 2));
   }
 
   label {
@@ -501,6 +558,21 @@ select {
       width: 10px;
       margin: 6px; 
     }
+  }
+  
+  .input_group {
+    a,
+    a i {
+      line-height: @xlargesize;
+    }
+    a i {
+      .font-size(21);
+    }
+  }
+  
+  .controls_group > span,
+  &.controls_group > span {
+    padding: 0 12px;
   }
 }
 
@@ -568,6 +640,94 @@ select {
     }
   }
 }
+
+// Grouping --------------------------------------------------------
+// In a sort of testing phase,
+// Use .input_group for sticking 'a's in inputs,
+// .controls_group for butting inputs, selects, and buttons against one another
+
+.input_group {
+  position: relative;
+  display: inline;
+  
+  input {
+    padding-right: 2em;
+  }
+  
+  a + input {
+    padding-left: 2em;
+    padding-right: 0;
+  }
+  
+  a:first-child,
+  input + a {
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  a:first-child {
+    left: 0.55em;
+  }
+  
+  input + a {
+    right: 0.55em;
+  }
+}
+
+.controls_group {
+  .clearfix();
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  
+  span {
+    display: inline-block;
+    padding: 0 8px;
+    line-height: (@blh - (@controlsborderwidth * 2));
+    background: darken(@controlsbackground, 5%);
+    border: @controlsborderwidth solid darken(@controlsbackground, 5%);
+    
+    & when (@controlsdepth) {
+      border-top-color: darken(@controlsbackground, 15%);
+    }
+    
+    & when ( luma( darken(@controlsbackground, 5%) ) < 60%) {
+      color: @white;
+    }
+    
+    &:first-child {
+      border-right: none;
+    }
+    
+    &:last-child {
+      border-left: none;
+    }
+  }
+  
+  span,
+  input,
+  select,
+  button,
+  input[type="reset"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="image"],
+  .btn {
+    float: left;
+    border-radius: 0;
+    
+    &:first-child {
+      border-radius: @controlsroundness 0 0 @controlsroundness;
+    }
+    
+    &:last-child {
+      border-radius: 0 @controlsroundness @controlsroundness 0;
+    }
+  }
+}
+
+
+
 
 // Hacks -----------------------------------------------------------
 @-moz-document url-prefix() {

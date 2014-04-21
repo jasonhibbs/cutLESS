@@ -69,64 +69,65 @@
     .margin-x(auto);      // Centre layout
     &:extend(.clearfix all); // Columns are floated
     
-    
-    // class="fixed layout" --------------------
-    // For when you’ve designed for each breakpoint
-    
-    &.fixed,
-    .fixed & {
-      @media @phone-landscape {
-        width: @phone-landscape-layout;
+    & when (@responsive) { 
+      // class="fixed layout" --------------------
+      // For when you’ve designed for each breakpoint
+      
+      &.fixed,
+      .fixed & {
+        @media @phone-landscape {
+          width: @phone-landscape-layout;
+        }
+        
+        @media @small-tablet {
+          width: @small-tablet-layout;
+        }
+        
+        @media @tablet {
+          width: @tablet-layout;
+        }
+        
+        @media @desktop {
+          width: @desktop-layout;
+        }
+        
+        @media @large-desktop {
+          width: @large-desktop-layout;
+        }
+        
+        @media @huge-desktop {
+          width: @huge-desktop-layout;
+        }
       }
       
-      @media @small-tablet {
-        width: @small-tablet-layout;
-      }
+      // class="liquid layout" -------------------
+      // For when you’re not ready to go full-fluid
       
-      @media @tablet {
-        width: @tablet-layout;
-      }
-      
-      @media @desktop {
-        width: @desktop-layout;
-      }
-      
-      @media @large-desktop {
-        width: @large-desktop-layout;
-      }
-      
-      @media @huge-desktop {
-        width: @huge-desktop-layout;
-      }
-    }
-    
-    // class="liquid layout" -------------------
-    // For when you’re not ready to go full-fluid
-    
-    &.liquid,
-    .liquid & {
-      @media @phone-landscape {
-        width: percentage((@phone-landscape-layout / @phone-landscape-width));
-      }
-      
-      @media @small-tablet {
-        width: percentage((@small-tablet-layout / @small-tablet-width));
-      }
-      
-      @media @tablet {
-        width: percentage((@tablet-layout / @tablet-width));
-      }
-      
-      @media @desktop {
-        width: percentage((@desktop-layout / @desktop-width));
-      }
-      
-      @media @large-desktop {
-        width: percentage((@large-desktop-layout / @large-desktop-width));
-      }
-      
-      @media @huge-desktop {
-        width: percentage((@huge-desktop-layout / @huge-desktop-width));
+      &.liquid,
+      .liquid & {
+        @media @phone-landscape {
+          width: percentage((@phone-landscape-layout / @phone-landscape-width));
+        }
+        
+        @media @small-tablet {
+          width: percentage((@small-tablet-layout / @small-tablet-width));
+        }
+        
+        @media @tablet {
+          width: percentage((@tablet-layout / @tablet-width));
+        }
+        
+        @media @desktop {
+          width: percentage((@desktop-layout / @desktop-width));
+        }
+        
+        @media @large-desktop {
+          width: percentage((@large-desktop-layout / @large-desktop-width));
+        }
+        
+        @media @huge-desktop {
+          width: percentage((@huge-desktop-layout / @huge-desktop-width));
+        }
       }
     }
   }

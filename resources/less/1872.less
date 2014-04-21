@@ -3,7 +3,7 @@
 @target: @huge-desktop-layout;
 
 
-// Column (needs redefining) ---------------------------------------
+// Column (must be redefined) --------------------------------------
 .column(@fraction: 1) {
   & when (@usecalc) { @columnwidth:(100% * @fraction); float: left; width: ~"-webkit-calc(@{columnwidth} - @{gw})"; width: ~"calc(@{columnwidth} - @{gw})"; .margin-x((@gw / 2)); }
   & when not (@usecalc) { @gridbits:(@target / @gw); @gutterbits:(100% / @gridbits); @portion:(1 / @fraction); @columnwidth:(@gutterbits * ((@gridbits - @portion) * @fraction)); float: left; width: @columnwidth; .margin-x((@gutterbits / 2)); }
