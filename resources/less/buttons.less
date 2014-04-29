@@ -7,37 +7,37 @@ input[type="submit"],
 input[type="image"],
 .btn {
   display: inline-block;
-  
+
   .font-size(12);
- 
+
   max-width: 100%;
   height: @blh;
   line-height: (@blh - (@buttonborderwidth * 2));
-  
+
   padding: 0 8px;
   border: @buttonborderwidth solid @buttonbordercolor;
   border-radius: @buttonroundness;
   margin: 0;
-  
+
   background: @buttonbackground;
   .transition(~'border-color 0.2s, background-color 0.2s');
-  
+
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-  
+
   cursor: pointer;
 
   &,
   &:visited,
   &:hover {
     color: @textcolor;
-    
+
     & when (luma(@buttonbackground) < 64%) {
       color: @white;
     }
   }
-  
+
   &:focus,
   &:hover {
     outline: none;
@@ -45,23 +45,23 @@ input[type="image"],
     background: darken(@buttonbackground, 5%);
     border-color: darken(@buttonbackground, 5%);
   }
-  
+
   & when (@buttondepth) {
     border-bottom-color: darken(@buttonbordercolor, 10%);
-    
+
     &:focus,
     &:hover {
       border-color: darken(@buttonbackground, 5%);
       border-bottom-color: darken(@buttonbordercolor, 15%);
     }
-    
+
     &:active {
       border-color: darken(@buttonbackground, 5%);
       border-top-color: darken(@buttonbordercolor, 15%);
       line-height: (@blh);
     }
   }
-  
+
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
@@ -78,9 +78,9 @@ input[type="image"],
   height: @smallsize;
   line-height: (@smallsize - (@buttonborderwidth * 2));
   padding: 0 6px;
-  
+
   &:active {
-    line-height: @smallsize;  
+    line-height: @smallsize;
   }
 }
 
@@ -89,9 +89,9 @@ input[type="image"],
   height: @blh;
   line-height: (@blh - (@buttonborderwidth * 2));
   padding: 0 8px;
-  
+
   &:active {
-    line-height: @blh;  
+    line-height: @blh;
   }
 }
 
@@ -100,9 +100,9 @@ input[type="image"],
   height: @largesize;
   line-height: (@largesize - (@buttonborderwidth * 2));
   padding: 0 10px;
-  
+
   &:active {
-    line-height: @largesize;  
+    line-height: @largesize;
   }
 }
 
@@ -111,9 +111,9 @@ input[type="image"],
   height: @xlargesize;
   line-height: (@xlargesize - (@buttonborderwidth * 2));
   padding: 0 14px;
-  
+
   &:active {
-    line-height: @xlargesize;  
+    line-height: @xlargesize;
   }
 }
 
@@ -122,7 +122,7 @@ input[type="image"],
   height: 2em;
   line-height: 1.85em;
   padding: 0 1em 0.15em;
-  
+
   &:active {
     border-top-width: (@buttonborderwidth * 2);
   }
@@ -146,45 +146,47 @@ input[type="image"],
   & when (@buttondepth) {
     border-bottom-color: darken(@thiscolor, 15%);
   }
-  
+
   &,
   &:visited,
   &:hover {
     color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 60%);
   }
-  
+
   &:focus,
   &:hover {
-    & when (luma(@thiscolor) < 60%) {
+    .colors() when (luma(@thiscolor) < 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 8%);
-      border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
-      & when (@buttondepth) {
+      border-color:     desaturate(darken(@thiscolor, 5%), 8%);
+      & when (@controlsdepth) {
         border-bottom-color: darken(@thiscolor, 20%);
       }
     }
-    & when (luma(@thiscolor) > 60%) {
+    .colors() when (luma(@thiscolor) > 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 5%);
       border-color:     desaturate(darken(@thiscolor, 5%), 5%);
-      & when (@buttondepth) {
+      & when (@controlsdepth) {
         border-bottom-color: darken(@thiscolor, 20%);
       }
     }
+    .colors();
   }
-  
+
   &:active {
-    & when (luma(@thiscolor) < 64%) {
+    .colors() when (luma(@thiscolor) < 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 8%);
-      border-color:     desaturate(darken(@thiscolor, 5%), 8%);      
-      & when (@buttondepth) {
+      border-color:     desaturate(darken(@thiscolor, 5%), 8%);
+      & when (@controlsdepth) {
         border-top-color: darken(@thiscolor, 20%);
       }
     }
-    & when (luma(@thiscolor) > 64%) {
+    .colors() when (luma(@thiscolor) > 60%) {
       background-color: desaturate(darken(@thiscolor, 5%), 5%);
       border-color:     desaturate(darken(@thiscolor, 5%), 5%);
-      & when (@buttondepth) {
+      & when (@controlsdepth) {
         border-top-color: darken(@thiscolor, 20%);
       }
     }
+    .colors();
   }
 }
