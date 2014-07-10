@@ -1,12 +1,14 @@
 <header role="banner" class="head">
   <div class="layout">
     <h1 class="site_title"><a href="index.html" title="The Homepage of <!-- $title-->"><!-- $title--></a></h1>
-    <nav role="navigation">
+    <nav id="primary_nav" role="navigation">
       <ul>
         <li><a href="#" title="">About</a></li>
         <li><a href="#" title="">Contact</a></li>
       </ul>
-      <h1 class="menu_bar"><i class="icon-reorder"></i> Menu</h1>
+      <h1 class="menu_bar" aria-controls="primary_nav">
+        <span class="menu_text">Menu</span>
+      </h1>
     </nav>
   </div>
 </header>

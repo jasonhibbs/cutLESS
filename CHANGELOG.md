@@ -1,3 +1,12 @@
+# 2.0.4
+2014-07-10
+
+- Updated default nav
+  - Now uses ARIA states and controls instead of classes
+  - CSS takes control of showing/hiding only if JS can update the state
+  - JS no longer needs to know the breakpoint
+  
+
 # 2.0.3
 2014-04-21
 

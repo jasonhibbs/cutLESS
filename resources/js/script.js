@@ -3,22 +3,25 @@
 // Helpers /////////////////////////////////////////////////////////
 var $window = $(window);
 var window_width = $window.width();
-var breakpoint = 0;
 
 
-// Functions /////////////////////////////////////////////////////////
+// Functions ///////////////////////////////////////////////////////
 
-// Menu Bar --------------------------------------------------------
-// If we’re loading a narrow page, close the nav
-$(function(){
-  if(window_width <= 600) {
-    $('.head nav ul').addClass('closed');
-  }
-});
+// Primary Navigation Menu -----------------------------------------
 
-// Toggle the menu
+// Close the nav before the page loads
+$('.head nav')
+  .attr('aria-expanded', 'false')
+  .removeClass('closed');
+
+
+// Toggle the nav
 $('.menu_bar').click(function() {
-  $('.head nav ul').toggleClass('closed');
+  if ( $('.head nav').attr('aria-expanded') === 'true' ) {
+    $('.head nav').attr('aria-expanded', 'false');
+  } else {
+    $('.head nav').attr('aria-expanded', 'true');
+  }
 });
 
 
@@ -28,15 +31,11 @@ $window.resize(function(){
   // Update window width
   window_width = $window.width();
 
-  function breakpoint() {
-    // Still thinking about it.
+  // Correct ARIA state for nav when necessary
+  if ( $('[aria-controls="primary_nav"]').is(':hidden') ) {
+    $('.head nav').attr('aria-expanded', 'true');
   }
-
-  // In case people are just testing our responsive skills, make sure the menu opens again…
-  if(window_width > 600 && $('.head nav ul')) {
-    $('.head nav ul').removeClass('closed');
-  }
-
+  
 });
 
 

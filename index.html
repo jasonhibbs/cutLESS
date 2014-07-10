@@ -4,6 +4,9 @@
 <head>
 <meta charset="utf-8">
 
+
+
+
 <title>cutLESS</title>
 
 <meta name="description" content="cutLESS">
@@ -24,18 +27,22 @@
 <!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script><script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script><![endif]-->
 </head>
 <body class="fixed">
+
 <header role="banner" class="head">
   <div class="layout">
     <h1 class="site_title"><a href="index.html" title="The Homepage of cutLESS">cutLESS</a></h1>
-    <nav role="navigation">
+    <nav id="primary_nav" role="navigation">
       <ul>
         <li><a href="#" title="">About</a></li>
         <li><a href="#" title="">Contact</a></li>
       </ul>
-      <h1 class="menu_bar"><i class="icon-reorder"></i> Menu</h1>
+      <h1 class="menu_bar" aria-controls="primary_nav">
+        <span class="menu_text">Menu</span>
+      </h1>
     </nav>
   </div>
-</header><div role="main" class="content">
+</header>
+<div role="main" class="content">
 
   
 
@@ -44,7 +51,8 @@
 
   
 
-</footer><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="resources/js/jquery-1.11.0.min.js"><\/script>')</script>
 <script src="resources/js/script.min.js"></script>
 </body>

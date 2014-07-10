@@ -10,7 +10,9 @@
   &:extend(.clearfix all);
 }
 
+// Primary Navigation Menu
 [role="navigation"] {
+  @expands: @tablet-width; // Width at which nav doesn’t need to collapse
   @navitems: 2; // Change this to the number of items in your <nav>
 
   ul {
@@ -22,10 +24,6 @@
     li a {
       display: block;
     }
-    
-    &.closed {
-      max-height: 0;
-    }
   }
   
   .menu_bar {
@@ -33,6 +31,20 @@
     line-height: @blh;
     margin: 0 0 @blh;
     cursor: pointer;
+    
+    @media (min-width: @expands) {
+      display: none;
+    }
+  }
+  
+  &[aria-expanded="false"] {
+    ul {
+      max-height: 0;
+
+      @media (min-width: @expands) {
+        max-height: none;
+      }
+    }
   }
 }
 
