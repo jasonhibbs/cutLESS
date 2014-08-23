@@ -4,7 +4,7 @@
 // Root ------------------------------------------------------------
 * { 
   background  : transparent !important; 
-  color       : #000 !important; 
+  color       : #333 !important; 
   box-shadow  : none !important; 
   text-shadow : none !important; 
   filter      : none !important; 
@@ -12,61 +12,62 @@
 }
 
 @page {
-    margin: 3cm 2cm 2cm;
+  margin: 2cm 1.5cm 2cm 4.5cm;
 }
 
 
 // Links and Abbreviations -----------------------------------------
 a,
 a:visited {
-    text-decoration: underline;
+  //text-decoration: underline;
 }
 
 a[href]:after {
-    content: " (" attr(href) ")";
-    font-size: 0.75em;
-    font-weight: 300;
+  content: " (" attr(href) ")";
+  font-size: 0.75em;
+  font-weight: 300;
+  color: #ccc;
 }
 
 abbr[title]:after {
-    content: " (" attr(title) ")";
+  content: " (" attr(title) ")";
 }
 
 .ir a:after,
 a[href^="javascript:"]:after,
 a[href^="#"]:after {
-    content: "";
+  content: "";
 }
 
 // Elements --------------------------------------------------------
 
 pre,
 blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
+  border: 1px solid #999;
+  page-break-inside: avoid;
 }
 
 thead {
-    display: table-header-group; /* h5bp.com/t */
+  display: table-header-group; /* h5bp.com/t */
 }
 
 tr,
 img {
-    page-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 img {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 p,
 h2,
 h3 {
-    orphans: 3;
-    widows: 3;
+  orphans: 3;
+  widows: 3;
 }
 
 h2,
 h3 {
-    page-break-after: avoid;
+  page-break-after: avoid;
 }

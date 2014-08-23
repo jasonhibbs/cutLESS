@@ -6,11 +6,10 @@
 hr { 
   display: block; 
   border: 0; 
-  border-top: 1px solid fadeout(@black, 93%);
+  border-top: 1px solid @decorcolor;
   margin: (@blh) 0 (@blh - 1px); 
   padding: 0;
 }
-
 
 
 // Images ----------------------------------------------------------
@@ -20,7 +19,6 @@ img {
   vertical-align: middle; 
   -ms-interpolation-mode: bicubic;
 }
-
 
 
 // Figures ---------------------------------------------------------
@@ -35,8 +33,8 @@ figure {
   figcaption {
     display: block;
     font-weight: normal;
-    .font-size(14); 
-    color: @grey;
+    font-size: 0.875em;
+    color: @decorcolor;
   }
   
   a {
@@ -51,7 +49,7 @@ summary {
   cursor: pointer;
   
   &:focus {
-    outline: 1px dotted @basecolor;
+    outline: 1px dotted @controlsfocuscolor;
   }
 }
 
@@ -74,5 +72,5 @@ video {
 
 // Why not, eh?
 video {
-  background-color: fadeout(@black, 10%);
+  background-color: fadeout(#000, 10%);
 }

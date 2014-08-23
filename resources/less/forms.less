@@ -58,7 +58,7 @@ select {
   
   &:hover,
   &:focus {
-    border-color: @basecolor;
+    border-color: @inputfocuscolor;
     outline: none;
   }
   
@@ -92,7 +92,7 @@ input[type="range"]:focus,
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: 1px dotted @basecolor;
+  outline: 1px dotted @inputfocuscolor;
   outline-offset: 1px;
 }
 
@@ -285,6 +285,10 @@ select {
 // Small -----------------------------
 .controls-small {
   .font-size(11);
+  
+  & {
+    line-height: @smallsize;  
+  }
 
   input,
   textarea,
@@ -326,7 +330,7 @@ select {
   .gt-ie8 & {
     input[type='checkbox'],
     input[type='radio'] {
-      margin-top: 1px;
+      margin-top: 0;
     }
   }
   
@@ -349,6 +353,10 @@ select {
 // Base ------------------------------
 .controls-base {
   .font-size(12);
+  
+  & {
+    line-height: @blh;  
+  }
 
   input,
   textarea,
@@ -367,10 +375,6 @@ select {
   .controls_group > span,
   &.controls_group > span {
     line-height: (@blh - (@inputborderwidth * 2));
-  }
-  
-  label {
-    line-height: @blh;
   }
 
   textarea {
@@ -395,6 +399,8 @@ select {
     input[type='checkbox'],
     input[type='radio'] {
       margin-top: 4px;
+      width: 16px;
+      height: 16px;
     }
   }
   
@@ -417,6 +423,10 @@ select {
 .controls-large {
   .font-size(14);
   
+  & {
+    line-height: @largesize;  
+  }
+  
   input,
   textarea,
   select {
@@ -433,10 +443,6 @@ select {
   .controls_group > span,
   &.controls_group > span {
     line-height: (@largesize - (@inputborderwidth * 2));
-  }
-  
-  label {
-    line-height: @largesize;
   }
 
   textarea {
@@ -498,6 +504,10 @@ select {
 .controls-xlarge {
   .font-size(16);
   
+  & {
+    line-height: @xlargesize;  
+  }
+  
   input,
   textarea,
   select {
@@ -514,10 +524,6 @@ select {
   .controls_group > span,
   &.controls_group > span {
     line-height: (@xlargesize - (@inputborderwidth * 2));
-  }
-
-  label {
-    line-height: @largesize;
   }
 
   textarea {
@@ -580,6 +586,10 @@ select {
 .controls-size(@size) {
   .font-size(@size);
   
+  & {
+    line-height: 2em;
+  }
+  
   input,
   textarea,
   select {
@@ -597,7 +607,6 @@ select {
     line-height: 1.85em;
   }
   
-  label,
   textarea {
     min-height: 2em;
     line-height: 2em;
@@ -654,6 +663,11 @@ select {
     padding-right: 2em;
   }
   
+  a {
+    width: 1.5em;
+    text-align: center;
+  }
+  
   a + input {
     padding-left: 2em;
     padding-right: 0;
@@ -666,11 +680,11 @@ select {
   }
   
   a:first-child {
-    left: 0.55em;
+    left: 0;
   }
   
   input + a {
-    right: 0.55em;
+    right: 0;
   }
 }
 
@@ -678,11 +692,11 @@ select {
   .clearfix();
   position: relative;
   display: block;
-  white-space: nowrap;
   
   span {
     display: inline-block;
     padding: 0 8px;
+    font-size: 0.75em;
     line-height: (@blh - (@controlsborderwidth * 2));
     background: darken(@controlsbackground, 5%);
     border: @controlsborderwidth solid darken(@controlsbackground, 5%);
@@ -726,6 +740,42 @@ select {
   }
 }
 
+// Colours /////////////////////////////////////////////////////////
+.input-color(@color) {
+  @background: lighten(@color, 36%);
+
+  border-color: @background;
+  background: @background;  
+  
+  & when (luma(@color) < 64%) {
+    color: @white;
+  }
+  
+  & when (@inputdepth) {
+    border-top-color: darken(@background, 10%);
+  }
+  
+  &:hover,
+  &:focus {
+    border-color: @color;
+  }
+  
+  ::-webkit-input-placeholder {
+    color: darken(@background, 25%);
+  
+    & when (luma(@background) < 64%) {
+      color: lighten(@background, 25%);
+    }
+  }
+  
+  input:-moz-placeholder { 
+    color: darken(@background, 25%);
+    
+    & when (luma(@background) > 64%) {
+      color: lighten(@background, 25%);
+    }
+  }
+}
 
 
 

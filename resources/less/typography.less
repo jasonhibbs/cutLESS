@@ -60,7 +60,7 @@ h4 {
 
 h5,
 h6 {
-  margin: @blh 0 0;
+  margin: @blh 0 (@blh * 0.5);
 }
 
 
@@ -71,10 +71,7 @@ ol,
 ul,
 dl,
 address {
-  .font-size(16);
-  margin-top: 0;
-  margin-bottom: @blh;
-  line-height: @blh;
+  margin: 0 auto @blh;
 }
 
 small { 
@@ -89,13 +86,13 @@ small {
 
 ul,
 ol {
-  margin: 0 0 @blh 0;
+  margin: 0 auto @blh;
   padding: 0 0 0 (@gw * 2);
 }
 
 li ul,
 li ol {
-  margin: 0 0 0;
+  margin: 0 auto 0;
 }
 
 
@@ -175,33 +172,26 @@ blockquote,
 .message-primary {
   .message-color(@basecolor);
 }
-
 .message-alert {
   .message-color(@alertcolor);
 }
-
 .message-error {
   .message-color(@errorcolor);
 }
-
 .message-info {
   .message-color(@infocolor);
 }
-
 .message-warning {
   .message-color(@warningcolor);
 }
-
 .message-success {
   .message-color(@successcolor);
 }
-
 .message-inverse {
   .message-color(@inversecolor);
 }
 
 .message-color(@thiscolor) {
-
   border-color: @thiscolor;
   background-color: lighten(@thiscolor, 36%);
   
@@ -226,33 +216,26 @@ blockquote,
 .panel-primary {
   .panel-color(@basecolor);
 }
-
 .panel-alert {
   .panel-color(@alertcolor);
 }
-
 .panel-error {
   .panel-color(@errorcolor);
 }
-
 .panel-info {
   .panel-color(@infocolor);
 }
-
 .panel-warning {
   .panel-color(@warningcolor);
 }
-
 .panel-success {
   .panel-color(@successcolor);
 }
-
 .panel-inverse {
   .panel-color(@inversecolor);
 }
 
 .panel-color(@thiscolor) {
-
   border-color: @thiscolor;
   background-color: lighten(@thiscolor, 36%);
   
@@ -295,7 +278,7 @@ dt {
 }
 
 dd {
-  margin: 0 0 (@blh / 2) (@gw * 2);
+  margin: 0 0 (@blh * 0.5) (@gw * 2);
 }
 
 
@@ -310,7 +293,6 @@ abbr[title] {
     font-variant: small-caps;
     letter-spacing: 1px;
     font-size: 105%;
-    //font-weight: 500;
   }
 }
 

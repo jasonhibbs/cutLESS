@@ -6,17 +6,18 @@
 
 
 // Colours ---------------------------------------------------------
+
 // Links ---------------------------------------
-@linkcolor         : @basecolor;
 @linkcolorhover    : darken(@linkcolor, 20);
 @linkcolorvisited  : desaturate(@linkcolor, 15);
 @linkcolorfocus    : darken(@linkcolor , 20);
 
 // Greyscale -----------------------------------
 @black             : rgb( 34, 34, 34);
-@darkgrey          : hsl( hue(@basecolor), 03%, 25% );
-@grey              : hsl( hue(@basecolor), 03%, 55% );
-@lightgrey         : hsl( hue(@basecolor), 03%, 85% );
+@darkergrey        : hsl( hue(@basecolor), 03%, 25% );
+@darkgrey          : hsl( hue(@basecolor), 03%, 40% );
+@grey              : hsl( hue(@basecolor), 03%, 60% );
+@lightgrey         : hsl( hue(@basecolor), 03%, 80% );
 @lightergrey       : hsl( hue(@basecolor), 03%, 94% );
 @white             : rgb( 255, 255, 255);
 
@@ -49,6 +50,7 @@
 @inputborderwidth  : @controlsborderwidth;
 @inputbackground   : @controlsbackground;
 @inputbordercolor  : @controlsbordercolor;
+@inputfocuscolor   : @controlsfocuscolor;
 
 // Buttons
 @buttondepth       : @controlsdepth;
@@ -56,6 +58,7 @@
 @buttonborderwidth : @controlsborderwidth;
 @buttonbackground  : @controlsbackground;
 @buttonbordercolor : @controlsbordercolor;
+@buttonfocuscolor  : @controlsfocuscolor;
 
 
 // Tables ----------------------------------------------------------

@@ -1,3 +1,9 @@
+# 2.0.5
+2014-08-23
+
+- Brought `@linkcolor` forward, added `@darkergrey` and `@*focuscolor`
+- Reviewed a few quirks
+
 # 2.0.4
 2014-07-10
 
