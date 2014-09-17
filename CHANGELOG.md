@@ -1,3 +1,9 @@
+# 2.0.6
+2014-09-17
+
+- Updated FontAwesome to 4.2.0 and moved it into it’s rightful folder
+- Removed some demo styles
+
 # 2.0.5
 2014-08-23
 
