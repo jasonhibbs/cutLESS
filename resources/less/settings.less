@@ -9,7 +9,7 @@
 @basecolor              : #48D;
 @compcolor              : #D44;
 
-@decorcolor             : @lightergrey;
+@decorcolor             : mix(@basecolor, @lightergrey, 1.5%);
 
 @textcolor              : @darkergrey;
 @linkcolor              : @basecolor;
@@ -20,14 +20,13 @@
 
 
 // Typography ------------------------------------------------------
-
 @bodyfont               : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
 @headingfont            : inherit;
 @altfont                : Cambria, Georgia, Times, 'Times New Roman', serif;
 @codefont               : Menlo, Monaco, monospace;
 
 @basefontsize           : 16px;
-@baselineheight         : (1.5 * @basefontsize); // 24px
+@baselineheight         : (1.5 * @basefontsize); // 1.5 * 16 = 24px
 
 @headingweight          : 500;
 @headingcolor           : inherit;
@@ -51,12 +50,12 @@
 
 
 // Controls --------------------------------------------------------
-@controlsdepth          : true; // Tint upper or lower borders
+@controlsdepth          : true; // Tint lower borders
 
-@controlsroundness      : 3px;  // Make zero for square controls
+@controlsroundness      : 2px;  // Make zero for square controls
 @controlsborderwidth    : 1px;  // Minimum 1px for focus/hover styles
 
-@controlsbackground     : @lightergrey;
+@controlsbackground     : @decorcolor;
 @controlsbordercolor    : @controlsbackground;
 @controlsfocuscolor     : @linkcolor;
 
@@ -66,6 +65,7 @@
 @smallsize              : (@blh * 0.75);
 @largesize              : (@blh * 1.25);
 @xlargesize             : (@blh * 1.50);
+@xxlargesize            : (@blh * 2);
 
 
 // Tables ----------------------------------------------------------

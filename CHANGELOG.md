@@ -1,3 +1,26 @@
+# 2.2.0
+2014-12-16
+
+### Dramatic
+- Overhaul to font sizing, we’re embracing the power of ems.
+- Overhaul to controls, we’re sick of Firefox being ugly
+- Removed nav scripts, .toggleARIA just works.
+
+### Cinematic
+- Inputs now look like buttons, because Yosemite makes that okay, and I like it.
+- Tables should be a little more obvious about their overflow on mobile, allow for scrollbars on Windows.
+- NEW XXL CONTROLS.
+
+### Chromatic
+- Added `-comp` colour options for controls and panels.
+- Some colours are now created by `mix()`-ing, tather than `lighten()`-ing or `darken()`-ing; should be better.
+
+### Idiomatic
+- Various tweaks and fixes.
+
+### Ecstatic
+- Ems.
+
 # 2.1.0
 2014-11-07
 

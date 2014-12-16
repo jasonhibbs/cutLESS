@@ -5,6 +5,8 @@ table when (@styletables) {
 }
 
 .tabular {
+  .font-scale(14, ((@blh * 1.5) - (@controlsborderwidth * 2)));
+  
   width: 100%;
   white-space: nowrap;
   margin-bottom : @blh;
@@ -12,24 +14,31 @@ table when (@styletables) {
   border-spacing : 0;
   background-color : @tablebackground;
 
+  caption {
+    padding: 0 (@blh / 2);
+    margin-bottom: (@blh * 0.5);
+  }
+
   th,
   td {
-    vertical-align : top;
-    border-top : @controlsborderwidth solid @tableborder;
+    vertical-align: middle;
+    border-top: @controlsborderwidth solid @tableborder;
     padding: 0 (@blh / 2);
-    .font-size(14);
-    line-height: ((@blh * 1.5) - 2px);
     text-align: left;
     height: (@blh * 1.5);
   }
 
   th {
-    font-weight : bold;
+    font-weight: 600;
   }
 
   thead th {
     vertical-align : bottom;
     border-top: none;
+  }
+  
+  tbody tr th:first-child {
+    border-right: @controlsborderwidth solid @tableborder;
   }
 
   colgroup + thead tr:first-child th,
@@ -40,17 +49,17 @@ table when (@styletables) {
   }
 
   tbody + tbody {
-    border-top : (@controlsborderwidth * 2) solid @tableborder;
+    border-top: (@controlsborderwidth * 2) solid @tableborder;
   }
 
   tbody tr td,
   tbody tr th {
-    .transition(background-color 0.1s);
+    transition: background-color 0.1s;
   }
 
   tbody tr:hover td,
   tbody tr:hover th {
-    background-color : @tablehover;
+    background-color: @tablehover;
   }
   
   tbody tr:first-child td,
@@ -58,12 +67,53 @@ table when (@styletables) {
     border-top-width: (@controlsborderwidth * 2);
   }
   
-  // I was really proud of this, until Wikipedia did it too…
-  @media only screen and (max-width: 599px) {
+  @media only screen and (max-width: (@small-tablet-width - 1px)) {
     overflow: auto;
     overflow-y: hidden;
     overflow-x: auto;
     display: block;
+    
+    border-right: 1px solid @lightgrey;
+    padding-bottom: (@blh * 0.875);
+    
+    caption {
+      text-align: left;
+    }
+  }
+  
+  @media @desktop {
+    .font-scale(15, ((@blh * 1.875) - (@controlsborderwidth * 2)));
+    
+    th,
+    td {
+      height: (@blh * 1.875);
+    }
+  }
+}
+
+// Testing this
+.table-coloured {
+  thead tr {
+    background-color: @basecolor;
+    color: contrast(@basecolor, @textcolor, @white);
+  }
+  
+  tbody tr {
+    background-color: mix(@basecolor, @white, 6%);
+    
+    th,
+    td {
+      border-color: mix(@basecolor, @controlsbordercolor, 12%);
+    }
+    
+    &:first-child th,
+    &:first-child td {
+      border-top: none;
+    }
+    
+    th:first-child {
+      border-color: mix(@basecolor, @controlsbordercolor, 12%);
+    }
   }
 }
 

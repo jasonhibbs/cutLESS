@@ -3,18 +3,34 @@
 
 // Text ------------------------------------------------------------
 
+// Font-sizing ---------------------------------
 .font-size(@font-size: 16) {
   @rem: (@font-size / 10);
   font-size: (@font-size * 1px);
   font-size: ~"@{rem}rem";
 }
 
+// New font sizing mixins in beta --------------
+// Best on target elements
+.font-set(@font-size: @basefontsize, @line-height: @baselineheight) {
+  font-size: unit((@font-size / @basefontsize), em);  // e.g. 18 / 16 = 1.125em
+  line-height: unit((@line-height / @font-size), em); // e.g. 27 / 18 = 1.5em
+}
+
+// Better on parent elements
+.font-scale(@font-size: @basefontsize, @line-height: @baselineheight) {
+  font-size: unit((@font-size / @basefontsize), em);     // 18 / 16 = 1.125em;
+  line-height: unit((@line-height / @basefontsize), em); // 27 / 16 = 1.6875em;
+}
+
+// For removing text from background images
 .text-overflow() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+// Bullet-proof font-face
 .font-face( @family-name, @font-path, @font-weight: normal, @font-style: normal) {
   @font-face {
     font-family: @family-name;
@@ -22,12 +38,26 @@
     src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),
          url('@{font-path}.woff') format('woff'),
          url('@{font-path}.ttf') format('truetype'),
-     url('@{font-path}.svg#@{family-name}') format('svg');
+         url('@{font-path}.svg#@{family-name}') format('svg');
     font-weight: @font-weight;
-    font-style: @font-style;
+    font-style:  @font-style;
   }
 }
 
+// Bullet-proof font-face2, for woff2
+.font-face2( @family-name, @font-path, @font-weight: normal, @font-style: normal) {
+  @font-face {
+    font-family: @family-name;
+    src: url('@{font-path}.eot');
+    src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),
+         url('@{font-path}.woff2') format('woff2'),
+         url('@{font-path}.woff') format('woff'),
+         url('@{font-path}.ttf') format('truetype'),
+         url('@{font-path}.svg#@{family-name}') format('svg');
+    font-weight: @font-weight;
+    font-style:  @font-style;
+  }
+}
 
 // Gradients -------------------------------------------------------
 

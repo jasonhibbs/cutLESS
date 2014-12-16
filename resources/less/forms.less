@@ -12,7 +12,6 @@ form {
       padding: (@blh * 0.25) (@gw * 0.5);
       border: @inputborderwidth solid @decorcolor;
       background-color: @bodycolor;
-    
     }
   }
 
@@ -35,22 +34,19 @@ form {
 input,
 textarea,
 select {
- .font-size(12); 
- 
-  max-width: 100%;
-  height: @blh;
-  line-height: (@blh - (@inputborderwidth * 2));
+  .font-set(12, (@blh - (@inputborderwidth * 2)));
   
-  padding: 0 4px;
+  max-width: 100%;
+  padding: 0 (1/3em);
+  margin: 0;  
+
   border: @inputborderwidth solid @inputbordercolor;
   border-radius: @inputroundness;
-  margin: 0;
   
   background: @inputbackground;
-  .transition(~'border-color 0.2s, background-color 0.2s');
+  transition: border-color 0.2s, background-color 0.2s;
   
   vertical-align: top;
-  .appearance(none);
   
   & when (luma(@inputbackground) < 64%) {
     color: @white;
@@ -75,13 +71,26 @@ select {
   }
 }
 
-input:not([type="checkbox"],[type="radio"]),
+// Options ---------------------------------------------------------
+input,
 textarea {
-  .appearance(none);
+  & when (@inputdepth) {
+    border-bottom-color: darken(@inputbordercolor, 10%);
+    
+    &:invalid,
+    &.invalid {
+      border-bottom-color: lighten(@errorcolor, 26%);
+    }
+  }
+}
+
+select {
+  & when (@inputdepth) {
+    border-bottom-color: darken(@inputbordercolor, 10%);
+  }
 }
 
 // Specifics -------------------------------------------------------
-
 label {
   cursor: pointer;
   display: inline-block; 
@@ -97,7 +106,8 @@ input[type="checkbox"]:focus {
 }
 
 input[type="search"] {
-  .appearance(none); // Specificity for iOS7
+  -webkit-appearance: none; // Specificity for iOS7
+  appearance: none; // In case anybody else gets too smart
 }
 
 input[type="file"] {
@@ -142,7 +152,6 @@ input:-moz-placeholder {
   select,
   input[type="radio"],
   input[type="checkbox"] {
-    .appearance(none);
 
     &:focus {
       outline: none;
@@ -150,14 +159,18 @@ input:-moz-placeholder {
   }
 
   select {    
-    padding: 0 1.75em 0 0.375em;
+    padding: 0 1.75em 0 0.3125em;
+    
+    // FF doesn’t care
+    -webkit-appearance: none;
+    appearance: none;
     
     & when (luma(@inputbackground) < 64%) {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURf///wAAAP///////////////6TQ+X8AAAAGdFJOU4AAQHgYCtMuA9sAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
+      background-image: @img_caret_light;
     }
     
     & when (luma(@inputbackground) > 64%) {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURQAAAAAAAAAAAAAAAAAAAAAAAOArGaIAAAAGdFJOU5kATI8dDe6564MAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
+      background-image: @img_caret_dark;
     }
     
     background-repeat: no-repeat;
@@ -172,68 +185,92 @@ input:-moz-placeholder {
   
   input[type="checkbox"],
   input[type="radio"] {
-    margin-top: 4px;
-    width: 16px;
-    height: 16px;
+    position: relative;
+    cursor: pointer;
+    
+    // FF won’t style these elements
+    -webkit-appearance: none;
+    appearance: none;
+    
+    background: none;
+    border: none;
+    top: unit((4 / (@basefontsize * 0.75)), em);;
+    
+    &,
+    &:before {
+      width: unit((16 / (@basefontsize * 0.75)), em);
+      height: unit((16 / (@basefontsize * 0.75)), em);
+    }
+    
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+    }
+    
+    &:before {
+      border: @inputborderwidth solid @inputbordercolor;
+      border-radius: @inputroundness;
+      background: @inputbackground;
+      transition: border-color 0.2s, background-color 0.2s;
+      
+      & when (@inputdepth) {
+        border-bottom-color: darken(@inputbordercolor, 10%);
+      }
+    }
     
     &:after {
+      position: absolute;
       opacity: 0;
-      .transition(opacity 0.2s);
+      transition: opacity 0.1s;
     }
     
     &:checked:after {
       opacity: 1;
     }
-  }
     
+    &:hover:before,
+    &:focus:before {
+      border-color: @inputfocuscolor;
+      outline: none;
+    }
+  }
+  
+  input[type="checkbox"] {
+    &:after {
+      border: unit((2 / (@basefontsize * 0.75)), em) solid @textcolor;
+      border-top: none;
+      border-right: none;
+
+      left:   unit((03 / (@basefontsize * 0.75)), em);
+      top:    unit((05 / (@basefontsize * 0.75)), em);
+      height: unit((05 / (@basefontsize * 0.75)), em);
+      width:  unit((10 / (@basefontsize * 0.75)), em);
+      transform: rotate(-45deg);
+    }
+  }
+  
   input[type="radio"] {
-    border-radius: 100%;
+    &:before,
+    &:after {
+      border-radius: 100%;
+    }
     
     &:after {
-      content: '';
-      display: block;
       background: @textcolor;
-      height: 6px;
-      width: 6px;
-      margin: 4px;
-      border-radius: 100%; 
+      height: (100% * (06 / 16));
+      width:  (100% * (06 / 16));
+      
+      top: 50%; left: 50%;
+      transform: translate3d(-50%,-50%,0);
+      // In case you can’t use transform
+      //margin-top:  (100% * (05 / 16));
+      //margin-left: (100% * (05 / 16));
     }
-  }
-   
-  input[type="checkbox"]:after {
-    content: '';
-    display: block;
-    position: relative;
-    left: 2px;
-    top: 4px;
-    border: 2px solid @textcolor;
-    border-top: none;
-    border-right: none;
-    height: 5px;
-    width: 10px;
-    .rotate(-45deg);
-  }    
+  }  
 }
 
-// Options ---------------------------------------------------------
 
-input,
-textarea {
-  & when (@inputdepth) {
-    border-top-color: darken(@inputbordercolor, 10%);
-    
-    &:invalid,
-    &.invalid {
-      border-top-color: lighten(@errorcolor, 26%);
-    }
-  }
-}
-
-select {
-  & when (@inputdepth) {
-    border-bottom-color: darken(@inputbordercolor, 10%);
-  }
-}
 
 
 // Sizing ----------------------------------------------------------
@@ -242,38 +279,27 @@ select {
 // Really only good for simple inputs similar to type=text
 
 .input-small {
- .font-size(11);
-  height: @smallsize;
-  line-height: (@smallsize - (@inputborderwidth * 2));
-  //padding: 0 3px; // Removing: only works for text or similar inputs
+  .font-set(11, (@smallsize - (@inputborderwidth * 2)));
 }
 
 .input-base {
-  .font-size(14);
-  height: @blh;
-  line-height: (@blh - (@inputborderwidth * 2));
-  //padding: 0 4px; // Removing: only works for text or similar inputs
+  .font-set(12, (@blh - (@inputborderwidth * 2)));
 }
 
 .input-large {
-  .font-size(14);
-  height: @largesize;
-  line-height: (@largesize - (@inputborderwidth * 2));
-  //padding: 0 6px; // Removing: only works for text or similar inputs
+  .font-set(14, (@largesize - (@inputborderwidth * 2)));
 }
 
 .input-xlarge {
-  .font-size(16);
-  height: @xlargesize;
-  line-height: (@xlargesize - (@inputborderwidth * 2));
-  //padding: 0 8px; // Removing: only works for text or similar inputs
+  .font-set(16, (@xlargesize - (@inputborderwidth * 2)));
+}
+
+.input-xxlarge {
+  .font-set(18, (@xxlargesize - (@inputborderwidth * 2)));
 }
 
 .input-size(@size) {
-  .font-size(@size);
-  height: 2em;
-  line-height: 1.85em;
-  //padding: 0 0.5em 0.15em; // Removing: only works for text or similar inputs
+  .font-set(@size, ((@size * 2) - (@inputborderwidth * 2)));
 }
 
 
@@ -284,369 +310,171 @@ select {
 
 // Small -----------------------------
 .controls-small {
-  .font-size(11);
+  line-height: @smallsize;
   
-  & {
-    line-height: @smallsize;  
-  }
-
   input,
   textarea,
-  select {
-    font-size: inherit;
-    height: @smallsize;
-  }
-  
-  input,
-  textarea {
-    padding: 0 3px;
-  }
-  
-  input,
   select,
-  .controls_group > span,
-  &.controls_group > span {
-    line-height: (@smallsize - (@inputborderwidth * 2));
-  }
-
-  textarea {
-    min-height: @smallsize;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    padding: 0;
-  }
-  
   button,
   input[type="reset"],
   input[type="button"],
   input[type="submit"],
   input[type="image"],
-  .btn {
-    .btn-small();
-  }
-  
-  .gt-ie8 & {
-    input[type='checkbox'],
-    input[type='radio'] {
-      margin-top: 0;
-    }
-  }
-  
-  .input_group {
-    a,
-    a i {
-      line-height: @smallsize;
-    }
-    a i {
-      .font-size(12);
-    }
-  }
-  
+  .btn,
   .controls_group > span,
   &.controls_group > span {
-    padding: 0 6px;
+    .font-set(11, (@smallsize - (@controlsborderwidth * 2)));
+  }
+  
+  textarea {
+    min-height: @smallsize;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set(12, @smallsize);
   }
 }
 
 // Base ------------------------------
 .controls-base {
-  .font-size(12);
+  line-height: @blh;
   
-  & {
-    line-height: @blh;  
-  }
-
   input,
   textarea,
-  select {
-    font-size: inherit;
-    height: @blh;
-  }
-  
-  input,
-  textarea {
-    padding: 0 3px;
-  }
-  
-  input,
   select,
-  .controls_group > span,
-  &.controls_group > span {
-    line-height: (@blh - (@inputborderwidth * 2));
-  }
-
-  textarea {
-    min-height: @blh;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    padding: 0;
-  }
-  
   button,
   input[type="reset"],
   input[type="button"],
   input[type="submit"],
   input[type="image"],
-  .btn {
-    .btn-base();
-  }
-  
-  .gt-ie8 & {
-    input[type='checkbox'],
-    input[type='radio'] {
-      margin-top: 4px;
-      width: 16px;
-      height: 16px;
-    }
-  }
-  
-  .input_group {
-    a,
-    a i {
-      line-height: @blh;
-    }
-    a i {
-      .font-size(14);
-    }
-  }
+  .btn,
   .controls_group > span,
   &.controls_group > span {
-    padding: 0 8px;
+    .font-set(12, (@blh - (@controlsborderwidth * 2)));
+  }
+  
+  textarea {
+    min-height: @blh;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set(14, @blh);
   }
 }
 
 // Large -----------------------------
 .controls-large {
-  .font-size(14);
-  
-  & {
-    line-height: @largesize;  
-  }
+  line-height: @largesize;
   
   input,
   textarea,
-  select {
-    font-size: inherit;
-    height: @largesize;
-  }
-  
-  input {
-    padding: 0 6px;
-  }
-  
-  input,
   select,
-  .controls_group > span,
-  &.controls_group > span {
-    line-height: (@largesize - (@inputborderwidth * 2));
-  }
-
-  textarea {
-    min-height: @largesize;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    padding: 0;
-  }
-  
   button,
   input[type="reset"],
   input[type="button"],
   input[type="submit"],
   input[type="image"],
-  .btn {
-    .btn-large();
-  }
-  
-  .gt-ie8 & {
-    input[type='checkbox'],
-    input[type='radio'] {
-      margin-top: ((@largesize * 1/3) / 2);
-      width: (@largesize * 2/3);
-      height: (@largesize * 2/3);
-    }
-    
-    input[type='checkbox']:after {
-      border-width: 3px;
-      height: 7px;
-      width: 14px;
-    }
-    
-    input[type='radio']:after {
-      height: 8px;
-      width: 8px;
-      margin: 5px; 
-    }
-  }
-  
-  .input_group {
-    a,
-    a i {
-      line-height: @largesize;
-    }
-    a i {
-      .font-size(18);
-    }
-  }
-  
+  .btn,
   .controls_group > span,
   &.controls_group > span {
-    padding: 0 10px;
+    .font-set(14, (@largesize - (@controlsborderwidth * 2)));
+  }
+  
+  textarea {
+    min-height: @largesize;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set(18, @largesize);
   }
 }
+
 
 // X-Large ---------------------------
 .controls-xlarge {
-  .font-size(16);
-  
-  & {
-    line-height: @xlargesize;  
-  }
+  line-height: @xlargesize;
   
   input,
   textarea,
-  select {
-    font-size: inherit;
-    height: @xlargesize;
-  }
-  
-  input {
-    padding: 0 8px;
-  }
-  
-  input,
   select,
-  .controls_group > span,
-  &.controls_group > span {
-    line-height: (@xlargesize - (@inputborderwidth * 2));
-  }
-
-  textarea {
-    min-height: @largesize;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    padding: 0;
-  }
-  
   button,
   input[type="reset"],
   input[type="button"],
   input[type="submit"],
   input[type="image"],
-  .btn {
-    .btn-xlarge();
-  }
-  
-  .gt-ie8 & {
-    input[type='checkbox'],
-    input[type='radio'] {
-      margin-top: ((@xlargesize * 1/3) / 2);
-      width: (@xlargesize * 2/3);
-      height: (@xlargesize * 2/3);
-    }
-    
-    input[type='checkbox']:after {
-      top: 5px;
-      border-width: 3px;
-      height: 9px;
-      width: 18px;
-    }
-    
-    input[type='radio']:after {
-      height: 10px;
-      width: 10px;
-      margin: 6px; 
-    }
-  }
-  
-  .input_group {
-    a,
-    a i {
-      line-height: @xlargesize;
-    }
-    a i {
-      .font-size(21);
-    }
-  }
-  
+  .btn,
   .controls_group > span,
   &.controls_group > span {
-    padding: 0 12px;
+    .font-set(16, (@xlargesize - (@controlsborderwidth * 2)));
+  }
+  
+  textarea {
+    min-height: @xlargesize;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set(20, @xlargesize);
   }
 }
 
-// Numeric ---------------------------
-.controls-size(@size) {
-  .font-size(@size);
-  
-  & {
-    line-height: 2em;
-  }
+// XX-Large --------------------------
+.controls-xxlarge {
+  line-height: @xxlargesize;
   
   input,
   textarea,
-  select {
-    font-size: inherit;
-    height: 2em;
-  }
-  
-  input,
-  textarea {
-    padding: 0 0.5em;
-  }
-  
-  input,
-  select {
-    line-height: 1.85em;
-  }
-  
-  textarea {
-    min-height: 2em;
-    line-height: 2em;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    padding: 0;
-  }
-  
+  select,
   button,
   input[type="reset"],
   input[type="button"],
   input[type="submit"],
   input[type="image"],
-  .btn {
-    .btn-size(@size);
+  .btn,
+  .controls_group > span,
+  &.controls_group > span {
+    .font-set(18, (@xxlargesize - (@controlsborderwidth * 2)));
   }
   
-  .gt-ie8 & {
-    input[type='checkbox'],
-    input[type='radio'] {
-      margin-top: 0.333333em;
-      width: 1.333333em;
-      height: 1.333333em;
-    }
-    
-    input[type='checkbox']:after {
-      top: 0.277777em;
-      left: 0.125em;
-      border-width: 0.175em;
-      height: 0.5em;
-      width: 1em;
-    }
-    
-    input[type='radio']:after {
-      height: 0.555555em;
-      width: 0.555555em;
-      margin: 0.333333em;
-    }
+  textarea {
+    min-height: @xxlargesize;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set(22, @xxlargesize);
+  }
+}
+
+
+// Numeric ---------------------------
+.controls-size(@size) {
+  line-height: (@size * 2px);
+  
+  input,
+  textarea,
+  select,
+  button,
+  input[type="reset"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="image"],
+  .btn,
+  .controls_group > span,
+  &.controls_group > span {
+    .font-set(@size, ((@size * 2) - (@controlsborderwidth * 2)));
+  }
+  
+  textarea {
+    min-height: @xxlargesize;
+  }
+  
+  .input_group a,
+  &.input_group a {
+    .font-set((@size + 4), (@size * 2));
   }
 }
 
@@ -659,50 +487,55 @@ select {
   position: relative;
   display: inline;
   
-  input {
-    padding-right: 2em;
-  }
-  
-  a {
-    width: 1.5em;
-    text-align: center;
-  }
-  
-  a + input {
-    padding-left: 2em;
-    padding-right: 0;
-  }
-  
   a:first-child,
   input + a {
     position: absolute;
     cursor: pointer;
   }
   
-  a:first-child {
-    left: 0;
+  input {
+    padding-right: 2.25em;
+    
+    + a {
+      right: 0;
+    }
   }
   
-  input + a {
-    right: 0;
+  a {
+    .font-set(14, @blh);
+    width: 1.75em;
+    text-align: center;
+    
+    i {
+      position: relative;
+      top: (@inputborderwidth * -1);
+    }
+
+    + input {
+      padding-left: 2.25em;
+      padding-right: 0;
+    }
+    
+    &:first-child {
+      left: 0;
+    }
   }
 }
 
 .controls_group {
-  .clearfix();
+  &:extend(clearfix all);
   position: relative;
   display: block;
   
   span {
+    .font-set(12, (@blh - (@controlsborderwidth * 2)));
     display: inline-block;
-    padding: 0 8px;
-    font-size: 0.75em;
-    line-height: (@blh - (@controlsborderwidth * 2));
+    padding: 0 0.625em;
     background: darken(@controlsbackground, 5%);
     border: @controlsborderwidth solid darken(@controlsbackground, 5%);
     
     & when (@controlsdepth) {
-      border-top-color: darken(@controlsbackground, 15%);
+      border-bottom-color: darken(@controlsbackground, 15%);
     }
     
     & when ( luma( darken(@controlsbackground, 5%) ) < 60%) {
@@ -752,12 +585,12 @@ select {
   }
   
   & when (@inputdepth) {
-    border-top-color: darken(@background, 10%);
+    border-bottom-color: darken(@background, 10%);
   }
   
   &:hover,
   &:focus {
-    border-color: @color;
+    border-color: @inputfocuscolor;
   }
   
   ::-webkit-input-placeholder {
@@ -778,8 +611,11 @@ select {
 }
 
 
+// Images //////////////////////////////////////////////////////////
+@img_caret_light: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURf///wAAAP///////////////6TQ+X8AAAAGdFJOU4AAQHgYCtMuA9sAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
+@img_caret_dark:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURQAAAAAAAAAAAAAAAAAAAAAAAOArGaIAAAAGdFJOU5kATI8dDe6564MAAABBSURBVAjXYwhSggBVBgUGCGBiCIayTBhEDMAMZkcGQWeIkCCDIFiQ2RHIAguaCIJYQEGgEIgFFAQKgVkixkAhQQBZcgcsuc/G9wAAAABJRU5ErkJggg==);
 
-// Hacks -----------------------------------------------------------
+// Hacks ///////////////////////////////////////////////////////////
 @-moz-document url-prefix() {
   textarea {
     padding-right: 0 !important;

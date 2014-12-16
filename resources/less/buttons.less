@@ -6,18 +6,15 @@ input[type="button"],
 input[type="submit"],
 input[type="image"],
 .btn {
+  .font-set(12, (@blh - (@buttonborderwidth * 2)));
+  
   display: inline-block;
-
-  .font-size(12);
-
   max-width: 100%;
-  height: @blh;
-  line-height: (@blh - (@buttonborderwidth * 2));
-
-  padding: 0 8px;
+  padding: 0 (7/8em);
+  margin: 0;
+  
   border: @buttonborderwidth solid @buttonbordercolor;
   border-radius: @buttonroundness;
-  margin: 0;
 
   background: @buttonbackground;
   transition: border-color 0.2s, background-color 0.2s;
@@ -25,17 +22,12 @@ input[type="image"],
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-
   cursor: pointer;
 
   &,
   &:visited,
   &:hover {
-    color: @textcolor;
-
-    & when (luma(@buttonbackground) < 64%) {
-      color: @white;
-    }
+    color: contrast(@buttonbackground, @textcolor, @white);
   }
 
   &:focus,
@@ -58,7 +50,6 @@ input[type="image"],
     &:active {
       border-color: darken(@buttonbackground, 5%);
       border-top-color: darken(@buttonbordercolor, 15%);
-      line-height: (@blh);
     }
   }
 
@@ -73,65 +64,35 @@ input[type="image"],
 
 // Sizing ----------------------------------------------------------
 
-.btn-small() {
-  .font-size(11);
-  height: @smallsize;
-  line-height: (@smallsize - (@buttonborderwidth * 2));
-  padding: 0 6px;
-
-  &:active {
-    line-height: @smallsize;
-  }
+.btn-small {
+  .font-set(11, (@smallsize - (@buttonborderwidth * 2)));
 }
 
-.btn-base() {
-  .font-size(12);
-  height: @blh;
-  line-height: (@blh - (@buttonborderwidth * 2));
-  padding: 0 8px;
-
-  &:active {
-    line-height: @blh;
-  }
+.btn-base {
+  .font-set(12, (@blh - (@buttonborderwidth * 2)));
 }
 
-.btn-large() {
-  .font-size(14);
-  height: @largesize;
-  line-height: (@largesize - (@buttonborderwidth * 2));
-  padding: 0 10px;
-
-  &:active {
-    line-height: @largesize;
-  }
+.btn-large {
+  .font-set(14, (@largesize - (@buttonborderwidth * 2)));
 }
 
-.btn-xlarge() {
-  .font-size(16);
-  height: @xlargesize;
-  line-height: (@xlargesize - (@buttonborderwidth * 2));
-  padding: 0 14px;
+.btn-xlarge {
+  .font-set(16, (@xlargesize - (@buttonborderwidth * 2)));
+}
 
-  &:active {
-    line-height: @xlargesize;
-  }
+.btn-xxlarge {
+  .font-set(18, (@xxlargesize - (@buttonborderwidth * 2)));
 }
 
 .btn-size(@size) {
-  .font-size(@size);
-  height: 2em;
-  line-height: 1.85em;
-  padding: 0 1em 0.15em;
-
-  &:active {
-    border-top-width: (@buttonborderwidth * 2);
-  }
+  .font-set(@size, (@size * 1.85));
 }
 
 // Colours ---------------------------------------------------------
 
 // Typical Colours
 .btn-primary { .btn-color(@basecolor);    }
+.btn-comp    { .btn-color(@compcolor);    }
 .btn-alert   { .btn-color(@alertcolor);   }
 .btn-error   { .btn-color(@errorcolor);   }
 .btn-info    { .btn-color(@infocolor);    }
@@ -151,6 +112,10 @@ input[type="image"],
   &:visited,
   &:hover {
     color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 60%);
+    
+    & when (luma(@thiscolor) < 60%) {
+      text-shadow: 0 -1px 0 fadeout(#000, 90%);
+    }
   }
 
   &:focus,
