@@ -1,3 +1,9 @@
+# 2.2.1
+2015-01-04
+
+- Added `@basesize`, it was bothering me.
+- Reinstated `appearance: none` to forms for iOS
+
 # 2.2.0
 2014-12-16
 
