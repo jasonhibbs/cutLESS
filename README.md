@@ -1,4 +1,4 @@
-# cutLESS 2.2.0
+# cutLESS 2.2.2
 
 cutLESS is a slightly less bloated framework for responsibly responsive development.
 

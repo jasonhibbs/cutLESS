@@ -1,3 +1,13 @@
+# 2.2.2
+2015-01-31
+
+- Fixes corrupt `base.less`
+- Corrects bad unit placing for LESS v2
+- Updates FontAwesome to 4.3.0
+- Improves ToggleARIA plugin: now auto-measures height of element
+- mmmmmmmm (more ems)
+
+
 # 2.2.1
 2015-01-04
 

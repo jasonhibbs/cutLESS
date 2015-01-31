@@ -1,1 +1,58 @@
-// Base ////////////////////////////////////////////////////////////// Universal -------------------------------------------------------*, *:before, *:after {  .box-sizing(border-box);}// Document --------------------------------------------------------html {  background: @htmlcolor;  color: @textcolor;  font-size: 62.5%;  -webkit-tap-highlight-color: fadeout(@basecolor, 90%);  -webkit-font-smoothing: antialiased;}body {  &:extend(.clearfix all);  background: @bodycolor /* url('../img/assist/baseline24.png') left 0px */;  width: 100%;  font-family: @bodyfont;  .font-size();  line-height: @blh;}// Links -----------------------------------------------------------a {  text-decoration: none;  color: @linkcolor;  .transition(color .2s);  &:visited {     color: @linkcolorvisited;  }  &:hover {     color: @linkcolorhover;  }  &:focus {     outline: @basecolor thin dotted;    color: @linkcolorfocus;  }  &:active {    outline: none;  }}// Selection -------------------------------------------------------::-moz-selection {  background-color: @highlightcolor;  color: inherit;   text-shadow: none;}::selection {  background-color: @highlightcolor;  color: inherit;  text-shadow: none;}
+// Base ////////////////////////////////////////////////////////////
+
+// Universal -------------------------------------------------------
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+// Document --------------------------------------------------------
+html {
+  background: @htmlcolor;
+  color: @textcolor;
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: fadeout(@basecolor, 90%);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  &:extend(.clearfix all);
+  background: @bodycolor /* url('../img/assist/baseline24.png') left 0px */;
+  width: 100%;
+  font-family: @bodyfont;
+  .font-size();
+  line-height: 1.5em;
+}
+
+// Links -----------------------------------------------------------
+a {
+  text-decoration: none;
+  color: @linkcolor;
+  transition: color 0.2s;
+
+  &:visited { 
+    color: @linkcolorvisited;
+  }
+  &:hover { 
+    color: @linkcolorhover;
+  }
+  &:focus { 
+    outline: @basecolor thin dotted;
+    color: @linkcolorfocus;
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+// Selection -------------------------------------------------------
+::-moz-selection {
+  background-color: @highlightcolor;
+  color: inherit; 
+  text-shadow: none;
+}
+
+::selection {
+  background-color: @highlightcolor;
+  color: inherit;
+  text-shadow: none;
+}

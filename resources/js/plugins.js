@@ -67,7 +67,7 @@ $(function() {
 
 
 // Toggle ARIA /////////////////////////////////////////////////////
-// Version: 0.1
+// Version: 0.2
 $.fn.toggleARIA = function(opts) {
 
   var $el = $(this);
@@ -76,13 +76,14 @@ $.fn.toggleARIA = function(opts) {
   var defaults = {
     toggle: '[aria-controls="' + el_id + '"]',
     binds: 'click',
+    measure: true,
     onExpand: '',
     onCollapse: '',
     tidySelf: false,
     tidyOthers: '',
   };
 
-  var options = $.extend( {}, $.fn.toggleARIA.defaults, opts );
+  var options = $.extend( {}, $.fn.toggleARIA.defaults, defaults );
 
   var $toggle = (options.toggle) ? $(options.toggle) : $(defaults.toggle);
   var binds = (options.binds) ? options.binds : defaults.binds;
@@ -133,11 +134,31 @@ $.fn.toggleARIA = function(opts) {
     }
   }
   
+  function checkMaxHeight(el) {
+    var expanded = el.attr('aria-expanded');
+    el.css('max-height', 'none');
+    
+    if (expanded === 'false') {
+      el.attr('aria-expanded', true);
+    }
+    
+    var h = el.outerHeight();
+    el.css('max-height', h);
+    
+    if (expanded === 'false') {
+      el.attr('aria-expanded', false);
+    }
+  }
+  
   // Setup
   if ($toggle.is(':hidden')) {
     expand($el);
   } else {
     collapse($el);
+  }
+    
+  if (options.measure) {
+    checkMaxHeight($el); 
   }
   
   // Binds
@@ -192,6 +213,10 @@ $.fn.toggleARIA = function(opts) {
     if ($toggle.is(':hidden')) {
       expand($el);
     }
+    
+    if (options.measure) {
+      checkMaxHeight($el); 
+    }
   });
 };
 
@@ -201,6 +226,10 @@ $(document).ready(function() {
   var presets = $('[aria-controls]');
   presets.each(function() {
     var el = $(this).attr('aria-controls');
-    $('#' + el).toggleARIA();
+    $('#' + el).addClass('no-transition');
+    $('#' + el).toggleARIA({});
+    setTimeout(function() {
+      $('#' + el).removeClass('no-transition');
+    }, 1);
   });
 });

@@ -39,13 +39,11 @@
     }
   }
   
-  &[aria-expanded="false"] {
-    ul {
-      max-height: 0;
+  ul[aria-expanded="false"] {
+    max-height: 0 !important;
 
-      @media (min-width: @expands) {
-        max-height: none;
-      }
+    @media (min-width: @expands) {
+      max-height: none !important;
     }
   }
 }

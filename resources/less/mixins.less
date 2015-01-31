@@ -128,11 +128,16 @@
         filter: @filters;
 }
 
-
 .transition(@transition) {
 -webkit-transition: @transition;
      -o-transition: @transition;
         transition: @transition;
+}
+
+.no-transition {
+  &, * {
+    transition: none !important;
+  }
 }
 
 // 2D Transforms -------------------------------
