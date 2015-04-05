@@ -20,20 +20,21 @@
 
 
 // Typography ------------------------------------------------------
-@bodyfont               : 'Helvetica Neue', Helvetica, Arial, Verdana sans-serif;
+@bodyfont               : 'Helvetica Neue', Helvetica, Arial, sans-serif;
 @headingfont            : inherit;
 @altfont                : Cambria, Georgia, Times, 'Times New Roman', serif;
 @codefont               : Menlo, Monaco, monospace;
 
 @basefontsize           : 16px;
 @baselineheight         : (1.5 * @basefontsize); // 1.5 * 16 = 24px
+@emlineheight           : unit((@baselineheight / unit(@basefontsize)), em);
 
 @headingweight          : 500;
 @headingcolor           : inherit;
 
 
 // Support ---------------------------------------------------------
-@usecalc                : false;
+@usecalc                : true;
 
 // Layout ----------------------------------------------------------
 @responsive             : true;   // Most of this section is moot, if false
@@ -52,8 +53,8 @@
 // Controls --------------------------------------------------------
 @controlsdepth          : true; // Tint lower borders
 
-@controlsroundness      : 2px;  // Make zero for square controls
-@controlsborderwidth    : 1px;  // Minimum 1px for focus/hover styles
+@controlsroundness      : 2px;  // 0 for square controls
+@controlsborderwidth    : 1px;  // Minimum 1px for built-in focus/hover styles
 
 @controlsbackground     : @decorcolor;
 @controlsbordercolor    : @controlsbackground;

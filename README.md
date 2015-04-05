@@ -1,7 +1,5 @@
-# cutLESS 2.2.2
+# cutLESS 2.3.0
 
-cutLESS is a slightly less bloated framework for responsibly responsive development.
+cutLESS is an upstart for responsibly responsive development.
 
-[Partial docs available](http://cutless.wearekatana.com/)
-
-Please note: this is very much a work in progress, and thus provided as is, at your own risk.
+Use of [autoprefixer](https://github.com/postcss/autoprefixer) at compilation is highly recommended

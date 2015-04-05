@@ -9,23 +9,23 @@ table when (@styletables) {
   
   width: 100%;
   white-space: nowrap;
-  margin-bottom : @blh;
-  border-collapse : collapse;
-  border-spacing : 0;
-  background-color : @tablebackground;
+  margin-bottom: @elh;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: @tablebackground;
 
   caption {
-    padding: 0 (@blh / 2);
-    margin-bottom: (@blh * 0.5);
+    padding: 0 (@elh / 2);
+    margin-bottom: (@elh * 0.5);
   }
 
   th,
   td {
     vertical-align: middle;
     border-top: @controlsborderwidth solid @tableborder;
-    padding: 0 (@blh / 2);
+    padding: 0 (@elh / 2);
     text-align: left;
-    height: (@blh * 1.5);
+    height: (@elh * 1.5);
   }
 
   th {
@@ -74,7 +74,7 @@ table when (@styletables) {
     display: block;
     
     border-right: 1px solid @lightgrey;
-    padding-bottom: (@blh * 0.875);
+    padding-bottom: (@elh * 0.875);
     
     caption {
       text-align: left;

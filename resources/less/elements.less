@@ -4,10 +4,12 @@
 //  Horizontal Rule ------------------------------------------------
 
 hr { 
-  display: block; 
-  border: 0; 
+  display: block;
+  box-sizing: border-box;
+  border: none;
   border-top: 1px solid @decorcolor;
-  margin: (@blh) 0 (@blh - 1px); 
+  height: @elh;
+  margin: @elh 0 0;
   padding: 0;
 }
 
@@ -24,7 +26,7 @@ img {
 // Figures ---------------------------------------------------------
 
 figure {
-  margin: 0 0 @blh;
+  margin: 0 0 @elh;
   
   img {
     width: 100%;
@@ -34,7 +36,7 @@ figure {
     display: block;
     font-weight: normal;
     font-size: 0.875em;
-    color: @decorcolor;
+    color: mix(@textcolor, @htmlcolor, 60%);
   }
   
   a {
@@ -73,4 +75,19 @@ video {
 // Why not, eh?
 video {
   background-color: fadeout(#000, 10%);
+}
+
+
+// Dialog ----------------------------------------------------------
+
+dialog {
+  background: @htmlcolor;
+  color: inherit;
+  padding: (@elh);
+  border: none;
+  border-radius: @controlsroundness;
+  
+  &::backdrop {
+    background: fadeout(contrast(@htmlcolor), 75%);
+  }
 }

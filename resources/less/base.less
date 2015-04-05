@@ -1,17 +1,17 @@
 // Base ////////////////////////////////////////////////////////////
 
-// Universal -------------------------------------------------------
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
 // Document --------------------------------------------------------
 html {
+  box-sizing: border-box;
   background: @htmlcolor;
   color: @textcolor;
-  font-size: 62.5%;
+  font-size: 62.5%; // 16 * 0.625 = 10
   -webkit-tap-highlight-color: fadeout(@basecolor, 90%);
   -webkit-font-smoothing: antialiased;
+}
+
+*, :before, :after {
+  box-sizing: inherit;
 }
 
 body {
@@ -20,7 +20,7 @@ body {
   width: 100%;
   font-family: @bodyfont;
   .font-size();
-  line-height: 1.5em;
+  line-height: @elh;
 }
 
 // Links -----------------------------------------------------------

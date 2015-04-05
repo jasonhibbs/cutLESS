@@ -1,3 +1,20 @@
+# 2.3.0
+2015-04-05
+
+### Large
+- Removes device-width stylesheets because the structure hinders maintenance. Better to break styles in a more OO kind of way. Unfortunately, this will make non-calc use of `.column()` a pain…
+- So, `@usecalc` is now `true` by default.
+- Adds `@emlineheight` and `@elh`, allowing 1.5em to be used as a reusable measure.
+
+### Small
+- Updates border-box best practice
+- Removes Verdana from font-stack
+- Considers a couple new HTML5 elements
+- Improves the nav style, targets more accurately
+- Some little tweaks
+- Adds a few more ems
+ 
+
 # 2.2.2
 2015-01-31
 

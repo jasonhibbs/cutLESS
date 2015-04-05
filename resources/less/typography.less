@@ -65,7 +65,7 @@ dl,
 address {
   font-size: inherit;
   line-height: inherit;
-  margin: 0 auto 1.5em;
+  margin: 0 auto @elh;
 }
 
 small { 
@@ -136,8 +136,8 @@ li ol {
 blockquote,
 .message,
 .panel  {
-  margin: 0 0 @blh 0;
-  padding: (@blh * 0.5) @gw;
+  margin: 0 0 @elh 0;
+  padding: (@elh * 0.5) @gw;
   
   color: @textcolor;
   background-color: darken(@lightergrey, 3%);
@@ -151,11 +151,11 @@ blockquote,
   }
   
   p:last-child {
-    margin-bottom: (@blh * 0);
+    margin-bottom: (@elh * 0);
   }
   
   > small:last-child {
-    margin: (@blh * 0.25) 0 0;
+    margin: (@elh * 0.25) 0 0;
     
     &:before {
       content: '\2014\00a0'; //&ndash;&nbsp;
@@ -206,7 +206,7 @@ blockquote {
 
 .panel {
   border-left: none;
-  border-top: (@blh * 0.25) solid @bodycolor;
+  border-top: (@elh * 0.25) solid @bodycolor;
   .padding-y(0, @blh);
   
   i:first-child {
@@ -276,9 +276,12 @@ blockquote {
 
 
 // Definition lists ------------------------------------------------
+dfn {
+  font-style: normal;
+}
 
 dl {
-  margin-bottom: 1.5em;
+  margin-bottom: @elh;
 }
 
 dt {
@@ -286,12 +289,11 @@ dt {
 }
 
 dd {
-  margin: 0 0 0.75em 1.5em;
+  margin: 0 0 (@elh * 0.5) (@elh);
 }
 
 
 // Text-level ------------------------------------------------------
-
 abbr[title] {
   border-color: @lightgrey;
   cursor: help;
@@ -302,6 +304,10 @@ abbr[title] {
     letter-spacing: 1px;
     font-size: 105%;
   }
+}
+
+var {
+  font-family: @altfont;
 }
 
 ins,
@@ -324,13 +330,13 @@ kbd,
 samp {
   display: inline-block;
   margin-bottom: -1px;
-  padding: 0 4px;
+  padding: 0 (1em / 3);
   
   background-color: @lightergrey;
   background-color: mix(@basecolor, @htmlcolor, 9%);
   
   border-bottom: 1px solid mix(@basecolor, @htmlcolor, 36%);
-  height: 1.5em;
+  height: @elh;
   white-space: nowrap;
 }
 

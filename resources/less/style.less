@@ -1,13 +1,17 @@
 // cutLESS
-// Version 2.2.2
+// Version 2.3.0
 
-// Normalise -----------------------------------
+// Setup ///////////////////////////////////////////////////////////
 @import (less) "normalize.css";
 
 // Variables & Mixins --------------------------
 @import "settings.less";
 @import "variables.less";
 @import "mixins.less";
+
+// Layout ------------------------------------
+@import "layout.less";
+@import "base.less";
 
 // Typography ----------------------------------
 @import "../fonts/fontawesome/less/font-awesome.less";
@@ -19,39 +23,13 @@
 @import "tables.less";
 @import "buttons.less";
 
-// Layout ------------------------------------
-@import "layout.less";
-@import "base.less";
-
-// Layout //////////////////////////////////////////////////////////
-
-// Global Styles
+// Site ////////////////////////////////////////////////////////////
 @import "global.less";
 
-// Print Styles
+// Components ----------------------------------
+//@import "otherbits.less";
+
+// Other Media /////////////////////////////////////////////////////
 @media print { @import "print.less"; }
-
-& when (@responsive) {
-  // 480px
-  @media @phone-landscape { @import "480.less"; }
-  
-  // 600px
-  @media @small-tablet    { @import "600.less"; }
-  
-  // 768px
-  @media @tablet          { @import "768.less"; }
-  
-  // 992px
-  @media @desktop         { @import "992.less"; }
-  
-  // 1382px
-  @media @large-desktop   { @import "1382.less"; }
-  
-  // 1872px
-  @media @huge-desktop    { @import "1872.less"; }
-}
-
-// 2x
-@media
-only screen and (-webkit-min-device-pixel-ratio: 1.5), 
-only screen and (min-resolution: 1.5dppx) { @import "2x.less"; }
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 1.5dppx) { @import "2x.less"; }

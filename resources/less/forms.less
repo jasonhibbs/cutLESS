@@ -1,28 +1,22 @@
 // Forms ///////////////////////////////////////////////////////////
 
 // Form ------------------------------------------------------------
-form { 
+form {
   
   fieldset { 
-    margin: 0 0 (@blh - @inputborderwidth) 0;
-    padding: (@blh) (@gw * 0.5);
+    margin: 0 0 @elh 0;
+    padding: (@elh) (@gw * 0.5);
     border: @inputborderwidth solid @decorcolor;
     
     legend {
       padding: (@blh * 0.25) (@gw * 0.5);
-      border: @inputborderwidth solid @decorcolor;
       background-color: @bodycolor;
+      margin-bottom:  -@inputborderwidth;
     }
   }
   
   ul {
-    list-style-type: none; 
-    margin: 0 0 @blh 0;
-    padding: 0;
-  }
-  
-  br {
-    display: none;
+    .delist();
   }
 }
 
@@ -176,10 +170,6 @@ input:-moz-placeholder {
     background-position: right 0.5em center;
     background-position: 96% center\9;            
     .background-size(0.6em auto);
-    
-    // FF Fixes. Surprise.
-    text-indent: 1px;
-    text-overflow: '';
   }
   
   input[type="checkbox"],
@@ -618,5 +608,10 @@ input:-moz-placeholder {
 @-moz-document url-prefix() {
   textarea {
     padding-right: 0 !important;
+  }
+  
+  select {
+    text-indent: 1px;
+    text-overflow: '';
   }
 }

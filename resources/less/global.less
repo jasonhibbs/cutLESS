@@ -1,6 +1,6 @@
 // Global //////////////////////////////////////////////////////////
 // Variables -------------------------------------------------------
-@target: @phone-layout;
+@navexpands: @tablet-width; // Width at which nav doesn’t need to collapse
 
 // Root ------------------------------------------------------------
 
@@ -11,8 +11,7 @@
 }
 
 // Primary Navigation Menu
-[role="navigation"] {
-  @expands: @tablet-width; // Width at which nav doesn’t need to collapse
+.head nav {
   @nlh: (@blh * 1.25); // Nav line-height, how tall the links should be
   @navitems: 2; // Change this to the number of items in your <nav>
 
@@ -26,24 +25,26 @@
       display: block;
       line-height: @nlh;
     }
+    
+    &[aria-expanded="false"] {
+      max-height: 0 !important;
+    }
+    
+    @media (min-width: @navexpands) {
+      &[aria-expanded] {
+        max-height: none !important;
+      }
+    }
   }
   
   .menu_control {
     .font-size();
     line-height: @nlh;
-    margin: 0 0 @blh;
+    margin: 0;
     cursor: pointer;
     
-    @media (min-width: @expands) {
+    @media (min-width: @navexpands) {
       display: none;
-    }
-  }
-  
-  ul[aria-expanded="false"] {
-    max-height: 0 !important;
-
-    @media (min-width: @expands) {
-      max-height: none !important;
     }
   }
 }
@@ -51,7 +52,7 @@
 // Header //////////////////////////////////////////////////////////
 
 .head {
-  
+  margin-bottom: @elh;
 }
 
 // Footer //////////////////////////////////////////////////////////
