@@ -67,7 +67,7 @@ $(function() {
 
 
 // Toggle ARIA /////////////////////////////////////////////////////
-// Version: 0.2
+// Version: 0.3
 $.fn.toggleARIA = function(opts) {
 
   var $el = $(this);
@@ -83,10 +83,10 @@ $.fn.toggleARIA = function(opts) {
     tidyOthers: '',
   };
 
-  var options = $.extend( {}, $.fn.toggleARIA.defaults, defaults );
+  var options = $.extend( defaults, $.fn.toggleARIA.options, opts );
 
-  var $toggle = (options.toggle) ? $(options.toggle) : $(defaults.toggle);
-  var binds = (options.binds) ? options.binds : defaults.binds;
+  var $toggle = $(options.toggle);
+  var binds = options.binds;
   
   var $html = $('html');
   var $window = $(window);
@@ -136,7 +136,10 @@ $.fn.toggleARIA = function(opts) {
   
   function checkMaxHeight(el) {
     var expanded = el.attr('aria-expanded');
-    el.css('max-height', 'none');
+    el.css({
+      'max-height': 'none',
+      'transition': 'initial',
+    });
     
     if (expanded === 'false') {
       el.attr('aria-expanded', true);
@@ -148,6 +151,8 @@ $.fn.toggleARIA = function(opts) {
     if (expanded === 'false') {
       el.attr('aria-expanded', false);
     }
+    
+    el.css('transition', '');
   }
   
   // Setup

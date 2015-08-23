@@ -1,3 +1,15 @@
+# 2.3.1
+2015-08-23
+
+- Removes `minimal-ui` from viewport meta tag
+- Replaced `X-UA-Compatible` meta tag
+- Temporarily replaces LESS `:extend`s to suppress complier warnings
+- `toggleARIA` custom settings may never have worked, forgive me
+- Updates jQuery 1.11.3, Modernizr 2.8.3, FontAwesome 4.4.0
+
+- *Note*: `gulpfile.js` does not yet concatenate `plugins.js` and `script.js`
+
+
 # 2.3.0
 2015-04-05
 

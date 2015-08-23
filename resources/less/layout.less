@@ -67,7 +67,8 @@
     width: @phone-layout; // 300 / 320 = 93.75%
     position: relative;   // For nudging
     .margin-x(auto);      // Centre layout
-    &:extend(.clearfix all); // Columns are floated
+
+    .clearfix(); //&:extend(.clearfix all); // Columns are floated
     
     & when (@responsive) { 
       // class="fixed layout" --------------------
