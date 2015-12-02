@@ -27,15 +27,16 @@ body {
 a {
   text-decoration: none;
   color: @linkcolor;
-  transition: color 0.2s;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  cursor: pointer;
 
-  &:visited { 
+  &:visited {
     color: @linkcolorvisited;
   }
-  &:hover { 
+  &:hover {
     color: @linkcolorhover;
   }
-  &:focus { 
+  &:focus {
     outline: @basecolor thin dotted;
     color: @linkcolorfocus;
   }
@@ -47,7 +48,7 @@ a {
 // Selection -------------------------------------------------------
 ::-moz-selection {
   background-color: @highlightcolor;
-  color: inherit; 
+  color: inherit;
   text-shadow: none;
 }
 

@@ -2,19 +2,19 @@
 
 // Form ------------------------------------------------------------
 form {
-  
-  fieldset { 
+
+  fieldset {
     margin: 0 0 @elh 0;
     padding: (@elh) (@gw * 0.5);
     border: @inputborderwidth solid @decorcolor;
-    
+
     legend {
       padding: (@blh * 0.25) (@gw * 0.5);
       background-color: @bodycolor;
       margin-bottom:  -@inputborderwidth;
     }
   }
-  
+
   ul {
     .delist();
   }
@@ -25,68 +25,68 @@ input,
 textarea,
 select {
   .font-set(12, (@blh - (@inputborderwidth * 2)));
-  
+
   max-width: 100%;
   padding: 0 (1em/3);
-  margin: 0;  
+  margin: 0;
 
   border: @inputborderwidth solid @inputbordercolor;
   border-radius: @inputroundness;
-  
+
   background: @inputbackground;
   transition: border-color 0.2s, background-color 0.2s;
-  
+
   vertical-align: top;
-  
+
   -webkit-appearance: none; // iOS is being smart
   appearance: none; // In case anybody else gets too smart
-  
+
   & when (luma(@inputbackground) < 64%) {
     color: @white;
   }
-  
+
   &:hover,
   &:focus {
     border-color: @inputfocuscolor;
     outline: none;
   }
-  
-  &:invalid,
+
+  //&:invalid,
   &.invalid {
     border-color: lighten(@errorcolor, 36%);
     background-color: lighten(@errorcolor, 36%);
-    
+
     &:hover,
     &:focus,
     &:active {
       border-color: lighten(@errorcolor, 15%);
     }
   }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 // Options ---------------------------------------------------------
 input,
-textarea {
+textarea,
+select {
   & when (@inputdepth) {
     border-bottom-color: darken(@inputbordercolor, 10%);
-    
-    &:invalid,
+
+    //&:invalid,
     &.invalid {
       border-bottom-color: lighten(@errorcolor, 26%);
     }
   }
 }
 
-select {
-  & when (@inputdepth) {
-    border-bottom-color: darken(@inputbordercolor, 10%);
-  }
-}
-
 // Specifics -------------------------------------------------------
 label {
   cursor: pointer;
-  display: inline-block; 
+  display: inline-block;
   vertical-align: top;
 }
 
@@ -122,19 +122,11 @@ textarea {
 
 // Placeholder -----------------------------------------------------
 
-::-webkit-input-placeholder {
-  color: fadeout(#000, 80%);
-  
-  & when (luma(@inputbackground) < 60%) {
-    color: fadeout(#FFF, 80%);
-  }
-}
+::placeholder {
+  color: fadeout(#000, (100% - @placeholdertint));
 
-input:-moz-placeholder { 
-  color: fadeout(#000, 80%);
-  
   & when (luma(@inputbackground) < 60%) {
-    color: fadeout(#FFF, 80%);
+    color: fadeout(#FFF, (100% - @placeholdertint));
   }
 }
 
@@ -151,80 +143,84 @@ input:-moz-placeholder {
     }
   }
 
-  select {    
+  select {
     padding: 0 1.75em 0 0.3125em;
-    
+
     // FF doesn’t care
     -webkit-appearance: none;
     appearance: none;
-    
+
     & when (luma(@inputbackground) < 60%) {
       background-image: @img_caret_light;
     }
-    
+
     & when (luma(@inputbackground) > 60%) {
       background-image: @img_caret_dark;
     }
-    
+
     background-repeat: no-repeat;
     background-position: right 0.5em center;
-    background-position: 96% center\9;            
-    .background-size(0.6em auto);
+    background-position: 96% center\9;
+    background-size: 0.6em auto;
+
+    &::-ms-expand {
+      display: none;
+    }
   }
-  
+
   input[type="checkbox"],
   input[type="radio"] {
     position: relative;
     cursor: pointer;
-    
+
     // FF won’t style these elements
     -webkit-appearance: none;
     appearance: none;
-    
+
     background: none;
     border: none;
     top: unit((4 / (@basefontsize * 0.75)), em);;
-    
+
     &,
     &:before {
       width: unit((16 / (@basefontsize * 0.75)), em);
       height: unit((16 / (@basefontsize * 0.75)), em);
     }
-    
+
     &:before,
     &:after {
       content: '';
       display: block;
     }
-    
+
     &:before {
       border: @inputborderwidth solid @inputbordercolor;
       border-radius: @inputroundness;
       background: @inputbackground;
       transition: border-color 0.2s, background-color 0.2s;
-      
+
       & when (@inputdepth) {
         border-bottom-color: darken(@inputbordercolor, 10%);
       }
     }
-    
+
     &:after {
       position: absolute;
       opacity: 0;
       transition: opacity 0.1s;
     }
-    
+
     &:checked:after {
       opacity: 1;
     }
-    
+
     &:hover:before,
     &:focus:before {
       border-color: @inputfocuscolor;
       outline: none;
     }
   }
-  
+
   input[type="checkbox"] {
     &:after {
       border: unit((2 / (@basefontsize * 0.75)), em) solid @textcolor;
@@ -238,25 +234,25 @@ input:-moz-placeholder {
       transform: rotate(-45deg);
     }
   }
-  
+
   input[type="radio"] {
     &:before,
     &:after {
       border-radius: 100%;
     }
-    
+
     &:after {
       background: @textcolor;
       height: (100% * (06 / 16));
       width:  (100% * (06 / 16));
-      
+
       top: 50%; left: 50%;
       transform: translate3d(-50%,-50%,0);
       // In case you can’t use transform
       //margin-top:  (100% * (05 / 16));
       //margin-left: (100% * (05 / 16));
     }
-  }  
+  }
 }
 
 
@@ -300,7 +296,7 @@ input:-moz-placeholder {
 // Small -----------------------------
 .controls-small {
   line-height: @smallsize;
-  
+
   input,
   textarea,
   select,
@@ -314,11 +310,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(11, (@smallsize - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @smallsize;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set(12, @smallsize);
@@ -328,7 +324,7 @@ input:-moz-placeholder {
 // Base ------------------------------
 .controls-base {
   line-height: @blh;
-  
+
   input,
   textarea,
   select,
@@ -342,11 +338,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(12, (@blh - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @blh;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set(14, @blh);
@@ -356,7 +352,7 @@ input:-moz-placeholder {
 // Large -----------------------------
 .controls-large {
   line-height: @largesize;
-  
+
   input,
   textarea,
   select,
@@ -370,11 +366,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(14, (@largesize - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @largesize;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set(18, @largesize);
@@ -385,7 +381,7 @@ input:-moz-placeholder {
 // X-Large ---------------------------
 .controls-xlarge {
   line-height: @xlargesize;
-  
+
   input,
   textarea,
   select,
@@ -399,11 +395,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(16, (@xlargesize - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @xlargesize;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set(20, @xlargesize);
@@ -413,7 +409,7 @@ input:-moz-placeholder {
 // XX-Large --------------------------
 .controls-xxlarge {
   line-height: @xxlargesize;
-  
+
   input,
   textarea,
   select,
@@ -427,11 +423,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(18, (@xxlargesize - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @xxlargesize;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set(22, @xxlargesize);
@@ -442,7 +438,7 @@ input:-moz-placeholder {
 // Numeric ---------------------------
 .controls-size(@size) {
   line-height: (@size * 2px);
-  
+
   input,
   textarea,
   select,
@@ -456,11 +452,11 @@ input:-moz-placeholder {
   &.controls_group > span {
     .font-set(@size, ((@size * 2) - (@controlsborderwidth * 2)));
   }
-  
+
   textarea {
     min-height: @xxlargesize;
   }
-  
+
   .input_group a,
   &.input_group a {
     .font-set((@size + 4), (@size * 2));
@@ -475,26 +471,26 @@ input:-moz-placeholder {
 .input_group {
   position: relative;
   display: inline;
-  
+
   a:first-child,
   input + a {
     position: absolute;
     cursor: pointer;
   }
-  
+
   input {
     padding-right: 2.25em;
-    
+
     + a {
       right: 0;
     }
   }
-  
+
   a {
     .font-set(14, @blh);
     width: 1.75em;
     text-align: center;
-    
+
     i {
       position: relative;
       top: (@inputborderwidth * -1);
@@ -504,7 +500,7 @@ input:-moz-placeholder {
       padding-left: 2.25em;
       padding-right: 0;
     }
-    
+
     &:first-child {
       left: 0;
     }
@@ -515,31 +511,31 @@ input:-moz-placeholder {
   .clearfix(); //&:extend(clearfix all);
   position: relative;
   display: block;
-  
+
   span {
     .font-set(12, (@basesize - (@controlsborderwidth * 2)));
     display: inline-block;
     padding: 0 0.625em;
     background: darken(@controlsbackground, 5%);
     border: @controlsborderwidth solid darken(@controlsbackground, 5%);
-    
+
     & when (@controlsdepth) {
       border-bottom-color: darken(@controlsbackground, 15%);
     }
-    
+
     & when ( luma( darken(@controlsbackground, 5%) ) < 60%) {
       color: @white;
     }
-    
+
     &:first-child {
       border-right: none;
     }
-    
+
     &:last-child {
       border-left: none;
     }
   }
-  
+
   span,
   input,
   select,
@@ -551,11 +547,11 @@ input:-moz-placeholder {
   .btn {
     float: left;
     border-radius: 0;
-    
+
     &:first-child {
       border-radius: @controlsroundness 0 0 @controlsroundness;
     }
-    
+
     &:last-child {
       border-radius: 0 @controlsroundness @controlsroundness 0;
     }
@@ -563,38 +559,42 @@ input:-moz-placeholder {
 }
 
 // Colours /////////////////////////////////////////////////////////
-.input-color(@color) {
-  @background: lighten(@color, 36%);
+.input-color(@backgroundcolor, @focuscolor: @inputfocuscolor) {
+  @bordercolor: darken(@backgroundcolor, 8%);
 
-  border-color: @background;
-  background: @background;  
-  
-  & when (luma(@color) < 64%) {
+  border-color: @bordercolor;
+  background: @backgroundcolor;
+
+  & when (luma(@backgroundcolor) < 60%) {
     color: @white;
   }
-  
+
   & when (@inputdepth) {
-    border-bottom-color: darken(@background, 10%);
+    border-bottom-color: darken(@bordercolor, 10%);
   }
-  
+
   &:hover,
   &:focus {
-    border-color: @inputfocuscolor;
+    border-color: @focuscolor;
   }
-  
-  ::-webkit-input-placeholder {
-    color: darken(@background, 25%);
-  
-    & when (luma(@background) < 64%) {
-      color: lighten(@background, 25%);
+
+  //&:invalid,
+  &.invalid {
+    border-color: lighten(@errorcolor, 36%);
+    background-color: lighten(@errorcolor, 36%);
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: lighten(@errorcolor, 15%);
     }
   }
-  
-  input:-moz-placeholder { 
-    color: darken(@background, 25%);
-    
-    & when (luma(@background) > 64%) {
-      color: lighten(@background, 25%);
+
+  ::placeholder {
+    color: fadeout(#000, (100% - @placeholdertint));
+
+    & when (luma(@inputbackground) < 60%) {
+      color: fadeout(#FFF, (100% - @placeholdertint));
     }
   }
 }
@@ -609,7 +609,7 @@ input:-moz-placeholder {
   textarea {
     padding-right: 0 !important;
   }
-  
+
   select {
     text-indent: 1px;
     text-overflow: '';

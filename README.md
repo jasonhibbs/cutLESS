@@ -1,4 +1,4 @@
-# cutLESS 2.3.1
+# cutLESS 2.3.2
 
 cutLESS is an upstart for responsibly responsive development.
 

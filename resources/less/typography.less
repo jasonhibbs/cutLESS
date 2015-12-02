@@ -68,20 +68,19 @@ address {
   margin: 0 auto @elh;
 }
 
-small { 
+small {
   font-size: 0.875em;
   font-weight: 300;
-  
+
   // This is for baseline fixing only, remove/override if causing problems
   display: inline-block;
   margin-bottom: -1px;
-  line-height: 1em;
 }
 
 ul,
 ol {
-  margin: 0 auto 1.5em;
-  padding: 0 0 0 1.5em;
+  margin: 0 auto @elh;
+  padding: 0 0 0 @elh;
 }
 
 li ul,
@@ -96,7 +95,7 @@ li ol {
   // <ol>’s only
   counter-reset: primary;
   list-style-type: none;
-  
+
   li {
     counter-increment: primary;
     position: relative;
@@ -106,21 +105,21 @@ li ol {
       left: -1.5em;
     }
   }
-  
+
   ol {
     counter-reset: secondary;
     list-style-type: none;
-    
+
     li {
       counter-increment: secondary;
       &:before {
         content: counter(primary) '.' counter(secondary);
       }
     }
-    
+
     ol {
       counter-reset: tertiary;
-      
+
       li {
         counter-increment: tertiary;
         &:before {
@@ -128,7 +127,7 @@ li ol {
         }
       }
     }
-  }  
+  }
 }
 
 // Blockquotes, Messages, and Panels -------------------------------
@@ -138,25 +137,25 @@ blockquote,
 .panel  {
   margin: 0 0 @elh 0;
   padding: (@elh * 0.5) @gw;
-  
+
   color: @textcolor;
-  background-color: darken(@lightergrey, 3%);
-  border-left: (@gw * 0.25) solid darken(@lightergrey, 13%);
-  
+  background-color: darken(@bodycolor, 3%);
+  border-left: (@gw * 0.25) solid @decorcolor;
+
   //font-family: @altfont;
-  
+
   i:first-child {
     position: relative;
     left: (@gw * -(1/3));
   }
-  
+
   p:last-child {
     margin-bottom: (@elh * 0);
   }
-  
+
   > small:last-child {
     margin: (@elh * 0.25) 0 0;
-    
+
     &:before {
       content: '\2014\00a0'; //&ndash;&nbsp;
     }
@@ -195,7 +194,7 @@ blockquote {
 .message-color(@thiscolor) {
   border-color: @thiscolor;
   background-color: mix(@thiscolor, @htmlcolor, 9%);
-  
+
   i {
     color: @thiscolor;
   }
@@ -207,8 +206,8 @@ blockquote {
 .panel {
   border-left: none;
   border-top: (@elh * 0.25) solid @bodycolor;
-  .padding-y(0, @blh);
-  
+  .padding-y(0, @elh);
+
   i:first-child {
     left: 0;
   }
@@ -242,24 +241,24 @@ blockquote {
 .panel-color(@thiscolor) {
   border-color: @thiscolor;
   background-color: mix(@thiscolor, @htmlcolor, 8%);
-  
+
   i {
     color: @thiscolor;
   }
-  
+
   a:not(.btn) {
     @thislinkcolor: mix(@textcolor, @thiscolor, 15%);
-    
+
     &,
-    &:visited {  
+    &:visited {
       color: @thislinkcolor;
     }
-    
+
     &,
     & i {
       transition: color 0.2s;
     }
-    
+
     &:hover,
     &:focus {
       &,
@@ -268,7 +267,7 @@ blockquote {
       }
     }
   }
-  
+
   input {
     .input-color(@white);
   }
@@ -297,7 +296,7 @@ dd {
 abbr[title] {
   border-color: @lightgrey;
   cursor: help;
-  
+
   &.acronym,
   &.initialism {
     font-variant: small-caps;
@@ -331,10 +330,10 @@ samp {
   display: inline-block;
   margin-bottom: -1px;
   padding: 0 (1em / 3);
-  
+
   background-color: @lightergrey;
   background-color: mix(@basecolor, @htmlcolor, 9%);
-  
+
   border-bottom: 1px solid mix(@basecolor, @htmlcolor, 36%);
   height: @elh;
   white-space: nowrap;
@@ -345,17 +344,17 @@ samp {
 
 pre {
   margin: 0;
-  
+
   code {
     display: block;
     height: auto;
     .font-size(12);
     line-height: 1.5em;
     padding: (@blh / 2) (@gw);
-    
+
     background: @lightergrey;
     border: none;
-    
+
     white-space: pre;
     overflow: hidden;
     overflow-x: auto;
@@ -366,14 +365,14 @@ pre {
 pre[class*="language-"] {
   display: block;
   position: relative;
-  
+
   color: @codetext;
   text-shadow: 0 1px rgba(0,0,0,0.3);
-  
+
   line-height: (@blh * 0.75);
   background-color: @codebg;
   margin: 0 0 @blh 0;
-  
+
   direction: ltr;
 	text-align: left;
 	white-space: pre;
@@ -382,7 +381,7 @@ pre[class*="language-"] {
 	-moz-tab-size: 2;
 	-o-tab-size: 2;
 	tab-size: 2;
-	
+
   &[class*="language-"]:before {
     content: attr(data-language);
     display: block;
@@ -395,12 +394,12 @@ pre[class*="language-"] {
     color: @white;
     background-color: @basecolor;
   }
-  
+
   code {
     padding: (@blh * 2) @gw (@blh * 0.5);
     color: @codetext;
   }
-  
+
   &.language-markup code {
   	color: @lightergrey;
 	}

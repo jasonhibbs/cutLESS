@@ -7,17 +7,17 @@ input[type="submit"],
 input[type="image"],
 .btn {
   .font-set(12, (@blh - (@buttonborderwidth * 2)));
-  
+
   display: inline-block;
   max-width: 100%;
   padding: 0 (7em/8);
   margin: 0;
-  
+
   border: @buttonborderwidth solid @buttonbordercolor;
   border-radius: @buttonroundness;
 
   background: @buttonbackground;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s, opacity 0.2s;
 
   text-align: center;
   white-space: nowrap;
@@ -60,6 +60,19 @@ input[type="image"],
     pointer-events: none;
     opacity: 0.6;
   }
+}
+
+// Helpers ---------------------------------------------------------
+.btn-reset() {
+  font-size: inherit;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-align: inherit;
+  white-space: normal;
+  vertical-align: inherit;
+  background: inherit;
 }
 
 // Sizing ----------------------------------------------------------
@@ -112,7 +125,7 @@ input[type="image"],
   &:visited,
   &:hover {
     color: contrast(@thiscolor, darken(@thiscolor, 40%), @white, 60%);
-    
+
     & when (luma(@thiscolor) < 60%) {
       text-shadow: 0 -1px 0 fadeout(#000, 90%);
     }

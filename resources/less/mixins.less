@@ -211,14 +211,14 @@
 // Technical -------------------------------------------------------
 
 // Only useful for clearing an appearance
-.appearance(@value) {
+.appearance(@value: none) {
 -webkit-appearance: @value;
    -moz-appearance: @value;
       //appearance: @value;
 }
 
 // Only useful for hiding a backface
-.backface-visibility(@value) {
+.backface-visibility(@value: hidden) {
 -webkit-backface-visibility: @value;
    -moz-backface-visibility: @value;
         backface-visibility: @value;
@@ -226,7 +226,7 @@
 
 // Not really up to spec
 // But 'none' is extremely useful
-.user-select(@select) {
+.user-select(@select: none) {
 -webkit-user-select: @select;
    -moz-user-select: @select;
     -ms-user-select: @select;
@@ -255,7 +255,7 @@
 .column-count(@count) {
   -webkit-column-count: @count;
      -moz-column-count: @count;
-          column-count: @count; 
+          column-count: @count;
 }
 
 .column-gap(@gap) {
@@ -333,7 +333,7 @@
 
 .clearfix {
   *zoom: 1;
-  
+
   &:before,
   &:after {
     display: table;
@@ -357,6 +357,18 @@
   padding: 0;
 }
 
+.inline-list {
+  .delist();
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+  }
+}
+
 
 // Accessibility -------------------------------
 
@@ -378,7 +390,7 @@
   margin: -1px;
   padding: 0;
   border: 0;
-  
+
   &.focusable:active,
   &.focusable:focus {
     position: static;
@@ -430,17 +442,17 @@
       -webkit-linear-gradient(135deg, transparent @size, @bgcolor @size),
       -webkit-linear-gradient(225deg, transparent @size, @bgcolor @size),
       -webkit-linear-gradient(315deg, transparent @size, @bgcolor @size);
-  background:                                     
+  background:
          -moz-linear-gradient(45deg,  transparent @size, @bgcolor @size),
          -moz-linear-gradient(135deg, transparent @size, @bgcolor @size),
          -moz-linear-gradient(225deg, transparent @size, @bgcolor @size),
          -moz-linear-gradient(315deg, transparent @size, @bgcolor @size);
-  background:                                     
+  background:
            -o-linear-gradient(45deg,  transparent @size, @bgcolor @size),
            -o-linear-gradient(135deg, transparent @size, @bgcolor @size),
            -o-linear-gradient(225deg, transparent @size, @bgcolor @size),
            -o-linear-gradient(315deg, transparent @size, @bgcolor @size);
-  
+
   background-position: bottom left, bottom right, top right, top left;
   -moz-background-size: 51% 51%;
   -webkit-background-size: 51% 51%;

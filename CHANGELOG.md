@@ -1,3 +1,11 @@
+# 2.3.2
+2015-12-02
+
+- Such refinements
+- Much improvements
+- So FontAwesome 4.5.0
+- Wow
+
 # 2.3.1
 2015-08-23
 
@@ -14,7 +22,7 @@
 2015-04-05
 
 ### Large
-- Removes device-width stylesheets because the structure hinders maintenance. Better to break styles in a more OO kind of way. Unfortunately, this will make non-calc use of `.column()` a pain…
+- Removes device-width stylesheets because the structure hinders maintenance. I prefer styles grouped by purpose, breakpoints nested. Unfortunately, this will make non-calc use of `.column()` a pain…
 - So, `@usecalc` is now `true` by default.
 - Adds `@emlineheight` and `@elh`, allowing 1.5em to be used as a reusable measure.
 
@@ -25,7 +33,7 @@
 - Improves the nav style, targets more accurately
 - Some little tweaks
 - Adds a few more ems
- 
+
 
 # 2.2.2
 2015-01-31
@@ -90,7 +98,7 @@
   - Now uses ARIA states and controls instead of classes
   - CSS takes control of showing/hiding only if JS can update the state
   - JS no longer needs to know the breakpoint
-  
+
 
 # 2.0.3
 2014-04-21
